@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Model Design &#8212; GPT3-Study  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Neural Networks" href="network.html" />
+    <link rel="prev" title="GPT3-Study’s Notes" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="network.html" title="Neural Networks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="GPT3-Study’s Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">GPT3-Study  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Model Design</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="model-design">
+<h1>Model Design<a class="headerlink" href="#model-design" title="Permalink to this headline">¶</a></h1>
+<section id="parameters">
+<span id="ref-model-parameters"></span><h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>The input text will go through an embedding / encoding process, which will map
+the string into a matrix:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 21%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Model Name</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(n_{parameter}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(n_{layer}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(d_{model}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(n_{head}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(d_{head}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GPT-2 Small</p></td>
+<td><p>117M</p></td>
+<td><p>12</p></td>
+<td><p>768</p></td>
+<td><p>12</p></td>
+<td><p>64</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPT-3 <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p></td>
+<td><p>175B</p></td>
+<td><p>96</p></td>
+<td><p>12288</p></td>
+<td><p>96</p></td>
+<td><p>128</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n_{parameter}\)</span> - total number of trainable parameters</p></li>
+<li><p><span class="math notranslate nohighlight">\(n_{layer}\)</span> - number of the decoder-only transformer layers</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{model}\)</span> - the original explain is “number of units in each bottleneck layer”.
+It first denotes the vector length of input embedding / encoding.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{ff}\)</span> - number of unit in the hidden states of the feed-forward layer. It
+is designed to be <strong>four times</strong> of <span class="math notranslate nohighlight">\(d_{model}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{head}\)</span> - dimension of each attention head</p></li>
+</ul>
+</section>
+<section id="workflow-chart">
+<h2>Workflow Chart<a class="headerlink" href="#workflow-chart" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>diagram of the GPT-3 process
+
+                                &lt;---------- 50257 ----------&gt;
+
+                                ============= 1 =============
+                                ============= 2 =============
+                                ============ ... ============
+                                ============ 2048 ===========
+
+                               |||                         |||
+                               |||                         |||
+                              \|||/                       \|||/
+                               \|/                         \|/
+
+                         token embedding           positional encoding
+                              (WTE)                       (WPE)
+
+                         &lt;--- 12288 ---&gt;             &lt;--- 12288 ---&gt;
+
+                         ====== 1 ======             ====== 1 ======
+                         ====== 2 ======             ====== 2 ======
+                         ===== ... =====             ===== ... =====
+                         ===== 2048 ====             ===== 2048 ====
+
+                                |                           |
+                                |                           |
+                                -----------------------------
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                           plus (+)
+
+                                       &lt;--- 12288 ---&gt;
+
+                                       ====== 1 ======
+                                       ====== 2 ======
+                                       ===== ... =====
+                                       ===== 2048 ====
+
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                   1st Decoder Transformer
+
+                                       &lt;--- 12288 ---&gt;
+
+                                       ====== 1 ======
+                                       ====== 2 ======
+                                       ===== ... =====
+                                       ===== 2048 ====
+
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                             ...
+
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                   96th Decoder Transformer
+
+                                       &lt;--- 12288 ---&gt;
+
+                                       ====== 1 ======
+                                       ====== 2 ======
+                                       ===== ... =====
+                                       ===== 2048 ====
+
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                   inverse token embedding
+                                     (WTE^(-1) + softmax)
+
+                                &lt;---------- 50257 ----------&gt;
+
+                                ============= 1 =============
+                                ============= 2 =============
+                                ============ ... ============
+                                ============ 2048 ===========
+</pre></div>
+</div>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://arxiv.org/abs/2005.14165">https://arxiv.org/abs/2005.14165</a></p>
+</dd>
+</dl>
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">GPT3-Study’s Notes</span></a>.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Model Design</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#workflow-chart">Workflow Chart</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">GPT3-Study’s Notes</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="network.html"
+                          title="next chapter">Neural Networks</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/model.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="network.html" title="Neural Networks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="GPT3-Study’s Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">GPT3-Study  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Model Design</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, ZHANG, Meng.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
