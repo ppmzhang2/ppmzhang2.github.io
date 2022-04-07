@@ -17,8 +17,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reference" href="reference.html" />
-    <link rel="prev" title="Pre-Training" href="pretrain.html" /> 
+    <link rel="next" title="Neural Networks" href="network.html" />
+    <link rel="prev" title="Model Design" href="model.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,10 +27,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="reference.html" title="Reference"
+          <a href="network.html" title="Neural Networks"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="pretrain.html" title="Pre-Training"
+          <a href="model.html" title="Model Design"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">GPT3-Study  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Input Encoding</a></li> 
@@ -44,6 +44,48 @@
             
   <section id="input-encoding">
 <h1>Input Encoding<a class="headerlink" href="#input-encoding" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GPT-3 Input Encoding
+
+                                &lt;---------- 50257 ----------&gt;
+
+                                ============= 1 =============
+                                ============= 2 =============
+                                ============ ... ============
+                                ============ 2048 ===========
+
+                               |||                         |||
+                               |||                         |||
+                              \|||/                       \|||/
+                               \|/                         \|/
+
+                         token embedding           positional encoding
+                              (WTE)                       (WPE)
+
+                         &lt;--- 12288 ---&gt;             &lt;--- 12288 ---&gt;
+
+                         ====== 1 ======             ====== 1 ======
+                         ====== 2 ======             ====== 2 ======
+                         ===== ... =====             ===== ... =====
+                         ===== 2048 ====             ===== 2048 ====
+
+                                |                           |
+                                |                           |
+                                -----------------------------
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                           plus (+)
+
+                                       &lt;--- 12288 ---&gt;
+
+                                       ====== 1 ======
+                                       ====== 2 ======
+                                       ===== ... =====
+                                       ===== 2048 ====
+</pre></div>
+</div>
 <p>The input text will go through an embedding / encoding process, which will map
 the string into a matrix:</p>
 <ul>
@@ -73,8 +115,8 @@ positional index ranging from <strong>0</strong> to <strong>2047</strong></p></l
 </ul>
 <p>The semantic properties will be interpreted by a “dictionary” in the form of a
 matrix, and</p>
-<section id="vocabulary-embedding">
-<h2>Vocabulary Embedding<a class="headerlink" href="#vocabulary-embedding" title="Permalink to this headline">¶</a></h2>
+<section id="token-embedding-wte">
+<h2>Token Embedding (WTE)<a class="headerlink" href="#token-embedding-wte" title="Permalink to this headline">¶</a></h2>
 <p>To interpret a word we could use a dictionary and in the case of the GPT-3
 training the “dictionary” is actually a <strong>50257-by-12288</strong> matrix, each row of
 which is a <strong>12288-dimension</strong> vector, containing distance information with
@@ -89,8 +131,8 @@ matrix mentioned above we have a <strong>2048-by-12288</strong> embedded matrix.
 </ul>
 </section>
 </section>
-<section id="positional-encoding">
-<h2>Positional Encoding<a class="headerlink" href="#positional-encoding" title="Permalink to this headline">¶</a></h2>
+<section id="positional-encoding-wpe">
+<h2>Positional Encoding (WPE)<a class="headerlink" href="#positional-encoding-wpe" title="Permalink to this headline">¶</a></h2>
 <p>For each token in the 2048 input slots, its position is encoded passing the
 index (from 0 to 2047) to <strong>12288</strong> sinusoidal functions of different frequencies.
 The output is a <strong>2048-by-12288</strong> position encoded matrix.</p>
@@ -114,11 +156,11 @@ matrices, and the final input to the model will be the sum of them.</p>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Input Encoding</a><ul>
-<li><a class="reference internal" href="#vocabulary-embedding">Vocabulary Embedding</a><ul>
+<li><a class="reference internal" href="#token-embedding-wte">Token Embedding (WTE)</a><ul>
 <li><a class="reference internal" href="#questions">Questions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#positional-encoding">Positional Encoding</a></li>
+<li><a class="reference internal" href="#positional-encoding-wpe">Positional Encoding (WPE)</a></li>
 <li><a class="reference internal" href="#encoding-combination">Encoding Combination</a></li>
 </ul>
 </li>
@@ -127,13 +169,13 @@ matrices, and the final input to the model will be the sum of them.</p>
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="pretrain.html"
-                          title="previous chapter">Pre-Training</a></p>
+    <p class="topless"><a href="model.html"
+                          title="previous chapter">Model Design</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="reference.html"
-                          title="next chapter">Reference</a></p>
+    <p class="topless"><a href="network.html"
+                          title="next chapter">Neural Networks</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -163,10 +205,10 @@ matrices, and the final input to the model will be the sum of them.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="reference.html" title="Reference"
+          <a href="network.html" title="Neural Networks"
              >next</a> |</li>
         <li class="right" >
-          <a href="pretrain.html" title="Pre-Training"
+          <a href="model.html" title="Model Design"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">GPT3-Study  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Input Encoding</a></li> 

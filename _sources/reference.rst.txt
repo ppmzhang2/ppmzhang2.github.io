@@ -47,6 +47,34 @@ Implementation
     training a sequence-to-sequence model that uses the `nn.Transformer`
     module.
 
+APIs
+====
+
+OpenAI API
+----------
+
+The document [#f1]_ of the official OpenAI library:
+
+- Text Completion
+
+- Edit / Correct Inputs
+
+- Similarity Comparison
+
+- Classification
+
+- Text Comprehension
+
+- Embedding
+
+- Fine-tuning
+
+Transformers
+------------
+
+The transformers from `Hugging Face <https://huggingface.co/>`_ provides APIs
+to download and train pre-trained models, including GPT-2 and GPT Neo.
+
 Other Sources
 =============
 
@@ -56,6 +84,14 @@ Other Sources
 
 - This `article <https://www.fullstackpython.com/gpt-3.html>`_ is an entry
   point of several GPT-3 related resources, including application tutorials.
+
+- Alberto Romero's medium
+
+  - `A Complete Overview of GPT-3
+    <https://towardsdatascience.com/gpt-3-a-complete-overview-190232eb25fd>`_
+
+  - `Understanding GPT-3 In 5 Minutes
+    <https://towardsdatascience.com/understanding-gpt-3-in-5-minutes-7fe35c3a1e52>`_
 
 - Jay Alammar's blog
 
@@ -69,5 +105,10 @@ Other Sources
 
   - `Mechanics of Seq2seq Models With Attention
     <https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/>`_
+
+Reference
+=========
+
+.. [#f1] https://beta.openai.com/docs/api-reference
 
 Back to :doc:`index`.

@@ -2,6 +2,49 @@
 Input Encoding
 ##############
 
+.. code-block:: none
+
+    GPT-3 Input Encoding
+
+                                    <---------- 50257 ---------->
+
+                                    ============= 1 =============
+                                    ============= 2 =============
+                                    ============ ... ============
+                                    ============ 2048 ===========
+
+                                   |||                         |||
+                                   |||                         |||
+                                  \|||/                       \|||/
+                                   \|/                         \|/
+
+                             token embedding           positional encoding
+                                  (WTE)                       (WPE)
+
+                             <--- 12288 --->             <--- 12288 --->
+
+                             ====== 1 ======             ====== 1 ======
+                             ====== 2 ======             ====== 2 ======
+                             ===== ... =====             ===== ... =====
+                             ===== 2048 ====             ===== 2048 ====
+
+                                    |                           |
+                                    |                           |
+                                    -----------------------------
+                                                 |||
+                                                 |||
+                                                \|||/
+                                                 \|/
+
+                                               plus (+)
+
+                                           <--- 12288 --->
+
+                                           ====== 1 ======
+                                           ====== 2 ======
+                                           ===== ... =====
+                                           ===== 2048 ====
+
 The input text will go through an embedding / encoding process, which will map
 the string into a matrix:
 
@@ -36,8 +79,8 @@ Once tokenized, each of the input tokens will have two groups of properties:
 The semantic properties will be interpreted by a "dictionary" in the form of a
 matrix, and
 
-Vocabulary Embedding
-====================
+Token Embedding (WTE)
+=====================
 
 To interpret a word we could use a dictionary and in the case of the GPT-3
 training the "dictionary" is actually a **50257-by-12288** matrix, each row of
@@ -53,8 +96,8 @@ Questions
 
 - does the token entries obey the additive law?
 
-Positional Encoding
-===================
+Positional Encoding (WPE)
+=========================
 
 For each token in the 2048 input slots, its position is encoded passing the
 index (from 0 to 2047) to **12288** sinusoidal functions of different frequencies.

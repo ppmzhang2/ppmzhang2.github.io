@@ -23,6 +23,12 @@ The document [#f1]_ of the official OpenAI library:
 
 - Fine-tuning
 
+Transformers
+============
+
+The transformers from `Hugging Face <https://huggingface.co/>`_ provides APIs
+to download and train pre-trained models, including GPT-2 and GPT Neo.
+
 Reference
 =========
 
