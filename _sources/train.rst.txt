@@ -130,4 +130,25 @@ Netflix Movie Classification
 
     Answer: Documentaries, International Movies, Music & Musicals
 
+Fine-Tune Training
+------------------
+
+.. code-block:: none
+
+    ***** Running training *****
+      Num examples = 7004
+      Num Epochs = 1
+      Instantaneous batch size per device = 2
+      Total train batch size (w. parallel, distributed & accumulation) = 2
+      Gradient Accumulation steps = 1
+      Total optimization steps = 3502
+    {'loss': 0.4458, 'learning_rate': 3.677248677248677e-05, 'epoch': 0.29}
+    {'loss': 0.3704, 'learning_rate': 2.2075249853027632e-05, 'epoch': 0.57}
+    {'loss': 0.3546, 'learning_rate': 7.37801293356849e-06, 'epoch': 0.86}
+    100%|█████████████████████████████████████████████████████████████████████████████████| 3502/3502 [4:53:35<00:00,  4.90s/it]
+
+    Training completed. Do not forget to share your model on huggingface.co/models =)
+
+    {'train_runtime': 17615.3528, 'train_samples_per_second': 0.398, 'train_steps_per_second': 0.199, 'train_loss': 0.38377865323470295, 'epoch': 1.0}
+
 Back to :doc:`index`.

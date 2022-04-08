@@ -155,6 +155,26 @@ Type:
 Answer: Documentaries, International Movies, Music &amp; Musicals
 </pre></div>
 </div>
+</section>
+<section id="fine-tune-training">
+<h3>Fine-Tune Training<a class="headerlink" href="#fine-tune-training" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>***** Running training *****
+  Num examples = 7004
+  Num Epochs = 1
+  Instantaneous batch size per device = 2
+  Total train batch size (w. parallel, distributed &amp; accumulation) = 2
+  Gradient Accumulation steps = 1
+  Total optimization steps = 3502
+{&#39;loss&#39;: 0.4458, &#39;learning_rate&#39;: 3.677248677248677e-05, &#39;epoch&#39;: 0.29}
+{&#39;loss&#39;: 0.3704, &#39;learning_rate&#39;: 2.2075249853027632e-05, &#39;epoch&#39;: 0.57}
+{&#39;loss&#39;: 0.3546, &#39;learning_rate&#39;: 7.37801293356849e-06, &#39;epoch&#39;: 0.86}
+100%|█████████████████████████████████████████████████████████████████████████████████| 3502/3502 [4:53:35&lt;00:00,  4.90s/it]
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+{&#39;train_runtime&#39;: 17615.3528, &#39;train_samples_per_second&#39;: 0.398, &#39;train_steps_per_second&#39;: 0.199, &#39;train_loss&#39;: 0.38377865323470295, &#39;epoch&#39;: 1.0}
+</pre></div>
+</div>
 <p>Back to <a class="reference internal" href="index.html"><span class="doc">GPT3-Study’s Notes</span></a>.</p>
 </section>
 </section>
@@ -180,6 +200,7 @@ Answer: Documentaries, International Movies, Music &amp; Musicals
 <li><a class="reference internal" href="#semantic-classification">Semantic Classification</a></li>
 <li><a class="reference internal" href="#translate-a-sentence">Translate a Sentence</a></li>
 <li><a class="reference internal" href="#netflix-movie-classification">Netflix Movie Classification</a></li>
+<li><a class="reference internal" href="#fine-tune-training">Fine-Tune Training</a></li>
 </ul>
 </li>
 </ul>
