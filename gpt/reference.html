@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Reference &#8212; Study Notes  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/disqus.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Review" href="review.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">Study Notes</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="model.html">
+  Model Design
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="encoding.html">
+  Input Encoding
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="network.html">
+  Neural Networks
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="train.html">
+  Training and Predicting
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="review.html">
+  Review
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="#">
+  Reference
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ppmzhang2/" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#papers">
+   Papers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apis">
+   APIs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-api">
+     OpenAI API
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformers">
+     Transformers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-sources">
+   Other Sources
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Reference
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h1>
+<section id="papers">
+<h2>Papers<a class="headerlink" href="#papers" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The original GPT-3 paper
+<a class="reference external" href="https://arxiv.org/abs/2005.14165">Language Models are Few-Shot Learners</a>:
+it is the ultimate resource to understand the new techniques applied by Open
+AI.</p></li>
+<li><p>The GPT-2 paper <a class="reference external" href="https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">Language Models are Unsupervised Multitask Learners</a>:
+the GPT-3 model remains largely the same as the GPT-2 counterpart.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>: introduced
+the encoder-decoder transformer, which is the most tricky part of the GPT
+model.</p></li>
+</ul>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://amaarora.github.io/2020/02/18/annotatedGPT2.html">The Annotated GPT-2</a> is an annotated
+version of the GPT-2 paper with plenty of <code class="code docutils literal notranslate"><span class="pre">pytorch</span></code> code.</p></li>
+<li><p>This <a class="reference external" href="https://github.com/huggingface/pytorch-openai-transformer-lm">GitHub repo</a> is an
+<code class="code docutils literal notranslate"><span class="pre">pytorch</span></code> implementation of the GPT-2 by <a class="reference external" href="https://huggingface.co/">Hugging Face</a>.</p></li>
+<li><p>Yet another <a class="reference external" href="https://github.com/graykode/gpt-2-Pytorch">GPT-2 implementation</a> via <code class="code docutils literal notranslate"><span class="pre">PyTorch</span></code></p></li>
+<li><p><a class="reference external" href="https://nlp.seas.harvard.edu/2018/04/03/attention.html">The Annotated Transformer</a> explains in code
+how the transformer is implemented, and is endorsed by the author of “The
+Annotated GPT-2”.</p></li>
+<li><p>The <code class="code docutils literal notranslate"><span class="pre">PyTorch</span></code> tutorial</p>
+<ul>
+<li><p><a class="reference external" href="https://pytorch.org/tutorials/beginner/transformer_tutorial.html">tutorial</a> on
+training a sequence-to-sequence model that uses the <code class="code docutils literal notranslate"><span class="pre">nn.Transformer</span></code>
+module.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="apis">
+<h2>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">#</a></h2>
+<section id="openai-api">
+<h3>OpenAI API<a class="headerlink" href="#openai-api" title="Permalink to this headline">#</a></h3>
+<p>The document <a class="footnote-reference brackets" href="#f1" id="id1">1</a> of the official OpenAI library:</p>
+<ul class="simple">
+<li><p>Text Completion</p></li>
+<li><p>Edit / Correct Inputs</p></li>
+<li><p>Similarity Comparison</p></li>
+<li><p>Classification</p></li>
+<li><p>Text Comprehension</p></li>
+<li><p>Embedding</p></li>
+<li><p>Fine-tuning</p></li>
+</ul>
+</section>
+<section id="transformers">
+<h3>Transformers<a class="headerlink" href="#transformers" title="Permalink to this headline">#</a></h3>
+<p>The transformers from <a class="reference external" href="https://huggingface.co/">Hugging Face</a> provides APIs
+to download and train pre-trained models, including GPT-2 and GPT Neo.</p>
+</section>
+</section>
+<section id="other-sources">
+<h2>Other Sources<a class="headerlink" href="#other-sources" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The post <a class="reference external" href="https://dugas.ch/artificial_curiosity/GPT_architecture.html">The GPT-3 Architecture, on a Napkin</a> explains as
+detailed as possible on the GPT-3 architecture, which is super useful.</p></li>
+<li><p>This <a class="reference external" href="https://www.fullstackpython.com/gpt-3.html">article</a> is an entry
+point of several GPT-3 related resources, including application tutorials.</p></li>
+<li><p>Alberto Romero’s medium</p>
+<ul>
+<li><p><a class="reference external" href="https://towardsdatascience.com/gpt-3-a-complete-overview-190232eb25fd">A Complete Overview of GPT-3</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/understanding-gpt-3-in-5-minutes-7fe35c3a1e52">Understanding GPT-3 In 5 Minutes</a></p></li>
+</ul>
+</li>
+<li><p>Jay Alammar’s blog</p>
+<ul>
+<li><p><a class="reference external" href="https://jalammar.github.io/how-gpt3-works-visualizations-animations/">How GPT3 Works</a></p></li>
+<li><p><a class="reference external" href="https://jalammar.github.io/illustrated-gpt2/">The Illustrated GPT-2</a></p></li>
+<li><p><a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a></p></li>
+<li><p><a class="reference external" href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Mechanics of Seq2seq Models With Attention</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2>Reference<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://beta.openai.com/docs/api-reference">https://beta.openai.com/docs/api-reference</a></p>
+</dd>
+</dl>
+<p>Back to <a class="reference internal" href="../index.html"><span class="doc">Welcome to Study Notes’s documentation!</span></a>.</p>
+<div data-disqus-identifier="Reference" data-disqus-shortname="my-cool-project" id="disqus_thread"></div></section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="review.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Review</p>
+        </div>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, ZHANG, Meng.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
