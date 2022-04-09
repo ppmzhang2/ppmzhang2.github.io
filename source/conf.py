@@ -31,7 +31,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx_disqus.disqus',
 ]
-disqus_shortname = "my-cool-project"
+disqus_shortname = "httpbbk0701githubiomysiteoutput"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

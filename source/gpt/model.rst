@@ -1,6 +1,6 @@
-############
-Model Design
-############
+###################
+GPT-3: Model Design
+###################
 
 .. _ref-model-parameters:
 
@@ -136,6 +136,6 @@ Reference
 
 .. [#f1] https://arxiv.org/abs/2005.14165
 
-Back to :doc:`../index`.
+Back to :doc:`index`.
 
 .. disqus::

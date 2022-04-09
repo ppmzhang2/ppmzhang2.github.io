@@ -3,16 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Study Notes's documentation!
-=======================================
+Personal Study Notes
+====================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   gpt/model.rst
-   gpt/encoding.rst
-   gpt/network.rst
-   gpt/train.rst
-   gpt/review.rst
-   gpt/reference.rst
+   gpt/index.rst
+
+.. disqus::

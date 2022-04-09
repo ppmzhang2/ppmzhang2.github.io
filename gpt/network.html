@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Neural Networks &#8212; Study Notes  documentation</title>
+    <title>GPT-3: Neural Networks &#8212; Study Notes  documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -33,8 +33,8 @@
     <script src="../_static/disqus.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Training and Predicting" href="train.html" />
-    <link rel="prev" title="Input Encoding" href="encoding.html" />
+    <link rel="next" title="GPT-3: Training and Predicting" href="train.html" />
+    <link rel="prev" title="GPT-3: Input Encoding" href="encoding.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -69,39 +69,9 @@
       
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
-    <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="model.html">
-  Model Design
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="encoding.html">
-  Input Encoding
- </a>
-</li>
-
-<li class="toctree-l1 current active nav-item">
- <a class="current reference internal nav-link" href="#">
-  Neural Networks
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="train.html">
-  Training and Predicting
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="review.html">
-  Review
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="reference.html">
-  Reference
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  GPT-3 Study Notes
  </a>
 </li>
 
@@ -139,7 +109,44 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
-    
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="model.html">
+   GPT-3: Model Design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="encoding.html">
+   GPT-3: Input Encoding
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   GPT-3: Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="train.html">
+   GPT-3: Training and Predicting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
+   GPT-3: Review
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference.html">
+   GPT-3: Reference
+  </a>
+ </li>
+</ul>
+
   </div>
 </nav>
               </div>
@@ -214,8 +221,8 @@
               
               <div>
                 
-  <section id="neural-networks">
-<h1>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">#</a></h1>
+  <section id="gpt-3-neural-networks">
+<h1>GPT-3: Neural Networks<a class="headerlink" href="#gpt-3-neural-networks" title="Permalink to this headline">#</a></h1>
 <section id="layer-normalization">
 <h2>Layer Normalization<a class="headerlink" href="#layer-normalization" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
@@ -257,7 +264,7 @@ from <code class="code docutils literal notranslate"><span class="pre">nx</span>
 <ul class="simple">
 <li><p>accept outputs from the attention layer</p></li>
 <li><p>cast from <code class="code docutils literal notranslate"><span class="pre">d_model</span></code> dimension to <code class="code docutils literal notranslate"><span class="pre">nx</span></code> dimension. As mentioned in the
-<a class="reference internal" href="model.html"><span class="doc">Model Design</span></a> part, the output dimension is <strong>four times</strong> the
+<a class="reference internal" href="model.html"><span class="doc">GPT-3: Model Design</span></a> part, the output dimension is <strong>four times</strong> the
 <span class="math notranslate nohighlight">\(d_{model}\)</span></p></li>
 <li><p>activate with <code class="code docutils literal notranslate"><span class="pre">GELU</span></code></p></li>
 <li><p>cast back to <code class="code docutils literal notranslate"><span class="pre">d_model</span></code> dimension</p></li>
@@ -365,8 +372,8 @@ new annotation:</p>
 <dd><p><a class="reference external" href="https://github.com/graykode/gpt-2-Pytorch/blob/master/GPT2/model.py#L30">https://github.com/graykode/gpt-2-Pytorch/blob/master/GPT2/model.py#L30</a></p>
 </dd>
 </dl>
-<p>Back to <a class="reference internal" href="../index.html"><span class="doc">Welcome to Study Notes’s documentation!</span></a>.</p>
-<div data-disqus-identifier="Neural Networks" data-disqus-shortname="my-cool-project" id="disqus_thread"></div></section>
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">GPT-3 Study Notes</span></a>.</p>
+<div data-disqus-identifier="GPT-3: Neural Networks" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
 </section>
 
 
@@ -379,13 +386,13 @@ new annotation:</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Input Encoding</p>
+            <p class="prev-next-title">GPT-3: Input Encoding</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="train.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Training and Predicting</p>
+        <p class="prev-next-title">GPT-3: Training and Predicting</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

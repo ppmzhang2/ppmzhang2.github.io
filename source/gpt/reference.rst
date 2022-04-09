@@ -1,6 +1,6 @@
-#########
-Reference
-#########
+################
+GPT-3: Reference
+################
 
 .. default-role:: code
 
@@ -111,6 +111,6 @@ Reference
 
 .. [#f1] https://beta.openai.com/docs/api-reference
 
-Back to :doc:`../index`.
+Back to :doc:`index`.
 
 .. disqus::

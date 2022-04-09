@@ -1,6 +1,6 @@
-##############
-Input Encoding
-##############
+#####################
+GPT-3: Input Encoding
+#####################
 
 .. code-block:: none
 
@@ -109,6 +109,6 @@ Encoding Combination
 Both the embedding matrix and position encoded matrix are **2048-by-12288**
 matrices, and the final input to the model will be the sum of them.
 
-Back to :doc:`../index`.
+Back to :doc:`index`.
 
 .. disqus::

@@ -1,6 +1,6 @@
-#######################
-Training and Predicting
-#######################
+##############################
+GPT-3: Training and Predicting
+##############################
 
 .. default-role:: code
 
@@ -151,6 +151,6 @@ Fine-Tune Training
 
     {'train_runtime': 17615.3528, 'train_samples_per_second': 0.398, 'train_steps_per_second': 0.199, 'train_loss': 0.38377865323470295, 'epoch': 1.0}
 
-Back to :doc:`../index`.
+Back to :doc:`index`.
 
 .. disqus::

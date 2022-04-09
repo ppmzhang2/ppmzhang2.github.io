@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Input Encoding &#8212; Study Notes  documentation</title>
+    <title>GPT-3: Input Encoding &#8212; Study Notes  documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -32,8 +32,8 @@
     <script src="../_static/disqus.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Neural Networks" href="network.html" />
-    <link rel="prev" title="Model Design" href="model.html" />
+    <link rel="next" title="GPT-3: Neural Networks" href="network.html" />
+    <link rel="prev" title="GPT-3: Model Design" href="model.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -68,39 +68,9 @@
       
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
-    <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="model.html">
-  Model Design
- </a>
-</li>
-
-<li class="toctree-l1 current active nav-item">
- <a class="current reference internal nav-link" href="#">
-  Input Encoding
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="network.html">
-  Neural Networks
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="train.html">
-  Training and Predicting
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="review.html">
-  Review
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="reference.html">
-  Reference
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  GPT-3 Study Notes
  </a>
 </li>
 
@@ -138,7 +108,44 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
-    
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="model.html">
+   GPT-3: Model Design
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   GPT-3: Input Encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="network.html">
+   GPT-3: Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="train.html">
+   GPT-3: Training and Predicting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
+   GPT-3: Review
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference.html">
+   GPT-3: Reference
+  </a>
+ </li>
+</ul>
+
   </div>
 </nav>
               </div>
@@ -203,8 +210,8 @@
               
               <div>
                 
-  <section id="input-encoding">
-<h1>Input Encoding<a class="headerlink" href="#input-encoding" title="Permalink to this headline">#</a></h1>
+  <section id="gpt-3-input-encoding">
+<h1>GPT-3: Input Encoding<a class="headerlink" href="#gpt-3-input-encoding" title="Permalink to this headline">#</a></h1>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GPT-3 Input Encoding
 
                                 &lt;---------- 50257 ----------&gt;
@@ -302,8 +309,8 @@ The output is a <strong>2048-by-12288</strong> position encoded matrix.</p>
 <h2>Encoding Combination<a class="headerlink" href="#encoding-combination" title="Permalink to this headline">#</a></h2>
 <p>Both the embedding matrix and position encoded matrix are <strong>2048-by-12288</strong>
 matrices, and the final input to the model will be the sum of them.</p>
-<p>Back to <a class="reference internal" href="../index.html"><span class="doc">Welcome to Study Notes’s documentation!</span></a>.</p>
-<div data-disqus-identifier="Input Encoding" data-disqus-shortname="my-cool-project" id="disqus_thread"></div></section>
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">GPT-3 Study Notes</span></a>.</p>
+<div data-disqus-identifier="GPT-3: Input Encoding" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
 </section>
 
 
@@ -316,13 +323,13 @@ matrices, and the final input to the model will be the sum of them.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Model Design</p>
+            <p class="prev-next-title">GPT-3: Model Design</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="network.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Neural Networks</p>
+        <p class="prev-next-title">GPT-3: Neural Networks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

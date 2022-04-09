@@ -1,6 +1,6 @@
-###############
-Neural Networks
-###############
+######################
+GPT-3: Neural Networks
+######################
 
 .. default-role:: code
 
@@ -161,6 +161,6 @@ Reference
 
 .. [#f3] https://github.com/graykode/gpt-2-Pytorch/blob/master/GPT2/model.py#L30
 
-Back to :doc:`../index`.
+Back to :doc:`index`.
 
 .. disqus::

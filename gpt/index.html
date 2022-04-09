@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>GPT-3: Review &#8212; Study Notes  documentation</title>
+    <title>GPT-3 Study Notes &#8212; Study Notes  documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -32,8 +32,8 @@
     <script src="../_static/disqus.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="GPT-3: Reference" href="reference.html" />
-    <link rel="prev" title="GPT-3: Training and Predicting" href="train.html" />
+    <link rel="next" title="GPT-3: Model Design" href="model.html" />
+    <link rel="prev" title="Personal Study Notes" href="../index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -69,7 +69,7 @@
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
     <li class="toctree-l1 current active nav-item">
- <a class="reference internal nav-link" href="index.html">
+ <a class="current reference internal nav-link" href="#">
   GPT-3 Study Notes
  </a>
 </li>
@@ -113,7 +113,7 @@
   Contents:
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="model.html">
    GPT-3: Model Design
@@ -134,8 +134,8 @@
    GPT-3: Training and Predicting
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="review.html">
    GPT-3: Review
   </a>
  </li>
@@ -161,46 +161,9 @@
               
               <div class="toc-item">
                 
-<div class="tocsection onthispage mt-5 pt-1 pb-3">
-    <i class="fas fa-list"></i> On this page
-</div>
 
 <nav id="bd-toc-nav">
-    <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#paper-review">
-   Paper Review
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#critics">
-   Critics
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#is-it-hyped">
-     Is It Hyped?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#know-its-ignorance">
-     Know Its Ignorance
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#not-an-agi">
-     Not an AGI
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reference">
-   Reference
-  </a>
- </li>
-</ul>
-
+    
 </nav>
               </div>
               
@@ -220,80 +183,56 @@
               
               <div>
                 
-  <section id="gpt-3-review">
-<h1>GPT-3: Review<a class="headerlink" href="#gpt-3-review" title="Permalink to this headline">#</a></h1>
-<section id="paper-review">
-<h2>Paper Review<a class="headerlink" href="#paper-review" title="Permalink to this headline">#</a></h2>
-<p>Summary from the paper:</p>
-<ul class="simple">
-<li><p>model scale</p>
+  <section id="gpt-3-study-notes">
+<h1>GPT-3 Study Notes<a class="headerlink" href="#gpt-3-study-notes" title="Permalink to this headline">#</a></h1>
+<p>This project is an project to store notes and codes during the study of the
+GPT-3 language model.</p>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li><p>larger models can typically use a larger batch size, but require a smaller
-learning rate</p></li>
-<li><p>potential contamination of downstream tasks</p>
-<ul>
-<li><p>test / development sets inadvertently seen during pre-training</p></li>
-<li><p>remove overlaps</p></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">GPT-3: Model Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model.html#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#workflow-chart">Workflow Chart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="encoding.html">GPT-3: Input Encoding</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="encoding.html#token-embedding-wte">Token Embedding (WTE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="encoding.html#positional-encoding-wpe">Positional Encoding (WPE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="encoding.html#encoding-combination">Encoding Combination</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="network.html">GPT-3: Neural Networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="network.html#layer-normalization">Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html#feed-forward">Feed-Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html#attention-layer">Attention Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="train.html">GPT-3: Training and Predicting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="train.html#pre-training">Pre-Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train.html#meta-learning">Meta-Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="review.html">GPT-3: Review</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="review.html#paper-review">Paper Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#critics">Critics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">GPT-3: Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#papers">Papers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#apis">APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#other-sources">Other Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#reference">Reference</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>spurious features</p>
-<ul>
-<li><p>these spurious correlations can occur due to biased sampling or artifacts
-in crowd-sourcing. For example, we may have a labeled dataset for
-recidivism prediction where race correlates with recurrence of crime due to
-sample selection bias, but this correlation does not hold on the
-population. Models which learn spurious correlations can generalize poorly
-on population data which does not have these biases. <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="critics">
-<h2>Critics<a class="headerlink" href="#critics" title="Permalink to this headline">#</a></h2>
-<section id="is-it-hyped">
-<h3>Is It Hyped?<a class="headerlink" href="#is-it-hyped" title="Permalink to this headline">#</a></h3>
-<p>Probably not. As the overview states <a class="footnote-reference brackets" href="#f2" id="id2">2</a>:
-“Sampling Can Prove The Presence Of Knowledge But Not The Absence”, which means
-that the GPT-3 may fail due to misuse.</p>
-<ul class="simple">
-<li><p>try few shots learning over zero shot learning</p></li>
-<li><p>tweak hyper-parameters</p></li>
-<li><p>design a good prompt</p></li>
-<li><p>even a bad choice of the <code class="code docutils literal notranslate"><span class="pre">BOS</span></code>, <code class="code docutils literal notranslate"><span class="pre">EOS</span></code>, or <code class="code docutils literal notranslate"><span class="pre">PAD</span></code> token may have a negative
-impact on performance</p></li>
-</ul>
-</section>
-<section id="know-its-ignorance">
-<h3>Know Its Ignorance<a class="headerlink" href="#know-its-ignorance" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>it does not know when it will fail</p></li>
-<li><p>it may need to be programmed with knowledge about uncertainty</p></li>
-</ul>
-</section>
-<section id="not-an-agi">
-<h3>Not an AGI<a class="headerlink" href="#not-an-agi" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>it is not about its performance of any specific task</p></li>
-<li><p>it lacks most of the perception of the environment</p></li>
-<li><p>it lacks social connection</p></li>
-</ul>
-</section>
-</section>
-<section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h2>
-<dl class="footnote brackets">
-<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://arxiv.org/abs/2006.10032">https://arxiv.org/abs/2006.10032</a></p>
-</dd>
-<dt class="label" id="f2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p><a class="reference external" href="https://towardsdatascience.com/gpt-3-a-complete-overview-190232eb25fd">https://towardsdatascience.com/gpt-3-a-complete-overview-190232eb25fd</a></p>
-</dd>
-</dl>
-<p>Back to <a class="reference internal" href="index.html"><span class="doc">GPT-3 Study Notes</span></a>.</p>
-<div data-disqus-identifier="GPT-3: Review" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
-</section>
+</div>
+<p>Back to <a class="reference internal" href="../index.html"><span class="doc">Personal Study Notes</span></a>.</p>
+<div data-disqus-identifier="GPT-3 Study Notes" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
 
 
               </div>
@@ -301,17 +240,17 @@ impact on performance</p></li>
               
               <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="train.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">GPT-3: Training and Predicting</p>
+            <p class="prev-next-title">Personal Study Notes</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="reference.html" title="next page">
+    <a class='right-next' id="next-link" href="model.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">GPT-3: Reference</p>
+        <p class="prev-next-title">GPT-3: Model Design</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

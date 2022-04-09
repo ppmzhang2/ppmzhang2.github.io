@@ -1,6 +1,6 @@
-######
-Review
-######
+#############
+GPT-3: Review
+#############
 
 .. default-role:: code
 
@@ -71,6 +71,6 @@ Reference
 
 .. [#f2] https://towardsdatascience.com/gpt-3-a-complete-overview-190232eb25fd
 
-Back to :doc:`../index`.
+Back to :doc:`index`.
 
 .. disqus::
