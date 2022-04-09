@@ -6,178 +6,261 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>GPT3-Study’s Notes &#8212; GPT3-Study  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <title>Welcome to Study Notes’s documentation! &#8212; Study Notes  documentation</title>
     
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Model Design" href="model.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="model.html" title="Model Design"
-             accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">GPT3-Study  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">GPT3-Study’s Notes</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Model Design" href="gpt/model.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="#">
+<p class="title">Study Notes</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="gpt/model.html">
+  Model Design
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="gpt/encoding.html">
+  Input Encoding
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="gpt/network.html">
+  Neural Networks
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="gpt/train.html">
+  Training and Predicting
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="gpt/review.html">
+  Review
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="gpt/reference.html">
+  Reference
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ppmzhang2/" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
             
-  <section id="gpt3-study-s-notes">
-<h1>GPT3-Study’s Notes<a class="headerlink" href="#gpt3-study-s-notes" title="Permalink to this headline">¶</a></h1>
-<p>This project is an project to store notes and codes during the study of the
-GPT-3 language model.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="model.html">Model Design</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="model.html#parameters">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#workflow-chart">Workflow Chart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#reference">Reference</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="encoding.html">Input Encoding</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="encoding.html#token-embedding-wte">Token Embedding (WTE)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="encoding.html#questions">Questions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="encoding.html#positional-encoding-wpe">Positional Encoding (WPE)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="encoding.html#encoding-combination">Encoding Combination</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="network.html">Neural Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="network.html#layer-normalization">Layer Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="network.html#feed-forward">Feed-Forward</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="network.html#conv1d-layer">CONV1D Layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="network.html#feed-forward-layer">Feed-Forward Layer</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="network.html#attention-layer">Attention Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="network.html#reference">Reference</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="train.html">Training and Predicting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="train.html#pre-training">Pre-Training</a></li>
-<li class="toctree-l2"><a class="reference internal" href="train.html#meta-learning">Meta-Learning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="train.html#questions">Questions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="train.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="train.html#semantic-classification">Semantic Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="train.html#translate-a-sentence">Translate a Sentence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="train.html#netflix-movie-classification">Netflix Movie Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="train.html#fine-tune-training">Fine-Tune Training</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="review.html">Review</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="review.html#paper-review">Paper Review</a></li>
-<li class="toctree-l2"><a class="reference internal" href="review.html#critics">Critics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="review.html#is-it-hyped">Is It Hyped?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="review.html#know-its-ignorance">Know Its Ignorance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="review.html#not-an-agi">Not an AGI</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="review.html#reference">Reference</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference.html#papers">Papers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference.html#implementation">Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference.html#apis">APIs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference.html#openai-api">OpenAI API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference.html#transformers">Transformers</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reference.html#other-sources">Other Sources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference.html#id3">Reference</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-</section>
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
 
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
 
-            <div class="clearer"></div>
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="#">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">GPT3-Study’s Notes</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
+          
 
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="model.html"
-                          title="next chapter">Model Design</a></p>
-  </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/index.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="welcome-to-study-notes-s-documentation">
+<h1>Welcome to Study Notes’s documentation!<a class="headerlink" href="#welcome-to-study-notes-s-documentation" title="Permalink to this headline">#</a></h1>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gpt/model.html">Model Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gpt/model.html#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/model.html#workflow-chart">Workflow Chart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/model.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gpt/encoding.html">Input Encoding</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gpt/encoding.html#token-embedding-wte">Token Embedding (WTE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/encoding.html#positional-encoding-wpe">Positional Encoding (WPE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/encoding.html#encoding-combination">Encoding Combination</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gpt/network.html">Neural Networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gpt/network.html#layer-normalization">Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/network.html#feed-forward">Feed-Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/network.html#attention-layer">Attention Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/network.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gpt/train.html">Training and Predicting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gpt/train.html#pre-training">Pre-Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/train.html#meta-learning">Meta-Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/train.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gpt/review.html">Review</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gpt/review.html#paper-review">Paper Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/review.html#critics">Critics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/review.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gpt/reference.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gpt/reference.html#papers">Papers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/reference.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/reference.html#apis">APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/reference.html#other-sources">Other Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpt/reference.html#id3">Reference</a></li>
+</ul>
+</li>
+</ul>
 </div>
-<script>$('#searchbox').show(0);</script>
-        </div>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="gpt/model.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Model Design</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
       </div>
-      <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="model.html" title="Model Design"
-             >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">GPT3-Study  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">GPT3-Study’s Notes</a></li> 
-      </ul>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, ZHANG, Meng.<br>
+</p>
     </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2022, ZHANG, Meng.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
     </div>
+    
+  </div>
+</footer>
   </body>
 </html>

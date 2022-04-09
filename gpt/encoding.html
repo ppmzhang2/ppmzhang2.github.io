@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Input Encoding &#8212; Study Notes  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/disqus.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Neural Networks" href="network.html" />
+    <link rel="prev" title="Model Design" href="model.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">Study Notes</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="model.html">
+  Model Design
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="#">
+  Input Encoding
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="network.html">
+  Neural Networks
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="train.html">
+  Training and Predicting
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="review.html">
+  Review
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="reference.html">
+  Reference
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ppmzhang2/" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#token-embedding-wte">
+   Token Embedding (WTE)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#questions">
+     Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positional-encoding-wpe">
+   Positional Encoding (WPE)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encoding-combination">
+   Encoding Combination
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="input-encoding">
+<h1>Input Encoding<a class="headerlink" href="#input-encoding" title="Permalink to this headline">#</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GPT-3 Input Encoding
+
+                                &lt;---------- 50257 ----------&gt;
+
+                                ============= 1 =============
+                                ============= 2 =============
+                                ============ ... ============
+                                ============ 2048 ===========
+
+                               |||                         |||
+                               |||                         |||
+                              \|||/                       \|||/
+                               \|/                         \|/
+
+                         token embedding           positional encoding
+                              (WTE)                       (WPE)
+
+                         &lt;--- 12288 ---&gt;             &lt;--- 12288 ---&gt;
+
+                         ====== 1 ======             ====== 1 ======
+                         ====== 2 ======             ====== 2 ======
+                         ===== ... =====             ===== ... =====
+                         ===== 2048 ====             ===== 2048 ====
+
+                                |                           |
+                                |                           |
+                                -----------------------------
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                           plus (+)
+
+                                       &lt;--- 12288 ---&gt;
+
+                                       ====== 1 ======
+                                       ====== 2 ======
+                                       ===== ... =====
+                                       ===== 2048 ====
+</pre></div>
+</div>
+<p>The input text will go through an embedding / encoding process, which will map
+the string into a matrix:</p>
+<ul>
+<li><p>input text string</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;python primer plus&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>tokenized strings</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;prim&quot;</span><span class="p">,</span> <span class="s2">&quot;er&quot;</span><span class="p">,</span> <span class="s2">&quot;plus&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>each token will be mapped to a token ID, ranging from <strong>0</strong> to <strong>50256</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>each token ID will be mapped to a 12288-dimension vector (GPT-3)</p></li>
+</ul>
+<p>Once tokenized, each of the input tokens will have two groups of properties:</p>
+<ul class="simple">
+<li><p>semantic properties as a sub-word, indicated by its token index ranging from
+<strong>0</strong> to <strong>50256</strong></p></li>
+<li><p>positional properties as an element in a sequence, indicated by its
+positional index ranging from <strong>0</strong> to <strong>2047</strong></p></li>
+</ul>
+<p>The semantic properties will be interpreted by a “dictionary” in the form of a
+matrix, and</p>
+<section id="token-embedding-wte">
+<h2>Token Embedding (WTE)<a class="headerlink" href="#token-embedding-wte" title="Permalink to this headline">#</a></h2>
+<p>To interpret a word we could use a dictionary and in the case of the GPT-3
+training the “dictionary” is actually a <strong>50257-by-12288</strong> matrix, each row of
+which is a <strong>12288-dimension</strong> vector, containing distance information with
+other tokens</p>
+<p>The GPT-3 has 2048 input slots and after tokenisation there the input will be
+a <strong>2048-by-50257</strong> matrix. By multiplying the input matrix with the vocabulary
+matrix mentioned above we have a <strong>2048-by-12288</strong> embedded matrix.</p>
+<section id="questions">
+<h3>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>does the token entries obey the additive law?</p></li>
+</ul>
+</section>
+</section>
+<section id="positional-encoding-wpe">
+<h2>Positional Encoding (WPE)<a class="headerlink" href="#positional-encoding-wpe" title="Permalink to this headline">#</a></h2>
+<p>For each token in the 2048 input slots, its position is encoded passing the
+index (from 0 to 2047) to <strong>12288</strong> sinusoidal functions of different frequencies.
+The output is a <strong>2048-by-12288</strong> position encoded matrix.</p>
+</section>
+<section id="encoding-combination">
+<h2>Encoding Combination<a class="headerlink" href="#encoding-combination" title="Permalink to this headline">#</a></h2>
+<p>Both the embedding matrix and position encoded matrix are <strong>2048-by-12288</strong>
+matrices, and the final input to the model will be the sum of them.</p>
+<p>Back to <a class="reference internal" href="../index.html"><span class="doc">Welcome to Study Notes’s documentation!</span></a>.</p>
+<div data-disqus-identifier="Input Encoding" data-disqus-shortname="my-cool-project" id="disqus_thread"></div></section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="model.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Model Design</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="network.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Neural Networks</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, ZHANG, Meng.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

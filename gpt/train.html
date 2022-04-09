@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Training and Predicting &#8212; Study Notes  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/disqus.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Review" href="review.html" />
+    <link rel="prev" title="Neural Networks" href="network.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">Study Notes</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="model.html">
+  Model Design
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="encoding.html">
+  Input Encoding
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="network.html">
+  Neural Networks
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="#">
+  Training and Predicting
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="review.html">
+  Review
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="reference.html">
+  Reference
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ppmzhang2/" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-training">
+   Pre-Training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#meta-learning">
+   Meta-Learning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#questions">
+     Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semantic-classification">
+     Semantic Classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#translate-a-sentence">
+     Translate a Sentence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#netflix-movie-classification">
+     Netflix Movie Classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fine-tune-training">
+     Fine-Tune Training
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="training-and-predicting">
+<h1>Training and Predicting<a class="headerlink" href="#training-and-predicting" title="Permalink to this headline">#</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. input: &quot;The quick brown fox jumps&quot;, label: &quot;over&quot;
+2. input: &quot;The quick brown fox jumps over&quot;, label: &quot;the&quot;
+3. input: &quot;The quick brown fox jumps over the&quot;, label: &quot;lazy&quot;
+4. input: &quot;The quick brown fox jumps over the lazy&quot;, label: &quot;dog&quot;
+</pre></div>
+</div>
+<p>For both the pre-training and fine-tuning:</p>
+<ul class="simple">
+<li><p>unsupervised training</p></li>
+<li><p>model: autoregressive, several blocks of transformer decoders</p></li>
+<li><p>objective: predict the next word (maximize the probability of the next word)</p></li>
+<li><p>the input should include both the sequence of tokens and the mask</p></li>
+<li><p>it follows a sentence-by-sentence mode, with each sentence is followed by an
+<code class="code docutils literal notranslate"><span class="pre">EOS</span></code> token</p></li>
+</ul>
+<section id="pre-training">
+<h2>Pre-Training<a class="headerlink" href="#pre-training" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>dataset: a total of 300 billion tokens</p></li>
+</ul>
+</section>
+<section id="meta-learning">
+<h2>Meta-Learning<a class="headerlink" href="#meta-learning" title="Permalink to this headline">#</a></h2>
+<p>The <strong>meta-learning</strong> is the inner-loop / outer-loop structure in the learning
+process. The <strong>in-context learning</strong> refers to the inner loop of meta-learning.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sequence 1 inner loop (arithmetic)
+3+5=13, 7+2=9, ..., 9+8=17
+
+sequence 2 inner loop (correct words)
+gaot=&gt;goat, sakne=&gt;snake, dcku=&gt;duck
+
+...
+
+(the end of the outer loop)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Each inner-loop represents a task to train a specific set of skills, and
+repeated sub-tasks can be embedded within a single sequence</p></li>
+<li><p>Meta-learning develops a broad set of skills and pattern recognition
+abilities at training time within the same model</p></li>
+<li><p>With these abilities the model can adapt rapidly to desired tasks</p></li>
+<li><p>Some of the results are still far inferior to fine-tuning</p></li>
+<li><p>The efficiency of meta-learning improves with scale</p></li>
+</ul>
+<section id="questions">
+<h3>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>does in-context learning means few-shots?</p></li>
+</ul>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<p>The demo training code can be found <a class="reference external" href="https://github.com/ppmzhang2/gpt3-study">here</a>, implemented by leveraging the
+transformers package.</p>
+<section id="semantic-classification">
+<h3>Semantic Classification<a class="headerlink" href="#semantic-classification" title="Permalink to this headline">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Tweet: I hate it when my phone battery dies. Sentiment: Negative
+Tweet: My day has been great so far. Sentiment: Positive
+Tweet: This is the link to the article. Sentiment: Neutral
+Tweet: This new music video was incredible. Sentiment:
+
+Answer: Positive
+</pre></div>
+</div>
+</section>
+<section id="translate-a-sentence">
+<h3>Translate a Sentence<a class="headerlink" href="#translate-a-sentence" title="Permalink to this headline">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Me: Le singe est dans l&#39;arbre Her: The monkey is in the tree
+Me: la plume de ma tante est sur la table Her: My aunt&#39;s pen is on the table
+Me: j&#39;aime bien le jambon Her: I like the chair
+Me: Qu&#39;est-ce que c&#39;est que ca? Her: What do you mean?
+Me: Comment tu t&#39;appeles? Her: I am called Bob
+Me: Où est le garçon? Her: Where is the boy?
+Me: Qui est le president des Etats-Unis? Her:
+
+Answer: Who is the president of the United States?
+</pre></div>
+</div>
+</section>
+<section id="netflix-movie-classification">
+<h3>Netflix Movie Classification<a class="headerlink" href="#netflix-movie-classification" title="Permalink to this headline">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Description: When Lebanon&#39;s Civil War deprives Zozo of his family, he&#39;s
+left with grief and little means as he escapes to Sweden in search of
+his grandparents.
+Type: Dramas, International Movies
+
+Description: A scrappy but poor boy worms his way into a tycoon&#39;s
+dysfunctional family, while facing his fear of music and the truth about
+his past.
+Type: Dramas, International Movies, Music &amp; Musicals
+
+Description: In this documentary, South African rapper Nasty C hits the
+stage and streets of Tokyo, introducing himself to the city&#39;s sights,
+sounds and culture.
+Type: Documentaries, International Movies, Music &amp; Musicals
+
+Description: Dessert wizard Adriano Zumbo looks for the next “Willy
+Wonka” in this tense competition that finds skilled amateurs competing for
+a $100,000 prize.
+Type: International TV Shows, Reality TV
+
+Description: This documentary delves into the mystique behind the
+blues-rock trio and explores how the enigmatic band created their iconic
+look and sound. Type: Documentaries, International Movies, Music &amp; Musicals
+Type:
+
+Answer: Documentaries, International Movies, Music &amp; Musicals
+</pre></div>
+</div>
+</section>
+<section id="fine-tune-training">
+<h3>Fine-Tune Training<a class="headerlink" href="#fine-tune-training" title="Permalink to this headline">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>***** Running training *****
+  Num examples = 7004
+  Num Epochs = 1
+  Instantaneous batch size per device = 2
+  Total train batch size (w. parallel, distributed &amp; accumulation) = 2
+  Gradient Accumulation steps = 1
+  Total optimization steps = 3502
+{&#39;loss&#39;: 0.4458, &#39;learning_rate&#39;: 3.677248677248677e-05, &#39;epoch&#39;: 0.29}
+{&#39;loss&#39;: 0.3704, &#39;learning_rate&#39;: 2.2075249853027632e-05, &#39;epoch&#39;: 0.57}
+{&#39;loss&#39;: 0.3546, &#39;learning_rate&#39;: 7.37801293356849e-06, &#39;epoch&#39;: 0.86}
+100%|█████████████████████████████████████████████████████████████████████████████████| 3502/3502 [4:53:35&lt;00:00,  4.90s/it]
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+{&#39;train_runtime&#39;: 17615.3528, &#39;train_samples_per_second&#39;: 0.398, &#39;train_steps_per_second&#39;: 0.199, &#39;train_loss&#39;: 0.38377865323470295, &#39;epoch&#39;: 1.0}
+</pre></div>
+</div>
+<p>Back to <a class="reference internal" href="../index.html"><span class="doc">Welcome to Study Notes’s documentation!</span></a>.</p>
+<div data-disqus-identifier="Training and Predicting" data-disqus-shortname="my-cool-project" id="disqus_thread"></div></section>
+</section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="network.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Neural Networks</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="review.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Review</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, ZHANG, Meng.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
