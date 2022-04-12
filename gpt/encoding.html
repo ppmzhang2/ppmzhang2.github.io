@@ -168,6 +168,11 @@
 <nav id="bd-toc-nav">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#byte-pair-encoding-bpe">
+   Byte Pair Encoding (BPE)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#token-embedding-wte">
    Token Embedding (WTE)
   </a>
@@ -283,6 +288,362 @@ positional index ranging from <strong>0</strong> to <strong>2047</strong></p></l
 </ul>
 <p>The semantic properties will be interpreted by a “dictionary” in the form of a
 matrix, and</p>
+<section id="byte-pair-encoding-bpe">
+<h2>Byte Pair Encoding (BPE)<a class="headerlink" href="#byte-pair-encoding-bpe" title="Permalink to this headline">#</a></h2>
+<p>Suppose we feed the byte-pair encoder a word <code class="code docutils literal notranslate"><span class="pre">workflow</span></code>. It first split the
+word into characters and pair the neighbouring ones:</p>
+<table class="table">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>o</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>r</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>r</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+</tr>
+</tbody>
+</table>
+<p>Add rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>o</p></td>
+<td><p>0</p></td>
+<td><p>21382</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>r</p></td>
+<td><p>1</p></td>
+<td><p>17</p></td>
+</tr>
+<tr class="row-even"><td><p>r</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-odd"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+<td><p>5183</p></td>
+</tr>
+<tr class="row-even"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+<td><p>66</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">o</span></code> and <code class="code docutils literal notranslate"><span class="pre">r</span></code>):</p>
+<table class="table">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>or</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>or</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+</tr>
+</tbody>
+</table>
+<p>Re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>or</p></td>
+<td><p>0</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>or</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+<td><p>711</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+<td><p>5183</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+<td><p>66</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">o</span></code> and <code class="code docutils literal notranslate"><span class="pre">w</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>or</p></td>
+<td><p>0</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>or</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+<td><p>711</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>9063</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">or</span></code> and <code class="code docutils literal notranslate"><span class="pre">k</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>ork</p></td>
+<td><p>0</p></td>
+<td><p>1562</p></td>
+</tr>
+<tr class="row-odd"><td><p>ork</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-odd"><td><p>l</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>9063</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">w</span></code> and <code class="code docutils literal notranslate"><span class="pre">ork</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>work</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>9063</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">f</span></code> and <code class="code docutils literal notranslate"><span class="pre">l</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>work</p></td>
+<td><p>fl</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>fl</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>10869</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">fl</span></code> and <code class="code docutils literal notranslate"><span class="pre">ow</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>work</p></td>
+<td><p>flow</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+</tbody>
+</table>
+<p>There no pair can be merged and the output should be both the prefix and the
+suffix.</p>
+</section>
 <section id="token-embedding-wte">
 <h2>Token Embedding (WTE)<a class="headerlink" href="#token-embedding-wte" title="Permalink to this headline">#</a></h2>
 <p>To interpret a word we could use a dictionary and in the case of the GPT-3
