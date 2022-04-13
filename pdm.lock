@@ -247,9 +247,9 @@ dependencies = [
 
 [[package]]
 name = "pyparsing"
-version = "3.0.7"
-requires_python = ">=3.6"
-summary = "Python parsing module"
+version = "3.0.8"
+requires_python = ">=3.6.8"
+summary = "pyparsing module - Classes and methods to define and execute parsing grammars"
 
 [[package]]
 name = "pytest"
@@ -305,7 +305,7 @@ dependencies = [
 
 [[package]]
 name = "setuptools"
-version = "62.0.0"
+version = "62.1.0"
 requires_python = ">=3.7"
 summary = "Easily download, build, install, upgrade, and uninstall Python packages"
 
@@ -757,9 +757,9 @@ content_hash = "sha256:19d40b6f2ff3d4df5eea81556e9b9cde03edd3a289beb33f5e7014cda
     {file = "pylint-2.13.5-py3-none-any.whl", hash = "sha256:c149694cfdeaee1aa2465e6eaab84c87a881a7d55e6e93e09466be7164764d1e"},
     {file = "pylint-2.13.5.tar.gz", hash = "sha256:dab221658368c7a05242e673c275c488670144123f4bd262b2777249c1c0de9b"},
 ]
-"pyparsing 3.0.7" = [
-    {file = "pyparsing-3.0.7-py3-none-any.whl", hash = "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"},
-    {file = "pyparsing-3.0.7.tar.gz", hash = "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea"},
+"pyparsing 3.0.8" = [
+    {file = "pyparsing-3.0.8-py3-none-any.whl", hash = "sha256:ef7b523f6356f763771559412c0d7134753f037822dad1b16945b7b846f7ad06"},
+    {file = "pyparsing-3.0.8.tar.gz", hash = "sha256:7bf433498c016c4314268d95df76c81b842a4cb2b276fa3312cfb1e1d85f6954"},
 ]
 "pytest 7.1.1" = [
     {file = "pytest-7.1.1-py3-none-any.whl", hash = "sha256:92f723789a8fdd7180b6b06483874feca4c48a5c76968e03bb3e7f806a1869ea"},
@@ -781,9 +781,9 @@ content_hash = "sha256:19d40b6f2ff3d4df5eea81556e9b9cde03edd3a289beb33f5e7014cda
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
     {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
 ]
-"setuptools 62.0.0" = [
-    {file = "setuptools-62.0.0-py3-none-any.whl", hash = "sha256:a65e3802053e99fc64c6b3b29c11132943d5b8c8facbcc461157511546510967"},
-    {file = "setuptools-62.0.0.tar.gz", hash = "sha256:7999cbd87f1b6e1f33bf47efa368b224bed5e27b5ef2c4d46580186cbcb1a86a"},
+"setuptools 62.1.0" = [
+    {file = "setuptools-62.1.0-py3-none-any.whl", hash = "sha256:26ead7d1f93efc0f8c804d9fafafbe4a44b179580a7105754b245155f9af05a8"},
+    {file = "setuptools-62.1.0.tar.gz", hash = "sha256:47c7b0c0f8fc10eec4cf1e71c6fdadf8decaa74ffa087e68cd1c20db7ad6a592"},
 ]
 "setuptools-git-versioning 1.9.2" = [
     {file = "setuptools_git_versioning-1.9.2-py3-none-any.whl", hash = "sha256:66acb4f5896956e5d2aec2250b1e41342a0bf3228e577d54171d9a06d5f8637b"},
