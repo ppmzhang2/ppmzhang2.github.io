@@ -75,6 +75,16 @@ Transformers
 The transformers from `Hugging Face <https://huggingface.co/>`_ provides APIs
 to download and train pre-trained models, including GPT-2 and GPT Neo.
 
+Fine-Tuning
+===========
+
+- This `150kb text
+  <https://uploads-ssl.webflow.com/60b2f56a556ad23e9c414ec8/61591f6661b89431b78faf3b_elon-musk.txt>`_
+  contains podcast transcripts of Elon Musk.
+
+- This `post
+  <https://medium.com/ai-innovation/beginners-guide-to-retrain-gpt-2-117m-to-generate-custom-text-content-8bb5363d8b7f>`_ shows how to retrain the GPT-2 model.
+
 Other Sources
 =============
 
@@ -105,6 +115,11 @@ Other Sources
 
   - `Mechanics of Seq2seq Models With Attention
     <https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/>`_
+
+- GPT-J
+
+  - `How to Fine-Tune GPT-J
+    <https://www.forefront.ai/blog-posts/how-to-fine-tune-gpt-j>`_
 
 Reference
 =========
