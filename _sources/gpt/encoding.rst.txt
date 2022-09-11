@@ -147,6 +147,10 @@ except for space, which is mapped to `Ġ` (U+0120).
         248: "ø", 249: "ù", 250: "ú", 251: "û", 252: "ü", 253: "ý", 254: "þ", 255: "ÿ",
     }
 
+The following tokenization and word embedding relies on unicode encoding and
+the vocabulary must contain only the 256 codes listed above (e.g. `vocab.json`
+and `vocab.bpe`).
+
 Tokenization
 ============
 
@@ -336,6 +340,11 @@ Merge top ranked pair (`fl` and `ow`) and re-rank:
 
 There no pair can be merged and the output should be both the prefix and the
 suffix.
+
+P.S.
+----
+
+- the best tokenization technique depends on language, task, etc.
 
 Token Embedding (WTE)
 =====================

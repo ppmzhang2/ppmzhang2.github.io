@@ -187,6 +187,11 @@
      Byte Pair Encoding (BPE)
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#p-s">
+     P.S.
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -363,6 +368,9 @@ except for space, which is mapped to <code class="code docutils literal notransl
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>The following tokenization and word embedding relies on unicode encoding and
+the vocabulary must contain only the 256 codes listed above (e.g. <code class="code docutils literal notranslate"><span class="pre">vocab.json</span></code>
+and <code class="code docutils literal notranslate"><span class="pre">vocab.bpe</span></code>).</p>
 </section>
 <section id="tokenization">
 <h2>Tokenization<a class="headerlink" href="#tokenization" title="Permalink to this headline">#</a></h2>
@@ -755,6 +763,12 @@ word into characters and pair the neighbouring ones:</p>
 </table>
 <p>There no pair can be merged and the output should be both the prefix and the
 suffix.</p>
+</section>
+<section id="p-s">
+<h3>P.S.<a class="headerlink" href="#p-s" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>the best tokenization technique depends on language, task, etc.</p></li>
+</ul>
 </section>
 </section>
 <section id="token-embedding-wte">

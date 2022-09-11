@@ -6,33 +6,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Study Notes &#8212; Study Notes  documentation</title>
+    <title>NeRF: Model &#8212; Study Notes  documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/disqus.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GPT-3 Study Notes" href="gpt/index.html" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/disqus.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -50,7 +49,7 @@
   <div id="navbar-start">
     
     
-<a class="navbar-brand" href="#">
+<a class="navbar-brand" href="../index.html">
 <p class="title">Study Notes</p>
 </a>
 
@@ -68,13 +67,13 @@
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
     <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="gpt/index.html">
+ <a class="reference internal nav-link" href="../gpt/index.html">
   GPT-3 Study Notes
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="nerf/index.html">
+ <a class="reference internal nav-link" href="index.html">
   NeRF
  </a>
 </li>
@@ -108,7 +107,7 @@
             
             <!-- Only show if we have sidebars configured, else just a small margin  -->
             <div class="col-12 col-md-3 bd-sidebar">
-              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
@@ -129,9 +128,19 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-design">
+   Model Design
+  </a>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -151,28 +160,14 @@
               
               <div>
                 
-  <section id="study-notes">
-<h1>Study Notes<a class="headerlink" href="#study-notes" title="Permalink to this headline">#</a></h1>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="gpt/index.html">GPT-3 Study Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gpt/model.html">GPT-3: Model Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gpt/encoding.html">GPT-3: Input Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gpt/network.html">GPT-3: Neural Networks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gpt/train.html">GPT-3: Training and Predicting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gpt/review.html">GPT-3: Review</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gpt/reference.html">GPT-3: Reference</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="nerf/index.html">NeRF</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="nerf/model.html">NeRF: Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nerf/reference.html">NeRF: Reference</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div data-disqus-identifier="Study Notes" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
+  <section id="nerf-model">
+<h1>NeRF: Model<a class="headerlink" href="#nerf-model" title="Permalink to this headline">#</a></h1>
+<section id="model-design">
+<h2>Model Design<a class="headerlink" href="#model-design" title="Permalink to this headline">#</a></h2>
+<p>TBD</p>
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">NeRF</span></a>.</p>
+<div data-disqus-identifier="NeRF: Model" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
+</section>
 
 
               </div>
@@ -180,13 +175,6 @@
               
               <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="gpt/index.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">GPT-3 Study Notes</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
               
           </main>
@@ -196,7 +184,7 @@
     </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 <footer class="footer mt-5 mt-md-0">
   <div class="container">
     
