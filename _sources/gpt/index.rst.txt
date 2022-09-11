@@ -1,6 +1,6 @@
-#################
-GPT-3 Study Notes
-#################
+#########
+GPT-3
+#########
 
 This project is an project to store notes and codes during the study of the
 GPT-3 language model.
