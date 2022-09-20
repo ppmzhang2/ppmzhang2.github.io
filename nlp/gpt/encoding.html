@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Input Encoding &#8212; Study Notes  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/disqus.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Neural Networks" href="network.html" />
+    <link rel="prev" title="Model Design" href="model.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../index.html">
+<p class="title">Study Notes</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  NLP
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../cv/index.html">
+  Computer Vision
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ppmzhang2/" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   GPT
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="model.html">
+     Model Design
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Input Encoding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="network.html">
+     Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="train.html">
+     Training and Predicting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="review.html">
+     Review
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference.html">
+     Reference
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unicode-encoding">
+   Unicode Encoding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tokenization">
+   Tokenization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initial-splitting">
+     Initial Splitting
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#byte-pair-encoding-bpe">
+     Byte Pair Encoding (BPE)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#p-s">
+     P.S.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#token-embedding-wte">
+   Token Embedding (WTE)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positional-encoding-wpe">
+   Positional Encoding (WPE)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encoding-combination">
+   Encoding Combination
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reference">
+   Reference
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="input-encoding">
+<h1>Input Encoding<a class="headerlink" href="#input-encoding" title="Permalink to this headline">#</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GPT-3 Input Encoding
+
+                                &lt;---------- 50257 ----------&gt;
+
+                                ============= 1 =============
+                                ============= 2 =============
+                                ============ ... ============
+                                ============ 2048 ===========
+
+                               |||                         |||
+                               |||                         |||
+                              \|||/                       \|||/
+                               \|/                         \|/
+
+                         token embedding           positional encoding
+                              (WTE)                       (WPE)
+
+                         &lt;--- 12288 ---&gt;             &lt;--- 12288 ---&gt;
+
+                         ====== 1 ======             ====== 1 ======
+                         ====== 2 ======             ====== 2 ======
+                         ===== ... =====             ===== ... =====
+                         ===== 2048 ====             ===== 2048 ====
+
+                                |                           |
+                                |                           |
+                                -----------------------------
+                                             |||
+                                             |||
+                                            \|||/
+                                             \|/
+
+                                           plus (+)
+
+                                       &lt;--- 12288 ---&gt;
+
+                                       ====== 1 ======
+                                       ====== 2 ======
+                                       ===== ... =====
+                                       ===== 2048 ====
+</pre></div>
+</div>
+<p>The input text will go through an embedding / encoding process, which will map
+the string into a matrix:</p>
+<ul>
+<li><p>input text string</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;python primer plus&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>tokenized strings</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;prim&quot;</span><span class="p">,</span> <span class="s2">&quot;er&quot;</span><span class="p">,</span> <span class="s2">&quot;plus&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>each token will be mapped to a token ID, ranging from <strong>0</strong> to <strong>50256</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>each token ID will be mapped to a 12288-dimension vector (GPT-3)</p></li>
+</ul>
+<p>Once tokenized, each of the input tokens will have two groups of properties:</p>
+<ul class="simple">
+<li><p>semantic properties as a sub-word, indicated by its token index ranging from
+<strong>0</strong> to <strong>50256</strong></p></li>
+<li><p>positional properties as an element in a sequence, indicated by its
+positional index ranging from <strong>0</strong> to <strong>2047</strong></p></li>
+</ul>
+<p>The semantic properties will be interpreted by a “dictionary” in the form of a
+matrix, and</p>
+<section id="unicode-encoding">
+<h2>Unicode Encoding<a class="headerlink" href="#unicode-encoding" title="Permalink to this headline">#</a></h2>
+<p>All the strings are in <strong>UTF-8</strong> format, which guarantees that each valid
+character is represented by one to four one-byte (8-bit) code units. This means
+any UTF-8 string can be represented via a 8-bit (256) alphabet.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bytes_to_unicode</span><span class="p">():</span>
+    <span class="n">bs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">),</span>
+                    <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span>
+                        <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;¡&quot;</span><span class="p">),</span>
+                        <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;¬&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;®&quot;</span><span class="p">),</span>
+                                                    <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;ÿ&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="n">bs</span><span class="p">[:]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">8</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bs</span><span class="p">:</span>
+            <span class="n">bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">cs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">8</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">cs</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">cs</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This program keeps the ASCII printable characters all remain in their position
+except for space, which is mapped to <code class="code docutils literal notranslate"><span class="pre">Ġ</span></code> (U+0120).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;Ā&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;ā&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Ă&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;ă&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Ą&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;ą&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;Ć&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;ć&quot;</span><span class="p">,</span>
+    <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;Ĉ&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;ĉ&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;Ċ&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span> <span class="s2">&quot;ċ&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;Č&quot;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span> <span class="s2">&quot;č&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">:</span> <span class="s2">&quot;Ď&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">:</span> <span class="s2">&quot;ď&quot;</span><span class="p">,</span>
+    <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;Đ&quot;</span><span class="p">,</span> <span class="mi">17</span><span class="p">:</span> <span class="s2">&quot;đ&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">:</span> <span class="s2">&quot;Ē&quot;</span><span class="p">,</span> <span class="mi">19</span><span class="p">:</span> <span class="s2">&quot;ē&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span> <span class="s2">&quot;Ĕ&quot;</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span> <span class="s2">&quot;ĕ&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">:</span> <span class="s2">&quot;Ė&quot;</span><span class="p">,</span> <span class="mi">23</span><span class="p">:</span> <span class="s2">&quot;ė&quot;</span><span class="p">,</span>
+    <span class="mi">24</span><span class="p">:</span> <span class="s2">&quot;Ę&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">:</span> <span class="s2">&quot;ę&quot;</span><span class="p">,</span> <span class="mi">26</span><span class="p">:</span> <span class="s2">&quot;Ě&quot;</span><span class="p">,</span> <span class="mi">27</span><span class="p">:</span> <span class="s2">&quot;ě&quot;</span><span class="p">,</span> <span class="mi">28</span><span class="p">:</span> <span class="s2">&quot;Ĝ&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">:</span> <span class="s2">&quot;ĝ&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span> <span class="s2">&quot;Ğ&quot;</span><span class="p">,</span> <span class="mi">31</span><span class="p">:</span> <span class="s2">&quot;ğ&quot;</span><span class="p">,</span>
+    <span class="mi">32</span><span class="p">:</span> <span class="s2">&quot;Ġ&quot;</span><span class="p">,</span> <span class="mi">33</span><span class="p">:</span> <span class="s2">&quot;!&quot;</span><span class="p">,</span> <span class="mi">34</span><span class="p">:</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="mi">35</span><span class="p">:</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="mi">36</span><span class="p">:</span> <span class="s2">&quot;$&quot;</span><span class="p">,</span> <span class="mi">37</span><span class="p">:</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span> <span class="mi">38</span><span class="p">:</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="mi">39</span><span class="p">:</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">,</span>
+    <span class="mi">40</span><span class="p">:</span> <span class="s2">&quot;(&quot;</span><span class="p">,</span> <span class="mi">41</span><span class="p">:</span> <span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="mi">43</span><span class="p">:</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="mi">44</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="mi">45</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="mi">46</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">47</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+    <span class="mi">48</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="mi">49</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="mi">51</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="mi">52</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="mi">53</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="mi">54</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="mi">55</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+    <span class="mi">56</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="mi">57</span><span class="p">:</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="mi">58</span><span class="p">:</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">59</span><span class="p">:</span> <span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="mi">60</span><span class="p">:</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="mi">61</span><span class="p">:</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="mi">62</span><span class="p">:</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="mi">63</span><span class="p">:</span> <span class="s2">&quot;?&quot;</span><span class="p">,</span>
+    <span class="mi">64</span><span class="p">:</span> <span class="s2">&quot;@&quot;</span><span class="p">,</span> <span class="mi">65</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">66</span><span class="p">:</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mi">67</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">68</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="mi">69</span><span class="p">:</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="mi">70</span><span class="p">:</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="mi">71</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+    <span class="mi">72</span><span class="p">:</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mi">73</span><span class="p">:</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="mi">74</span><span class="p">:</span> <span class="s2">&quot;J&quot;</span><span class="p">,</span> <span class="mi">75</span><span class="p">:</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="mi">76</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="mi">77</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="mi">78</span><span class="p">:</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="mi">79</span><span class="p">:</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span>
+    <span class="mi">80</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="mi">81</span><span class="p">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="mi">82</span><span class="p">:</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="mi">83</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="mi">84</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="mi">85</span><span class="p">:</span> <span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="mi">86</span><span class="p">:</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="mi">87</span><span class="p">:</span> <span class="s2">&quot;W&quot;</span><span class="p">,</span>
+    <span class="mi">88</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="mi">89</span><span class="p">:</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="mi">90</span><span class="p">:</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="mi">91</span><span class="p">:</span> <span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="mi">92</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">93</span><span class="p">:</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="mi">94</span><span class="p">:</span> <span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="mi">95</span><span class="p">:</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span>
+    <span class="mi">96</span><span class="p">:</span> <span class="s2">&quot;`&quot;</span><span class="p">,</span> <span class="mi">97</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">98</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">99</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="mi">101</span><span class="p">:</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="mi">102</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="mi">103</span><span class="p">:</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span>
+    <span class="mi">104</span><span class="p">:</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="mi">105</span><span class="p">:</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="mi">106</span><span class="p">:</span> <span class="s2">&quot;j&quot;</span><span class="p">,</span> <span class="mi">107</span><span class="p">:</span> <span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="mi">108</span><span class="p">:</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="mi">109</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="mi">110</span><span class="p">:</span> <span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="mi">111</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span>
+    <span class="mi">112</span><span class="p">:</span> <span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="mi">113</span><span class="p">:</span> <span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">114</span><span class="p">:</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="mi">115</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mi">116</span><span class="p">:</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="mi">117</span><span class="p">:</span> <span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="mi">118</span><span class="p">:</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="mi">119</span><span class="p">:</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+    <span class="mi">120</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mi">121</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="mi">122</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="mi">123</span><span class="p">:</span> <span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="mi">124</span><span class="p">:</span> <span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="mi">125</span><span class="p">:</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="mi">126</span><span class="p">:</span> <span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="mi">127</span><span class="p">:</span> <span class="s2">&quot;ġ&quot;</span><span class="p">,</span>
+    <span class="mi">128</span><span class="p">:</span> <span class="s2">&quot;Ģ&quot;</span><span class="p">,</span> <span class="mi">129</span><span class="p">:</span> <span class="s2">&quot;ģ&quot;</span><span class="p">,</span> <span class="mi">130</span><span class="p">:</span> <span class="s2">&quot;Ĥ&quot;</span><span class="p">,</span> <span class="mi">131</span><span class="p">:</span> <span class="s2">&quot;ĥ&quot;</span><span class="p">,</span> <span class="mi">132</span><span class="p">:</span> <span class="s2">&quot;Ħ&quot;</span><span class="p">,</span> <span class="mi">133</span><span class="p">:</span> <span class="s2">&quot;ħ&quot;</span><span class="p">,</span> <span class="mi">134</span><span class="p">:</span> <span class="s2">&quot;Ĩ&quot;</span><span class="p">,</span> <span class="mi">135</span><span class="p">:</span> <span class="s2">&quot;ĩ&quot;</span><span class="p">,</span>
+    <span class="mi">136</span><span class="p">:</span> <span class="s2">&quot;Ī&quot;</span><span class="p">,</span> <span class="mi">137</span><span class="p">:</span> <span class="s2">&quot;ī&quot;</span><span class="p">,</span> <span class="mi">138</span><span class="p">:</span> <span class="s2">&quot;Ĭ&quot;</span><span class="p">,</span> <span class="mi">139</span><span class="p">:</span> <span class="s2">&quot;ĭ&quot;</span><span class="p">,</span> <span class="mi">140</span><span class="p">:</span> <span class="s2">&quot;Į&quot;</span><span class="p">,</span> <span class="mi">141</span><span class="p">:</span> <span class="s2">&quot;į&quot;</span><span class="p">,</span> <span class="mi">142</span><span class="p">:</span> <span class="s2">&quot;İ&quot;</span><span class="p">,</span> <span class="mi">143</span><span class="p">:</span> <span class="s2">&quot;ı&quot;</span><span class="p">,</span>
+    <span class="mi">144</span><span class="p">:</span> <span class="s2">&quot;Ĳ&quot;</span><span class="p">,</span> <span class="mi">145</span><span class="p">:</span> <span class="s2">&quot;ĳ&quot;</span><span class="p">,</span> <span class="mi">146</span><span class="p">:</span> <span class="s2">&quot;Ĵ&quot;</span><span class="p">,</span> <span class="mi">147</span><span class="p">:</span> <span class="s2">&quot;ĵ&quot;</span><span class="p">,</span> <span class="mi">148</span><span class="p">:</span> <span class="s2">&quot;Ķ&quot;</span><span class="p">,</span> <span class="mi">149</span><span class="p">:</span> <span class="s2">&quot;ķ&quot;</span><span class="p">,</span> <span class="mi">150</span><span class="p">:</span> <span class="s2">&quot;ĸ&quot;</span><span class="p">,</span> <span class="mi">151</span><span class="p">:</span> <span class="s2">&quot;Ĺ&quot;</span><span class="p">,</span>
+    <span class="mi">152</span><span class="p">:</span> <span class="s2">&quot;ĺ&quot;</span><span class="p">,</span> <span class="mi">153</span><span class="p">:</span> <span class="s2">&quot;Ļ&quot;</span><span class="p">,</span> <span class="mi">154</span><span class="p">:</span> <span class="s2">&quot;ļ&quot;</span><span class="p">,</span> <span class="mi">155</span><span class="p">:</span> <span class="s2">&quot;Ľ&quot;</span><span class="p">,</span> <span class="mi">156</span><span class="p">:</span> <span class="s2">&quot;ľ&quot;</span><span class="p">,</span> <span class="mi">157</span><span class="p">:</span> <span class="s2">&quot;Ŀ&quot;</span><span class="p">,</span> <span class="mi">158</span><span class="p">:</span> <span class="s2">&quot;ŀ&quot;</span><span class="p">,</span> <span class="mi">159</span><span class="p">:</span> <span class="s2">&quot;Ł&quot;</span><span class="p">,</span>
+    <span class="mi">160</span><span class="p">:</span> <span class="s2">&quot;ł&quot;</span><span class="p">,</span> <span class="mi">161</span><span class="p">:</span> <span class="s2">&quot;¡&quot;</span><span class="p">,</span> <span class="mi">162</span><span class="p">:</span> <span class="s2">&quot;¢&quot;</span><span class="p">,</span> <span class="mi">163</span><span class="p">:</span> <span class="s2">&quot;£&quot;</span><span class="p">,</span> <span class="mi">164</span><span class="p">:</span> <span class="s2">&quot;¤&quot;</span><span class="p">,</span> <span class="mi">165</span><span class="p">:</span> <span class="s2">&quot;¥&quot;</span><span class="p">,</span> <span class="mi">166</span><span class="p">:</span> <span class="s2">&quot;¦&quot;</span><span class="p">,</span> <span class="mi">167</span><span class="p">:</span> <span class="s2">&quot;§&quot;</span><span class="p">,</span>
+    <span class="mi">168</span><span class="p">:</span> <span class="s2">&quot;¨&quot;</span><span class="p">,</span> <span class="mi">169</span><span class="p">:</span> <span class="s2">&quot;©&quot;</span><span class="p">,</span> <span class="mi">170</span><span class="p">:</span> <span class="s2">&quot;ª&quot;</span><span class="p">,</span> <span class="mi">171</span><span class="p">:</span> <span class="s2">&quot;«&quot;</span><span class="p">,</span> <span class="mi">172</span><span class="p">:</span> <span class="s2">&quot;¬&quot;</span><span class="p">,</span> <span class="mi">173</span><span class="p">:</span> <span class="s2">&quot;Ń&quot;</span><span class="p">,</span> <span class="mi">174</span><span class="p">:</span> <span class="s2">&quot;®&quot;</span><span class="p">,</span> <span class="mi">175</span><span class="p">:</span> <span class="s2">&quot;¯&quot;</span><span class="p">,</span>
+    <span class="mi">176</span><span class="p">:</span> <span class="s2">&quot;°&quot;</span><span class="p">,</span> <span class="mi">177</span><span class="p">:</span> <span class="s2">&quot;±&quot;</span><span class="p">,</span> <span class="mi">178</span><span class="p">:</span> <span class="s2">&quot;²&quot;</span><span class="p">,</span> <span class="mi">179</span><span class="p">:</span> <span class="s2">&quot;³&quot;</span><span class="p">,</span> <span class="mi">180</span><span class="p">:</span> <span class="s2">&quot;´&quot;</span><span class="p">,</span> <span class="mi">181</span><span class="p">:</span> <span class="s2">&quot;µ&quot;</span><span class="p">,</span> <span class="mi">182</span><span class="p">:</span> <span class="s2">&quot;¶&quot;</span><span class="p">,</span> <span class="mi">183</span><span class="p">:</span> <span class="s2">&quot;·&quot;</span><span class="p">,</span>
+    <span class="mi">184</span><span class="p">:</span> <span class="s2">&quot;¸&quot;</span><span class="p">,</span> <span class="mi">185</span><span class="p">:</span> <span class="s2">&quot;¹&quot;</span><span class="p">,</span> <span class="mi">186</span><span class="p">:</span> <span class="s2">&quot;º&quot;</span><span class="p">,</span> <span class="mi">187</span><span class="p">:</span> <span class="s2">&quot;»&quot;</span><span class="p">,</span> <span class="mi">188</span><span class="p">:</span> <span class="s2">&quot;¼&quot;</span><span class="p">,</span> <span class="mi">189</span><span class="p">:</span> <span class="s2">&quot;½&quot;</span><span class="p">,</span> <span class="mi">190</span><span class="p">:</span> <span class="s2">&quot;¾&quot;</span><span class="p">,</span> <span class="mi">191</span><span class="p">:</span> <span class="s2">&quot;¿&quot;</span><span class="p">,</span>
+    <span class="mi">192</span><span class="p">:</span> <span class="s2">&quot;À&quot;</span><span class="p">,</span> <span class="mi">193</span><span class="p">:</span> <span class="s2">&quot;Á&quot;</span><span class="p">,</span> <span class="mi">194</span><span class="p">:</span> <span class="s2">&quot;Â&quot;</span><span class="p">,</span> <span class="mi">195</span><span class="p">:</span> <span class="s2">&quot;Ã&quot;</span><span class="p">,</span> <span class="mi">196</span><span class="p">:</span> <span class="s2">&quot;Ä&quot;</span><span class="p">,</span> <span class="mi">197</span><span class="p">:</span> <span class="s2">&quot;Å&quot;</span><span class="p">,</span> <span class="mi">198</span><span class="p">:</span> <span class="s2">&quot;Æ&quot;</span><span class="p">,</span> <span class="mi">199</span><span class="p">:</span> <span class="s2">&quot;Ç&quot;</span><span class="p">,</span>
+    <span class="mi">200</span><span class="p">:</span> <span class="s2">&quot;È&quot;</span><span class="p">,</span> <span class="mi">201</span><span class="p">:</span> <span class="s2">&quot;É&quot;</span><span class="p">,</span> <span class="mi">202</span><span class="p">:</span> <span class="s2">&quot;Ê&quot;</span><span class="p">,</span> <span class="mi">203</span><span class="p">:</span> <span class="s2">&quot;Ë&quot;</span><span class="p">,</span> <span class="mi">204</span><span class="p">:</span> <span class="s2">&quot;Ì&quot;</span><span class="p">,</span> <span class="mi">205</span><span class="p">:</span> <span class="s2">&quot;Í&quot;</span><span class="p">,</span> <span class="mi">206</span><span class="p">:</span> <span class="s2">&quot;Î&quot;</span><span class="p">,</span> <span class="mi">207</span><span class="p">:</span> <span class="s2">&quot;Ï&quot;</span><span class="p">,</span>
+    <span class="mi">208</span><span class="p">:</span> <span class="s2">&quot;Ð&quot;</span><span class="p">,</span> <span class="mi">209</span><span class="p">:</span> <span class="s2">&quot;Ñ&quot;</span><span class="p">,</span> <span class="mi">210</span><span class="p">:</span> <span class="s2">&quot;Ò&quot;</span><span class="p">,</span> <span class="mi">211</span><span class="p">:</span> <span class="s2">&quot;Ó&quot;</span><span class="p">,</span> <span class="mi">212</span><span class="p">:</span> <span class="s2">&quot;Ô&quot;</span><span class="p">,</span> <span class="mi">213</span><span class="p">:</span> <span class="s2">&quot;Õ&quot;</span><span class="p">,</span> <span class="mi">214</span><span class="p">:</span> <span class="s2">&quot;Ö&quot;</span><span class="p">,</span> <span class="mi">215</span><span class="p">:</span> <span class="s2">&quot;×&quot;</span><span class="p">,</span>
+    <span class="mi">216</span><span class="p">:</span> <span class="s2">&quot;Ø&quot;</span><span class="p">,</span> <span class="mi">217</span><span class="p">:</span> <span class="s2">&quot;Ù&quot;</span><span class="p">,</span> <span class="mi">218</span><span class="p">:</span> <span class="s2">&quot;Ú&quot;</span><span class="p">,</span> <span class="mi">219</span><span class="p">:</span> <span class="s2">&quot;Û&quot;</span><span class="p">,</span> <span class="mi">220</span><span class="p">:</span> <span class="s2">&quot;Ü&quot;</span><span class="p">,</span> <span class="mi">221</span><span class="p">:</span> <span class="s2">&quot;Ý&quot;</span><span class="p">,</span> <span class="mi">222</span><span class="p">:</span> <span class="s2">&quot;Þ&quot;</span><span class="p">,</span> <span class="mi">223</span><span class="p">:</span> <span class="s2">&quot;ß&quot;</span><span class="p">,</span>
+    <span class="mi">224</span><span class="p">:</span> <span class="s2">&quot;à&quot;</span><span class="p">,</span> <span class="mi">225</span><span class="p">:</span> <span class="s2">&quot;á&quot;</span><span class="p">,</span> <span class="mi">226</span><span class="p">:</span> <span class="s2">&quot;â&quot;</span><span class="p">,</span> <span class="mi">227</span><span class="p">:</span> <span class="s2">&quot;ã&quot;</span><span class="p">,</span> <span class="mi">228</span><span class="p">:</span> <span class="s2">&quot;ä&quot;</span><span class="p">,</span> <span class="mi">229</span><span class="p">:</span> <span class="s2">&quot;å&quot;</span><span class="p">,</span> <span class="mi">230</span><span class="p">:</span> <span class="s2">&quot;æ&quot;</span><span class="p">,</span> <span class="mi">231</span><span class="p">:</span> <span class="s2">&quot;ç&quot;</span><span class="p">,</span>
+    <span class="mi">232</span><span class="p">:</span> <span class="s2">&quot;è&quot;</span><span class="p">,</span> <span class="mi">233</span><span class="p">:</span> <span class="s2">&quot;é&quot;</span><span class="p">,</span> <span class="mi">234</span><span class="p">:</span> <span class="s2">&quot;ê&quot;</span><span class="p">,</span> <span class="mi">235</span><span class="p">:</span> <span class="s2">&quot;ë&quot;</span><span class="p">,</span> <span class="mi">236</span><span class="p">:</span> <span class="s2">&quot;ì&quot;</span><span class="p">,</span> <span class="mi">237</span><span class="p">:</span> <span class="s2">&quot;í&quot;</span><span class="p">,</span> <span class="mi">238</span><span class="p">:</span> <span class="s2">&quot;î&quot;</span><span class="p">,</span> <span class="mi">239</span><span class="p">:</span> <span class="s2">&quot;ï&quot;</span><span class="p">,</span>
+    <span class="mi">240</span><span class="p">:</span> <span class="s2">&quot;ð&quot;</span><span class="p">,</span> <span class="mi">241</span><span class="p">:</span> <span class="s2">&quot;ñ&quot;</span><span class="p">,</span> <span class="mi">242</span><span class="p">:</span> <span class="s2">&quot;ò&quot;</span><span class="p">,</span> <span class="mi">243</span><span class="p">:</span> <span class="s2">&quot;ó&quot;</span><span class="p">,</span> <span class="mi">244</span><span class="p">:</span> <span class="s2">&quot;ô&quot;</span><span class="p">,</span> <span class="mi">245</span><span class="p">:</span> <span class="s2">&quot;õ&quot;</span><span class="p">,</span> <span class="mi">246</span><span class="p">:</span> <span class="s2">&quot;ö&quot;</span><span class="p">,</span> <span class="mi">247</span><span class="p">:</span> <span class="s2">&quot;÷&quot;</span><span class="p">,</span>
+    <span class="mi">248</span><span class="p">:</span> <span class="s2">&quot;ø&quot;</span><span class="p">,</span> <span class="mi">249</span><span class="p">:</span> <span class="s2">&quot;ù&quot;</span><span class="p">,</span> <span class="mi">250</span><span class="p">:</span> <span class="s2">&quot;ú&quot;</span><span class="p">,</span> <span class="mi">251</span><span class="p">:</span> <span class="s2">&quot;û&quot;</span><span class="p">,</span> <span class="mi">252</span><span class="p">:</span> <span class="s2">&quot;ü&quot;</span><span class="p">,</span> <span class="mi">253</span><span class="p">:</span> <span class="s2">&quot;ý&quot;</span><span class="p">,</span> <span class="mi">254</span><span class="p">:</span> <span class="s2">&quot;þ&quot;</span><span class="p">,</span> <span class="mi">255</span><span class="p">:</span> <span class="s2">&quot;ÿ&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following tokenization and word embedding relies on unicode encoding and
+the vocabulary must contain only the 256 codes listed above (e.g. <code class="code docutils literal notranslate"><span class="pre">vocab.json</span></code>
+and <code class="code docutils literal notranslate"><span class="pre">vocab.bpe</span></code>).</p>
+</section>
+<section id="tokenization">
+<h2>Tokenization<a class="headerlink" href="#tokenization" title="Permalink to this headline">#</a></h2>
+<p>It is a process of splitting text (e.g. a phrase, a sentence, or a paragraph)
+into smaller units. <a class="footnote-reference brackets" href="#f1" id="id1">1</a> There are three different tokenization techniques
+based on the token size.</p>
+<ul class="simple">
+<li><p>word-based</p></li>
+<li><p>character-based</p></li>
+<li><p>subword-based</p></li>
+</ul>
+<p>Each token will have a unique identifier, through which the token embedding
+vector can be looked up. To keep a high coverage percentage the size of the
+vocabulary must grow as the size of token increases, and for word-based
+tokenization large number of tokens will be tagged as OOV (out of vocabulary).</p>
+<p>If the token size is reduced to one character, however, each individual element
+will have very little meaning, and a sentence, for instance, must be
+represented by a token sequence much longer.</p>
+<p>The subword-based technique takes the token size / sequence length trade-off,
+if it can split words into meaningful subwords. The split policy that the GPT-3
+adopted is Byte Pair Encoding (<strong>BPE</strong>).</p>
+<section id="initial-splitting">
+<h3>Initial Splitting<a class="headerlink" href="#initial-splitting" title="Permalink to this headline">#</a></h3>
+<p>A sentence will be truncated into words before the BPE. Valid words including:</p>
+<ul class="simple">
+<li><p>suffixes like <code class="code docutils literal notranslate"><span class="pre">'s</span></code>, <code class="code docutils literal notranslate"><span class="pre">'t</span></code>, <code class="code docutils literal notranslate"><span class="pre">'re</span></code>, <code class="code docutils literal notranslate"><span class="pre">'ve</span></code>, <code class="code docutils literal notranslate"><span class="pre">'m</span></code>, <code class="code docutils literal notranslate"><span class="pre">'ll</span></code>, <code class="code docutils literal notranslate"><span class="pre">'d</span></code></p></li>
+<li><p>word with only letters</p></li>
+<li><p>number</p></li>
+<li><p>signs / unicode sequence with no space, letter or number</p></li>
+<li><p>only spaces</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;&#39;s|&#39;t|&#39;re|&#39;ve|&#39;m|&#39;ll|&#39;d| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="byte-pair-encoding-bpe">
+<h3>Byte Pair Encoding (BPE)<a class="headerlink" href="#byte-pair-encoding-bpe" title="Permalink to this headline">#</a></h3>
+<p>Suppose we feed the byte-pair encoder a word <code class="code docutils literal notranslate"><span class="pre">workflow</span></code>. It first split the
+word into characters and pair the neighbouring ones:</p>
+<table class="table">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>o</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>r</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>r</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+</tr>
+</tbody>
+</table>
+<p>Add rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>o</p></td>
+<td><p>0</p></td>
+<td><p>21382</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>r</p></td>
+<td><p>1</p></td>
+<td><p>17</p></td>
+</tr>
+<tr class="row-even"><td><p>r</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-odd"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+<td><p>5183</p></td>
+</tr>
+<tr class="row-even"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+<td><p>66</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">o</span></code> and <code class="code docutils literal notranslate"><span class="pre">r</span></code>):</p>
+<table class="table">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>or</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>or</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+</tr>
+</tbody>
+</table>
+<p>Re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>or</p></td>
+<td><p>0</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>or</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+<td><p>711</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>o</p></td>
+<td><p>5</p></td>
+<td><p>5183</p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p>w</p></td>
+<td><p>6</p></td>
+<td><p>66</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">o</span></code> and <code class="code docutils literal notranslate"><span class="pre">w</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>or</p></td>
+<td><p>0</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>or</p></td>
+<td><p>k</p></td>
+<td><p>2</p></td>
+<td><p>711</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>9063</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">or</span></code> and <code class="code docutils literal notranslate"><span class="pre">k</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>w</p></td>
+<td><p>ork</p></td>
+<td><p>0</p></td>
+<td><p>1562</p></td>
+</tr>
+<tr class="row-odd"><td><p>ork</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-odd"><td><p>l</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>9063</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">w</span></code> and <code class="code docutils literal notranslate"><span class="pre">ork</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>work</p></td>
+<td><p>f</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>l</p></td>
+<td><p>4</p></td>
+<td><p>2448</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>9063</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">f</span></code> and <code class="code docutils literal notranslate"><span class="pre">l</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>work</p></td>
+<td><p>fl</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+<tr class="row-odd"><td><p>fl</p></td>
+<td><p>ow</p></td>
+<td><p>5</p></td>
+<td><p>10869</p></td>
+</tr>
+</tbody>
+</table>
+<p>Merge top ranked pair (<code class="code docutils literal notranslate"><span class="pre">fl</span></code> and <code class="code docutils literal notranslate"><span class="pre">ow</span></code>) and re-rank:</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>suffix</p></th>
+<th class="head"><p>index</p></th>
+<th class="head"><p>rank</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>work</p></td>
+<td><p>flow</p></td>
+<td><p>3</p></td>
+<td><p>n.a.</p></td>
+</tr>
+</tbody>
+</table>
+<p>There no pair can be merged and the output should be both the prefix and the
+suffix.</p>
+</section>
+<section id="p-s">
+<h3>P.S.<a class="headerlink" href="#p-s" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>the best tokenization technique depends on language, task, etc.</p></li>
+</ul>
+</section>
+</section>
+<section id="token-embedding-wte">
+<h2>Token Embedding (WTE)<a class="headerlink" href="#token-embedding-wte" title="Permalink to this headline">#</a></h2>
+<p>To interpret a word we could use a dictionary and in the case of the GPT-3
+training the “dictionary” is actually a <strong>50257-by-12288</strong> matrix, each row of
+which is a <strong>12288-dimension</strong> vector, containing distance information with
+other tokens</p>
+<p>The GPT-3 has 2048 input slots and after tokenisation there the input will be
+a <strong>2048-by-50257</strong> matrix. By multiplying the input matrix with the vocabulary
+matrix mentioned above we have a <strong>2048-by-12288</strong> embedded matrix.</p>
+<ul class="simple">
+<li><p>the additive law of the token entries: the main operation for word embedding
+vectors is multiplication rather than addition.</p></li>
+</ul>
+</section>
+<section id="positional-encoding-wpe">
+<h2>Positional Encoding (WPE)<a class="headerlink" href="#positional-encoding-wpe" title="Permalink to this headline">#</a></h2>
+<p>For each token in the 2048 input slots, its position is encoded passing the
+index (from 0 to 2047) to <strong>12288</strong> sinusoidal functions of different frequencies.
+The output is a <strong>2048-by-12288</strong> position encoded matrix.</p>
+</section>
+<section id="encoding-combination">
+<h2>Encoding Combination<a class="headerlink" href="#encoding-combination" title="Permalink to this headline">#</a></h2>
+<p>Both the embedding matrix and position encoded matrix are <strong>2048-by-12288</strong>
+matrices, and the final input to the model will be the sum of them.</p>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://towardsdatascience.com/word-subword-and-character-based-tokenization-know-the-difference-ea0976b64e17">https://towardsdatascience.com/word-subword-and-character-based-tokenization-know-the-difference-ea0976b64e17</a></p>
+</dd>
+</dl>
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">GPT</span></a>.</p>
+<div data-disqus-identifier="Input Encoding" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="model.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Model Design</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="network.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Neural Networks</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, ZHANG, Meng.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

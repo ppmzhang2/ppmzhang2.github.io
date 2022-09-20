@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Review &#8212; Study Notes  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/disqus.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Training and Predicting" href="train.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../index.html">
+<p class="title">Study Notes</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  NLP
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../cv/index.html">
+  Computer Vision
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ppmzhang2/" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this site..." aria-label="Search this site..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   GPT
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="model.html">
+     Model Design
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="encoding.html">
+     Input Encoding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="network.html">
+     Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="train.html">
+     Training and Predicting
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Review
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference.html">
+     Reference
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paper-review">
+   Paper Review
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#critics">
+   Critics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#is-it-hyped">
+     Is It Hyped?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#know-its-ignorance">
+     Know Its Ignorance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#not-an-agi">
+     Not an AGI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reference">
+   Reference
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="review">
+<h1>Review<a class="headerlink" href="#review" title="Permalink to this headline">#</a></h1>
+<section id="paper-review">
+<h2>Paper Review<a class="headerlink" href="#paper-review" title="Permalink to this headline">#</a></h2>
+<p>Summary from the paper:</p>
+<ul class="simple">
+<li><p>model scale</p>
+<ul>
+<li><p>larger models can typically use a larger batch size, but require a smaller
+learning rate</p></li>
+<li><p>potential contamination of downstream tasks</p>
+<ul>
+<li><p>test / development sets inadvertently seen during pre-training</p></li>
+<li><p>remove overlaps</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>spurious features</p>
+<ul>
+<li><p>these spurious correlations can occur due to biased sampling or artifacts
+in crowd-sourcing. For example, we may have a labeled dataset for
+recidivism prediction where race correlates with recurrence of crime due to
+sample selection bias, but this correlation does not hold on the
+population. Models which learn spurious correlations can generalize poorly
+on population data which does not have these biases. <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="critics">
+<h2>Critics<a class="headerlink" href="#critics" title="Permalink to this headline">#</a></h2>
+<section id="is-it-hyped">
+<h3>Is It Hyped?<a class="headerlink" href="#is-it-hyped" title="Permalink to this headline">#</a></h3>
+<p>Probably not. As the overview states <a class="footnote-reference brackets" href="#f2" id="id2">2</a>:
+“Sampling Can Prove The Presence Of Knowledge But Not The Absence”, which means
+that the GPT-3 may fail due to misuse.</p>
+<ul class="simple">
+<li><p>try few shots learning over zero shot learning</p></li>
+<li><p>tweak hyper-parameters</p></li>
+<li><p>design a good prompt</p></li>
+<li><p>even a bad choice of the <code class="code docutils literal notranslate"><span class="pre">BOS</span></code>, <code class="code docutils literal notranslate"><span class="pre">EOS</span></code>, or <code class="code docutils literal notranslate"><span class="pre">PAD</span></code> token may have a negative
+impact on performance</p></li>
+</ul>
+</section>
+<section id="know-its-ignorance">
+<h3>Know Its Ignorance<a class="headerlink" href="#know-its-ignorance" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>it does not know when it will fail</p></li>
+<li><p>it may need to be programmed with knowledge about uncertainty</p></li>
+</ul>
+</section>
+<section id="not-an-agi">
+<h3>Not an AGI<a class="headerlink" href="#not-an-agi" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>it is not about its performance of any specific task</p></li>
+<li><p>it lacks most of the perception of the environment</p></li>
+<li><p>it lacks social connection</p></li>
+</ul>
+</section>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://arxiv.org/abs/2006.10032">https://arxiv.org/abs/2006.10032</a></p>
+</dd>
+<dt class="label" id="f2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="https://towardsdatascience.com/gpt-3-a-complete-overview-190232eb25fd">https://towardsdatascience.com/gpt-3-a-complete-overview-190232eb25fd</a></p>
+</dd>
+</dl>
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">GPT</span></a>.</p>
+<div data-disqus-identifier="Review" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="train.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Training and Predicting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="reference.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reference</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, ZHANG, Meng.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
