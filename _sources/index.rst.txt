@@ -10,7 +10,7 @@ Study Notes
    :maxdepth: 2
    :caption: Contents:
 
-   gpt/index.rst
-   nerf/index.rst
+   nlp/index.rst
+   cv/index.rst
 
 .. disqus::
