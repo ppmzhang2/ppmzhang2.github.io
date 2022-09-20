@@ -32,6 +32,9 @@ Implementation
   `pytorch` implementation of the GPT-2 by `Hugging Face
   <https://huggingface.co/>`_.
 
+- The `minGPT <https://github.com/karpathy/minGPT>`_ is a minimal PyTorch
+  re-implementation.
+
 - Yet another `GPT-2 implementation
   <https://github.com/graykode/gpt-2-Pytorch>`_ via `PyTorch`
 
