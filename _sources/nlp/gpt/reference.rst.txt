@@ -25,14 +25,14 @@ Implementation
 
 - `The Annotated GPT-2
   <https://amaarora.github.io/2020/02/18/annotatedGPT2.html>`_ is an annotated
-  version of the GPT-2 paper with plenty of `pytorch` code.
+  version of the GPT-2 paper with plenty of `PyTorch` code.
 
 - This `GitHub repo
   <https://github.com/huggingface/pytorch-openai-transformer-lm>`_ is an
-  `pytorch` implementation of the GPT-2 by `Hugging Face
+  `PyTorch` implementation of the GPT-2 by `Hugging Face
   <https://huggingface.co/>`_.
 
-- The `minGPT <https://github.com/karpathy/minGPT>`_ is a minimal PyTorch
+- The `minGPT <https://github.com/karpathy/minGPT>`_ is a minimal `PyTorch`
   re-implementation.
 
 - Yet another `GPT-2 implementation

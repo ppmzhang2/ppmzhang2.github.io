@@ -9,21 +9,24 @@ Papers
 
 - The original YOLO paper
   `You Only Look Once: Unified, Real-Time Object Detection
-  <https://arxiv.org/abs/1506.02640>`_:
+  <https://arxiv.org/abs/1506.02640>`_.
 
 - `YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time
-  object detectors <https://arxiv.org/abs/2207.02696>`_
+  object detectors <https://arxiv.org/abs/2207.02696>`_.
 
-- `Fast R-CNN <https://arxiv.org/abs/1504.08083>`_
+- `Fast R-CNN <https://arxiv.org/abs/1504.08083>`_.
 
 Implementation
 ==============
+
+- `YOLO v1 in PyTorch
+  <https://github.com/motokimura/yolo_v1_pytorch>`_.
 
 - `YOLO v5 in PyTorch
   <https://github.com/ultralytics/yolov5>`_.
 
 - `YOLO v2 in Julia
-  <https://github.com/IanButterworth/YOLO.jl>`_
+  <https://github.com/IanButterworth/YOLO.jl>`_.
 
 Other Sources
 =============
