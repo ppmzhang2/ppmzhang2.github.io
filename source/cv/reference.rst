@@ -11,6 +11,9 @@ Papers
   `An Introduction to Convolutional Neural Networks
   <https://arxiv.org/abs/1511.08458>`_.
 
+- `OverFeat <https://arxiv.org/abs/1312.6229>`_ is a convolutional
+  implementation of sliding window.
+
 Demo
 ====
 

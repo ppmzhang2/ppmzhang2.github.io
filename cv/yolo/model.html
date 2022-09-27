@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Model &#8212; Study Notes  documentation</title>
+    <title>Model Design &#8212; Study Notes  documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -29,7 +29,7 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/disqus.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Reference" href="reference.html" />
@@ -154,7 +154,7 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Model
+     Model Design
     </a>
    </li>
    <li class="toctree-l2">
@@ -193,8 +193,18 @@
 <nav id="bd-toc-nav">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-design">
-   Model Design
+  <a class="reference internal nav-link" href="#notation">
+   Notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss-function">
+   Loss Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reference">
+   Reference
   </a>
  </li>
 </ul>
@@ -218,13 +228,141 @@
               
               <div>
                 
-  <section id="model">
-<h1>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h1>
-<section id="model-design">
-<h2>Model Design<a class="headerlink" href="#model-design" title="Permalink to this headline">#</a></h2>
-<p>TBD</p>
-<p>Back to <a class="reference internal" href="index.html"><span class="doc">YOLO</span></a>.</p>
-<div data-disqus-identifier="Model" data-disqus-shortname="httpbbk0701githubiomysiteoutput" id="disqus_thread"></div></section>
+  <section id="model-design">
+<h1>Model Design<a class="headerlink" href="#model-design" title="Permalink to this headline">#</a></h1>
+<section id="notation">
+<h2>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">#</a></h2>
+<p>The YOLO algorithm assumes that the model divides an input image into an
+<span class="math notranslate nohighlight">\(S \times S\)</span> grid.
+Each grid cell is responsible to predict <span class="math notranslate nohighlight">\(B\)</span> bounding boxes, performing both
+localization and classification (totally <span class="math notranslate nohighlight">\(K\)</span> classes).</p>
+<ul>
+<li><p>Predictions of each <strong>bounding box</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}^{(box)} = ( p^{(obj)}, x, y, w, h )^T\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p^{(obj)}\)</span>: confidence that the box contains an object; ground truth
+confidence could only be <span class="math notranslate nohighlight">\(1\)</span> or <span class="math notranslate nohighlight">\(0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>: coordinates of the object center. <span class="math notranslate nohighlight">\(x, y \in (0, 1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(h\)</span>: width and height of the object <span class="math notranslate nohighlight">\(w, h &gt; 0\)</span></p></li>
+</ul>
+</li>
+<li><p>Classification of each <strong>cell</strong> (regardless of the number of boxes <span class="math notranslate nohighlight">\(B\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}^{(cls)} =
+  ( p^{(cls | obj)} (1),
+    p^{(cls | obj)} (2),
+    \ldots,
+    p^{(cls | obj)} (K)
+  )^T\]</div>
+</li>
+</ul>
+<p>For <span class="math notranslate nohighlight">\(i \in \mathbb{N}, i &lt; S^2\)</span>:</p>
+<ul>
+<li><p>output / label:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}_i =
+  ( \mathbf{y}_{i1}^{(box)},
+    \mathbf{y}_{i2}^{(box)},
+    \ldots,
+    \mathbf{y}_{iB}^{(box)},
+    \mathbf{y}_i^{(cls)}
+  )\]</div>
+</li>
+<li><p>Predicted class index of each <strong>cell</strong>:</p>
+<div class="math notranslate nohighlight">
+\[k_i^{(max)} = \arg \max_{k} p_i^{(cls|obj)} (k)\]</div>
+</li>
+<li><p>IoU (use both prediction and label)</p>
+<div class="math notranslate nohighlight">
+\[IoU =
+\frac
+  { Area(x_{ij}, y_{ij}, w_{ij}, h_{ij}) \cap
+    Area(\hat{x}_{ij}, \hat{y}_{ij}, \hat{w}_{ij}, \hat{h}_{ij})
+  }
+  { Area(x_{ij}, y_{ij}, w_{ij}, h_{ij}) \cup
+    Area(\hat{x}_{ij}, \hat{y}_{ij}, \hat{w}_{ij}, \hat{h}_{ij})
+  }\]</div>
+</li>
+<li><p>Confidence score for each <strong>bounding box</strong> (use both prediction and label):</p>
+<div class="math notranslate nohighlight">
+\[C_{ij} = p_{ij}^{(cls)} (k_i^{(max)}) \cdot IoU_{ij}
+       = p_i^{(cls | obj)} (k_i^{(max)}) \cdot p_{ij}^{(obj)} \cdot IoU_{ij}\]</div>
+</li>
+</ul>
+</section>
+<section id="loss-function">
+<h2>Loss Function<a class="headerlink" href="#loss-function" title="Permalink to this headline">#</a></h2>
+<p>Loss function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(\mathbf{y}, \mathbf{\hat{y}}) =
+  \lambda_{coord} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{obj}
+  [ (x_{ij} - \hat{x}_{ij})^2 + (y_{ij} - \hat{y}_{ij})^2
+  ]
+\\
++ \lambda_{coord} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{obj}
+  [ (\sqrt{w_{ij}} - \sqrt{\hat{w}_{ij}})^2 +
+    (\sqrt{h_{ij}} - \sqrt{\hat{h}_{ij}})^2
+  ]
+\\
++ \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{obj}
+  (C_{ij} - \hat{C}_{ij})^2
+\\
++ \lambda_{noobj} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{noobj}
+  (C_{ij} - \hat{C}_{ij})^2
+\\
++ \sum_{i=0}^{S^2} \mathbb{1}_{i}^{obj} \sum_{k=1}^{K}
+  (p_i^{(cls | obj)} (k) - \hat{p}_i^{(cls | obj)} (k))^2\end{split}\]</div>
+<p>Specifically:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{1}_{i}^{obj}\)</span> is label determined:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbb{1}_{i}^{obj} =
+\begin{cases}
+  1 &amp; p_i^{(obj)} = 1
+  \\
+  0 &amp; otherwise
+\end{cases},\end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{1}_{ij}^{obj}\)</span>: according to the paper <a class="footnote-reference brackets" href="#f01" id="id1">1</a>:</p>
+<blockquote>
+<div><p>… denotes that the <span class="math notranslate nohighlight">\(j\)</span> th bounding box predictor in cell <span class="math notranslate nohighlight">\(i\)</span> is
+“responsible” for that prediction.</p>
+</div></blockquote>
+<p>that is to say, is <span class="math notranslate nohighlight">\(1\)</span> if there is an object in cell <span class="math notranslate nohighlight">\(i\)</span> and confidence of
+the <span class="math notranslate nohighlight">\(j\)</span> th predictors of this cell is the highest among all the predictors
+of this cell.</p>
+</li>
+<li><p>label <span class="math notranslate nohighlight">\(C_{ij}\)</span> can be either <span class="math notranslate nohighlight">\(1\)</span> or <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_{coord} = 5\)</span> to increase the localization prediction error</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_{noobj} = 0.5\)</span> to decrease the loss from confidence predictions
+containing no object</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(B = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(\mathbf{y}, \mathbf{\hat{y}}) =
+\lambda_{coord} \sum_{i=0}^{S^2} \mathbb{1}_{i}^{obj}
+  [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 +
+    (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 +
+    (\sqrt{h_i} - \sqrt{\hat{h}_i})^2
+  ]
+\\
++ \sum_{i=0}^{S^2} \mathbb{1}_{i}^{obj} (C_i - \hat{C}_i)^2
++ \lambda_{noobj} \sum_{i=0}^{S^2} \mathbb{1}_{i}^{noobj}
+  (C_i - \hat{C}_i)^2
+\\
++ \sum_{i=0}^{S^2} \mathbb{1}_{i}^{obj} \sum_{k=1}^{K}
+  (p_i^{(cls)} (k) - \hat{p}_i^{(cls)} (k))^2\end{split}\]</div>
+</li>
+</ul>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="f01"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://arxiv.org/abs/1506.02640">https://arxiv.org/abs/1506.02640</a></p>
+</dd>
+</dl>
+</section>
 </section>
 
 
