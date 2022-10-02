@@ -8,7 +8,7 @@ YOLO:
    :maxdepth: 2
    :caption: Contents:
 
-   model.rst
+   loss.rst
    reference.rst
 
 Back to :doc:`../index`.
