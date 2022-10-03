@@ -10,6 +10,7 @@ Data Science Study Notes
    :maxdepth: 2
    :caption: Fields:
 
+   math/index.rst
    nlp/index.rst
    cv/index.rst
 
