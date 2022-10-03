@@ -3,5 +3,5 @@
 update contents:
 
 ```sh
-pdm run sphinx-build source . -b html
+pdm run sphinx-build source dist -b html
 ```
