@@ -45,6 +45,4 @@ deploy-dev:
 .PHONY: clean
 ## Clean python cache file.
 clean:
-	rm -rf __pycache__ _sources _static .doctrees
-	rm -rf cv nlp
-	rm -f .buildinfo objects.inv *.html *.js
+	find dist ! -name '.nojekyll' -delete
