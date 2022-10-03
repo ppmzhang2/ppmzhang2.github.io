@@ -45,4 +45,4 @@ deploy-dev:
 .PHONY: clean
 ## Clean python cache file.
 clean:
-	find dist ! -name '.nojekyll' -delete
+	find docs ! -name '.nojekyll' -delete
