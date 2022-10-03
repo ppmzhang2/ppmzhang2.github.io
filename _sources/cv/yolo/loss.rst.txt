@@ -171,3 +171,7 @@ Reference
 
 .. [#f01] https://github.com/motokimura/yolo_v1_pytorch
 .. [#f02] https://arxiv.org/abs/1506.02640
+
+Back to :doc:`index`.
+
+.. disqus::
