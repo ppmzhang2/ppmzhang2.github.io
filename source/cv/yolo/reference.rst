@@ -16,6 +16,8 @@ Papers
 
 - `Fast R-CNN <https://arxiv.org/abs/1504.08083>`_.
 
+- `Generalized Intersection over Union (GIoU) <https://giou.stanford.edu>`_
+
 Implementation
 ==============
 
