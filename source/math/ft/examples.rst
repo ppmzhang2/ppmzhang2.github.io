@@ -4,6 +4,10 @@ Important Examples
 
 .. default-role:: math
 
+.. math::
+
+   \DeclareMathOperator{\sinc}{sinc}
+
 General Tips
 ============
 
@@ -25,7 +29,7 @@ Rectangular Function
      0 & t < -0.5 \lor t > 0.5
    \end{cases}
    \implies
-   \mathcal{F} \pi (s) = sinc(s)
+   \mathcal{F} \pi (s) = \sinc (s)
 
 Proof:
 
@@ -41,13 +45,13 @@ Proof:
      -\frac{1}{2 \pi i s} (e^{- \pi i s} - e^{\pi i s})
      \\ & =
      -\frac{1}{2 \pi i s}
-       (cos(\pi s) - i \cdot sin(\pi s) - cos(\pi s) - i \cdot sin(\pi s))
+       (\cos (\pi s) - i \cdot \sin (\pi s) - \cos (\pi s) - i \cdot \sin (\pi s))
      \\ & =
-     -\frac{- 2 i \cdot sin(\pi s)}{2 \pi i s}
+     -\frac{- 2 i \cdot \sin (\pi s)}{2 \pi i s}
      \\ & =
-     \frac{sin(\pi s)}{\pi s}
+     \frac{\sin (\pi s)}{\pi s}
      \\ & =
-     sinc(x)
+     \sinc(x)
 
    \square
 
@@ -65,7 +69,7 @@ Triangle Function
      0 & t < -1 \lor t > 1
    \end{cases}
    \implies
-   \mathcal{F} \Lambda (s) = sinc^2 (s)
+   \mathcal{F} \Lambda (s) = \sinc^2 (s)
 
 Proof:
 
@@ -103,26 +107,26 @@ Proof:
      \int_{-1}^0 (e^{-2 \pi i s t} + e^{2 \pi i s t}) t dt
      \\ & =
      \int_{-1}^0 (
-       cos(2 \pi s t) -
-       i \cdot sin(2 \pi s t) +
-       cos(2 \pi s t) +
-       i \cdot sin(2 \pi s t)) t dt
+       \cos (2 \pi s t) -
+       i \cdot \sin (2 \pi s t) +
+       \cos (2 \pi s t) +
+       i \cdot \sin (2 \pi s t)) t dt
      \\ & =
-     2 \int_{-1}^0 cos(2 \pi s t) t dt
+     2 \int_{-1}^0 \cos (2 \pi s t) t dt
      \\ & =
-     2 \frac{1}{2 \pi s} \int_{-1}^0 t d sin(2 \pi s t)
+     2 \frac{1}{2 \pi s} \int_{-1}^0 t d \sin (2 \pi s t)
      \\ & =
-     \frac{1}{\pi s} (t \cdot sin (2 \pi s t) |_{-1}^0 -
-     \int_{-1}^0 sin(2 \pi s t) dt)
+     \frac{1}{\pi s} (t \cdot \sin (2 \pi s t) |_{-1}^0 -
+     \int_{-1}^0 \sin (2 \pi s t) dt)
      \\ & =
-     - \frac{-1 \cdot sin (2 \pi s \cdot (-1))}{\pi s} -
-     \frac{1}{-2 \pi^2 s^2} cos(2 \pi s t) |_{-1}^0
+     - \frac{-1 \cdot \sin (2 \pi s \cdot (-1))}{\pi s} -
+     \frac{1}{-2 \pi^2 s^2} \cos (2 \pi s t) |_{-1}^0
      \\ & =
-     - \frac{sin (2 \pi s)}{\pi s} +
-     \frac{1}{2 \pi^2 s^2} (1 - cos(2 \pi s))
+     - \frac{\sin (2 \pi s)}{\pi s} +
+     \frac{1}{2 \pi^2 s^2} (1 - \cos (2 \pi s))
      \\ & =
-     - \frac{sin (2 \pi s)}{\pi s} +
-     \frac{sin^2 (\pi s)}{\pi^2 s^2}
+     - \frac{\sin (2 \pi s)}{\pi s} +
+     \frac{\sin^2 (\pi s)}{\pi^2 s^2}
      ,
 
    \\
@@ -132,11 +136,11 @@ Proof:
      -\frac{1}{2 \pi i s} (e^{-2 \pi i s} - e^{2 \pi i s})
      \\ & =
      -\frac{1}{2 \pi i s}
-       (cos(2 \pi s) - i \cdot sin(2 \pi s) - cos(2 \pi s) - i \cdot sin(2 \pi s))
+       (\cos (2 \pi s) - i \cdot \sin (2 \pi s) - \cos (2 \pi s) - i \cdot \sin (2 \pi s))
      \\ & =
-     -\frac{-2 i \cdot sin(2 \pi s)}{2 \pi i s}
+     -\frac{-2 i \cdot \sin(2 \pi s)}{2 \pi i s}
      \\ & =
-     \frac{sin (2 \pi s)}{\pi s}
+     \frac{\sin (2 \pi s)}{\pi s}
 
    \\
    \therefore
@@ -145,13 +149,13 @@ Proof:
      \int_0^1 e^{-2 \pi i s t} t dt +
      \int_{-1}^1 e^{-2 \pi i s t} dt
      = 
-     - \frac{sin (2 \pi s)}{\pi s} +
-     \frac{sin^2 (\pi s)}{\pi^2 s^2} +
-     \frac{sin (2 \pi s)}{\pi s}
+     - \frac{\sin (2 \pi s)}{\pi s} +
+     \frac{\sin^2 (\pi s)}{\pi^2 s^2} +
+     \frac{\sin (2 \pi s)}{\pi s}
      \\ & = 
-     \frac{sin^2 (\pi s)}{\pi^2 s^2}
+     \frac{\sin^2 (\pi s)}{\pi^2 s^2}
      \\ & =
-     sinc^2 (s)
+     \sinc^2 (s)
 
    \square
 
@@ -204,7 +208,7 @@ Proof:
      \lim_{t \to +\infty} \frac{e^{2 \pi i s t}}{e^{\pi t^2}}
      \\ & =
      \lim_{t \to +\infty}
-       \frac{cos(2 \pi s t) + i \cdot sin(2 \pi s t)}{e^{\pi t^2}}
+       \frac{\cos (2 \pi s t) + i \cdot \sin(2 \pi s t)}{e^{\pi t^2}}
      \\ & =
      0,
 
@@ -216,7 +220,7 @@ Proof:
      \lim_{t \to +\infty} \frac{e^{-2 \pi i s t}}{e^{\pi t^2}}
      \\ & =
      \lim_{t \to +\infty}
-       \frac{cos(2 \pi s t) - i \cdot sin(2 \pi s t)}{e^{\pi t^2}}
+       \frac{\cos (2 \pi s t) - i \cdot \sin(2 \pi s t)}{e^{\pi t^2}}
      \\ & =
      0
 
