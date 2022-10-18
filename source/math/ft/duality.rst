@@ -84,19 +84,21 @@ Application
 
 .. math::
 
-   \mathcal{F} sinc = \pi
+   \DeclareMathOperator{\sinc}{sinc}
+
+   \mathcal{F} \sinc = \pi
 
 Proof
 
 .. math::
 
    \because
-   \mathcal{F} \pi (x) = sinc (x)
+   \mathcal{F} \pi (x) = \sinc (x)
 
    \\
 
    \therefore
-   \mathcal{F} sinc & =
+   \mathcal{F} \sinc & =
      \mathcal{F} \mathcal{F} \pi
      \\ & =
      \pi^-
