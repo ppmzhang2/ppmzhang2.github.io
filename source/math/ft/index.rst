@@ -7,8 +7,11 @@ Fourier Transform
    :caption: Contents:
 
    examples.rst
-   operations.rst
    duality.rst
+   operations.rst
+   conv.rst
+   convapp_rodcooling.rst
+   convapp_prob.rst
 
 Back to :doc:`../index`.
 

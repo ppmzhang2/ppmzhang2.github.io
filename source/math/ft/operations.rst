@@ -12,6 +12,15 @@ Operations
 
 - convolution is probably the most important operation in signal processing
 
+Linear Combination
+==================
+
+.. math::
+
+   \mathcal{F}(a \cdot f + b \cdot g) =
+     a \cdot \mathcal{F}f + b \cdot \mathcal{F}g
+
+Can be proved by applying definition directly.
 
 Shift
 =====
@@ -90,15 +99,45 @@ Proof
 
    \square
 
+Differentiation
+===============
 
-Addition
-========
+    Fourier transform turns differentiation into multiplication.
+
+**The Derivitive Theorem of Fourier Transform**: 
 
 .. math::
 
-   \mathcal{F}(f + g) = \mathcal{F}f + \mathcal{F}g
+   f \in L^1 \implies (\mathcal{F} f')(s) = 2 \pi i s \cdot \mathcal{F}f (s)
 
-Can be proved by applying definition directly.
+**Proof:**
+
+.. math::
+
+   \text{Suppose: } \lim_{t \to \infty} f(t) = 0
+
+.. math::
+
+   \therefore
+   \mathcal{F} f' (s) & =
+     \int_{-\infty}^{+\infty} e^{-2 \pi i s t} f' (t) dt
+     \\ & =
+     \int_{-\infty}^{+\infty} e^{-2 \pi i s t} d f (t)
+     \\ & =
+     e^{-2 \pi i s t} f (t) |_{-\infty}^{+\infty} -
+       \int_{-\infty}^{+\infty} f(t) d e^{-2 \pi i s t}
+     \\ & =
+     2 \pi i s \cdot \int_{-\infty}^{+\infty} f(t) e^{-2 \pi i s t} dt
+     \\ & =
+     2 \pi i s \cdot \mathcal{F} f (s)
+
+   \square
+
+In the case of higher derivatives:
+
+.. math::
+
+   (\mathcal{F} f^{(n)}) (s) = (2 \pi i s)^n \cdot \mathcal{F}f(s)
 
 Convolution
 ===========
