@@ -15,7 +15,7 @@ The Schwartz space `\mathcal{S}` is the topological vector space of functions
 
      \forall m, n \ge 0
      \implies
-     \lim_{x \to \infty} |x|^n | \frac{\partial^m}{\partial x^m} f(x) | = 0
+     \lim_{x \to \infty} |x|^n | f^{(m)} (x) | = 0
 
 Properties without proof:
 
@@ -48,20 +48,30 @@ Proof:
    \therefore
    | \mathcal{F} f (s) | \le \| f \|_1
 
+.. _ref-ft-diff-formula-proof:
+
 Differentiation Formulas
 ========================
 
+First statement:
+
 .. math::
 
-   \mathcal{F} \frac{\partial^n f}{\partial x^n} =
+   f \in \mathcal{S}
+   \implies
+   \mathcal{F} f^{(n)} =
    (2 \pi i s)^n \cdot \mathcal{F} f
 
+Second statement
+
 .. math::
 
+   f \in \mathcal{S}
+   \implies
    \frac{\partial^n \mathcal{F} f}{\partial s^n} =
    \mathcal{F} ((-2 \pi i x)^n f(x))
 
-Proof:
+Proof of first statement:
 
 .. math::
 
@@ -69,17 +79,14 @@ Proof:
    f \in \mathcal{S}
 
    & \therefore
-   \frac{\partial}{\partial x} f(x) \in \mathcal{S}
+   f' \in \mathcal{S}
 
 .. math::
 
    \therefore
-   (\mathcal{F} \frac{\partial f}{\partial x}) (s) & =
+   (\mathcal{F} f') (s) & =
      \int_{-\infty}^{+\infty}
-       e^{-2 \pi i s x} \frac{\partial}{\partial x} f(x) dx
-     \\ & =
-     \int_{-\infty}^{+\infty}
-       e^{-2 \pi i s x} d f(x)
+       e^{-2 \pi i s x} f' (x) dx
      \\ & =
      e^{-2 \pi i s x} \cdot f(x) |_{-\infty}^{+\infty} -
        \int_{-\infty}^{+\infty} f(x) d e^{-2 \pi i s x}
@@ -93,8 +100,10 @@ By induction it follows that:
 
 .. math::
 
-   \mathcal{F} \frac{\partial^n f}{\partial x^n} =
+   \mathcal{F} f^{(n)} =
    (2 \pi i s)^n \cdot \mathcal{F} f
+
+Proof of first statement:
 
 .. math::
 
@@ -122,6 +131,10 @@ By induction it follows that:
 
    \frac{\partial^n \mathcal{F} f}{\partial s^n} =
    \mathcal{F} ((-2 \pi i x)^n f(x))
+
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Closure under Fourier Transform
 ===============================

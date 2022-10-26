@@ -13,6 +13,7 @@ Fourier Transform
    convapp_prob.rst
    gft_1.rst
    gft_2.rst
+   gft_3.rst
 
 Reference
 =========
