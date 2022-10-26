@@ -4,7 +4,6 @@ Fourier Transform
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    examples.rst
    duality.rst
@@ -12,6 +11,16 @@ Fourier Transform
    conv.rst
    convapp_rodcooling.rst
    convapp_prob.rst
+   gft_1.rst
+   gft_2.rst
+
+Reference
+=========
+
+1. `The Fourier Transform and its Applications
+   <https://www.youtube.com/playlist?list=PL1780FAF4A29FE679>`_
+2. `Tempered Distributions
+   <https://personal.math.ubc.ca/~feldman/m321/distributions.pdf>`_
 
 Back to :doc:`../index`.
 
