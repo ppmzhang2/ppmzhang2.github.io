@@ -31,7 +31,7 @@ Shift
 
    (\mathcal{F} f(t - b))(s) = e^{-2 \pi i s b} \cdot \mathcal{F} f (s)
 
-Proof
+Proof:
 
 .. math::
 
@@ -55,7 +55,9 @@ Proof
      \\ & =
      e^{-2 \pi i s b} \cdot \mathcal{F} f (s)
 
-   \square
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Stretch
 =======
@@ -72,7 +74,7 @@ Stretch
 
    (\mathcal{F} f(a t))(s) = |\frac{1}{a}| F(\frac{s}{a})
 
-Proof
+Proof:
 
 .. math::
 
@@ -97,7 +99,9 @@ Proof
      \\ & =
      |\frac{1}{a}| F(\frac{s}{a})
 
-   \square
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Differentiation
 ===============
@@ -108,45 +112,49 @@ Differentiation
 
 .. math::
 
-   f \in L^1 \implies (\mathcal{F} f')(s) = 2 \pi i s \cdot \mathcal{F}f (s)
+   \mathcal{F} f^{(n)} & =
+   (2 \pi i s)^n \cdot \mathcal{F} f
 
-**Proof:**
+   \\
 
-.. math::
+   \frac{\partial^n \mathcal{F} f}{\partial s^n} & =
+   \mathcal{F} ((-2 \pi i x)^n f(x))
 
-   \text{Suppose: } \lim_{t \to \infty} f(t) = 0
+Rigorous proof can be found in :ref:`ref-ft-diff-formula-proof`.
 
-.. math::
+.. warning::
 
-   \therefore
-   \mathcal{F} f' (s) & =
-     \int_{-\infty}^{+\infty} e^{-2 \pi i s t} f' (t) dt
-     \\ & =
-     \int_{-\infty}^{+\infty} e^{-2 \pi i s t} d f (t)
-     \\ & =
-     e^{-2 \pi i s t} f (t) |_{-\infty}^{+\infty} -
-       \int_{-\infty}^{+\infty} f(t) d e^{-2 \pi i s t}
-     \\ & =
-     2 \pi i s \cdot \int_{-\infty}^{+\infty} f(t) e^{-2 \pi i s t} dt
-     \\ & =
-     2 \pi i s \cdot \mathcal{F} f (s)
+   These formulas hold only if function `f` satisfies some specific conditions
+   e.g. **vanish at infinity**
 
-   \square
-
-In the case of higher derivatives:
-
-.. math::
-
-   (\mathcal{F} f^{(n)}) (s) = (2 \pi i s)^n \cdot \mathcal{F}f(s)
+.. _ref-ft-conv-proof:
 
 Convolution
 ===========
 
+**Convolution Theorem of Fourier Transform**:
+
+First statement:
+
 .. math::
 
-   \mathcal{F} g \cdot \mathcal{F} f = \mathcal{F}(f * g)
+   \mathcal{F} f \cdot \mathcal{F} g = \mathcal{F}(f * g)
 
-Proof
+   \\
+
+   \mathcal{F}^{-1} F \cdot \mathcal{F}^{-1} G = \mathcal{F}^{-1} (F * G)
+
+Second statement:
+
+.. math::
+
+   \mathcal{F} (f \cdot g) = \mathcal{F} f * \mathcal{F} g
+
+   \\
+
+   \mathcal{F}^{-1} (F \cdot G) = \mathcal{F}^{-1} F * \mathcal{F}^{-1} G
+
+Proof:
 
 .. math::
 
@@ -206,7 +214,40 @@ Proof
      \\ & =
      \mathcal{F}(f * g)(s)
 
-   \square
+similarly:
+
+.. math::
+
+   \mathcal{F}^{-1} F \cdot \mathcal{F}^{-1} G = \mathcal{F}^{-1} (F * G)
+
+To prove the second statement we start with the first statement of the inverse
+Fourier transform:
+
+.. math::
+
+   \mathcal{F}^{-1} F \cdot \mathcal{F}^{-1} G = \mathcal{F}^{-1} (F * G)
+
+   \\
+
+   \therefore
+   f \cdot g =
+     \mathcal{F}^{-1} \left( \mathcal{F} f * \mathcal{F} g \right)
+
+   \\
+
+   \therefore
+   \mathcal{F} \left( f \cdot g \right) =
+     \mathcal{F} f * \mathcal{F} g
+
+Similarly:
+
+.. math::
+
+   \mathcal{F}^{-1} (F \cdot G) = \mathcal{F}^{-1} F * \mathcal{F}^{-1} G
+
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Back to :doc:`index`.
 
