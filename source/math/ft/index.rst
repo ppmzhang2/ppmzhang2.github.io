@@ -14,6 +14,7 @@ Fourier Transform
    gft_1.rst
    gft_2.rst
    gft_3.rst
+   app_diffraction.rst
 
 Reference
 =========
