@@ -9,6 +9,7 @@ Mathematics related study notes:
    :caption: Contents:
 
    ft/index.rst
+   dm/index.rst
    sl/index.rst
 
 Back to :doc:`../index`.
