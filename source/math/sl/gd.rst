@@ -4,103 +4,85 @@ Gradient Descent
 
 .. default-role:: math
 
+Empirical Risk Minimization
+===========================
+
+Suppose a dataset
+`S = \{ \mathbf{z}_i \}_{i=1}^n = \{ (\mathbf{x}_i, \mathbf{y}_i) \}_{i=1}^n`
+is sampled from a distribution `\mathcal{D}` over a domain
+`\mathcal{Z} = \mathcal{X} \times \mathcal{Y}`,
+where
+`\mathcal{X} \subseteq \mathbb{R}^d`,
+`\mathcal{Y} \subseteq \mathbb{R}^{d_o}`.
+
+We model with a functions `f (\mathbf{x}; \mathbf{w})` parameterized by a
+weight vector `\mathbf{w} \in \mathcal{W}`, such that
+`f_{\mathbf{w}}: \mathcal{X} \rightarrow \mathcal{Y}`;
+we also use a loss function denoted by
+`Q: \mathcal{Z} \times \mathcal{W} \rightarrow \mathbb{R}` to measure the
+difference between a prediction and a true label:
+
+.. math::
+
+   Q(\mathbf{z}, \mathbf{w}) = \ell (f (\mathbf{x}; \mathbf{w}), \mathbf{y})
+
+Our goal is to find the target weight `\mathbf{w}^*` such that the expected
+risk `R_{\mathcal{D}} = E_{\mathcal{D}} Q (\mathbf{z}, \mathbf{w})`
+is minimized.
+
+.. math::
+
+   R_{\mathcal{D}} (\mathbf{w}) &=
+   E_{\mathcal{D}} Q (\mathbf{z}, \mathbf{w})
+   \\ &=
+   \int_{\mathcal{D}}
+     Q(\mathbf{z}, \mathbf{w}) f_Z (\mathbf{z}) \mathrm{d} \mathbf{z}
+
+where `f_Z` is the joint probability density function.
+
+`R_{\mathcal{D}}` is hard to calculate as the distribution (i.e. `f_Z`) is
+unknown.
+It can be estimated, however, with the empirical risk `R_n`:
+
+.. math::
+
+   R_n (\mathbf{w}) =
+   \frac{1}
+   {|\Omega|} \sum_{\mathbf{z} \in \Omega} Q(\mathbf{z}, \mathbf{w})
+
+where `\Omega \subset \mathcal{D}`.
+
+Using gradient descent (GD), `R_n` can be minimized by submitting the gradient
+iteratively:
+
+.. math::
+
+   \mathbf{w}^{(t+1)} &=
+   \mathbf{w}^{(t)} - \eta \cdot
+     \nabla_{\mathbf{w}} R_n (\mathbf{w})
+   \\ &=
+   \mathbf{w}^{(t)} - \eta \cdot
+     \nabla_{\mathbf{w}}
+       \frac{1}{|\Omega|}
+       \sum_{\mathbf{z} \in \Omega} Q(\mathbf{z}, \mathbf{w})
+   \\ &=
+   \mathbf{w}^{(t)} - \eta \cdot
+     \frac{1}{|\Omega|}
+     \sum_{\mathbf{z} \in \Omega} \nabla_{\mathbf{w}} Q(\mathbf{z}, \mathbf{w})
+
 Stochastic vs. Batch
 ====================
 
-..
-    TODO: revision on monte carlo
+Training with the whole training set `\Omega` for each step is
+**Batch Gradient Descent**.
+When `|\Omega| = 1` it is **Stochastic Gradient Descent (SGD)**.
+A compromised solution is to train for each step a subset of the training
+dataset, which is the **Mini-Batch Gradient Descent**.
 
-Suppose observation
+Reference
+=========
 
-.. math::
-
-   \mathbf{x}, y
-
-where
-
-.. math::
-
-   \mathbf{x} =
-     ( x_1,
-       x_2,
-       \ldots,
-       x_p
-     )^T
-
-The underlying join probability density funtion is
-`f_{X, Y}(\mathbf{x}, y)`.
-
-Suppose we have a model whose parameter vecter is denoted as `\mathbf{\theta}`.
-Its loss of a specific observation can be defined as:
-
-.. math::
-
-   L_{\theta}(\hat{y}(\mathbf{x}), y)
-
-For example, `l` of ordinary least squares is:
-
-.. math::
-
-   L_{\theta}(\hat{y}(\mathbf{x}), y) = \frac{1}{2} (y - \hat{y})^2
-     = \frac{1}{2} (y - \mathbf{\theta}^T \mathbf{x})^2
-
-is an observation of `p` features and one label.
-
-The goal of optimization is to minimize the **expected loss**:
-
-.. math::
-
-   E [ L_{\theta} (\hat{y}(\mathbf{x}), y) ] =
-     \int_{x} \int_{y} f_{X, Y}(\mathbf{x}, y)
-     L_{\theta}(\hat{y}(\mathbf{x}), y) \mathrm{d} y \mathrm{d} \mathbf{x}
-
-Thus the parameters can be calculated by submitting the gradient iteratively:
-
-.. math::
-
-   \mathbf{\theta}^{(t+1)} =
-     \mathbf{\theta}^{(t)} - \eta \cdot
-       \nabla_{\theta} E [ L_{\theta} (\hat{y}(\mathbf{x}), y) ]
-
-The original loss function `L(\mathbf{\theta})` is hard to calculate as the
-joint PDF `f_{X, Y}(\mathbf{x}, y)` is unknown.
-However, `L(\mathbf{\theta})` can be simulated with Monte Carlo integration.
-Suppose there is a dataset of size `N`:
-
-.. math::
-
-   D = \{ (\mathbf{x}^{(1)}, y^{(1)}), \ldots, (\mathbf{x}^{(N)}, y^{(N)})\}
-
-.. math::
-
-   E [ L_{\theta} (\hat{y}(\mathbf{x}), y) ] =
-     \frac{1}{|\Omega|} \sum_{i \in \Omega} L_{\theta} (\hat{y}(\mathbf{x}^{(i)}), y^{(i)})
-
-where
-
-.. math::
-
-   \Omega \subset D
-
-.. math::
-
-   \therefore
-   \mathbf{W}_{t+1} & =
-     \mathbf{W}_{t+1} -
-     \eta \cdot
-       \nabla_{\theta} \frac{1}{|\Omega|} \sum_{i \in \Omega}
-       L_{\theta} (\hat{y}(\mathbf{x}^{(i)}), y^{(i)})
-     \\ & =
-     \mathbf{W}_{t+1} -
-     \eta \cdot \frac{1}{|\Omega|} \sum_{i \in \Omega}
-       \nabla_{\theta} L_{\theta} (\hat{y}(\mathbf{x}^{(i)}), y^{(i)})
-
-
-- When `|\Omega| = N`: batch gradient descent
-
-- When `|\Omega| = 1`: stochastic gradient descent (SGD)
-
-- When `1 < |\Omega| < N`: mini-batch gradient descent
+1. https://cilvr.cs.nyu.edu/diglib/lsml/bottou-sgd-tricks-2012.pdf
 
 Back to :doc:`index`.
 
