@@ -84,7 +84,10 @@ Let:
    \therefore
    p(x) = (p_1 * p_2) (x)
    \space
-   \square
+
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Central Limit Theorem
 =====================
@@ -220,7 +223,9 @@ Let `g(x)` be the gaussian function `e^{- \pi x^2}`. Obviously:
      \\ & =
      \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}}
 
-   \square
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Back to :doc:`index`.
 

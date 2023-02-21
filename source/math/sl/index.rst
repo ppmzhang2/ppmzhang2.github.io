@@ -8,10 +8,11 @@ Statistical Learning
    bayes.rst
    bayes_ex_1.rst
    bayes_ex_2.rst
+   lr_ols.rst
    gd.rst
    pg.rst
-   ref.rst
    appx_a.rst
+   ref.rst
 
 Back to :doc:`../index`.
 

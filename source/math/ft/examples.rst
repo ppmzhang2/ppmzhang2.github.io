@@ -53,7 +53,9 @@ Proof:
      \\ & =
      \sinc(x)
 
-   \square
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Triangle Function
 =================
@@ -157,7 +159,9 @@ Proof:
      \\ & =
      \sinc^2 (s)
 
-   \square
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Gaussian function
 =================
@@ -253,7 +257,9 @@ Proof:
      \\ & =
      f(s)
 
-   \square
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Back to :doc:`index`.
 
