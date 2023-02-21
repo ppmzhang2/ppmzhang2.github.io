@@ -105,7 +105,9 @@ Proof
      \\ & =
      \pi
 
-   \square
+.. math::
+
+   \tag*{$\blacksquare$}
 
 Back to :doc:`index`.
 

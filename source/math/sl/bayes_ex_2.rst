@@ -4,10 +4,6 @@ Bayes Example: Classification
 
 .. default-role:: math
 
-.. math::
-
-   \DeclareMathOperator{\diff}{d}
-
 Consider a binary classification problem `\theta \in \{0, 1\}`:
 
 .. math::

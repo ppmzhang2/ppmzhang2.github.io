@@ -30,8 +30,10 @@ author = 'ZHANG, Meng'
 extensions = [
     'sphinx.ext.mathjax',
     'sphinx_disqus.disqus',
+    'sphinxcontrib.bibtex',
 ]
 disqus_shortname = "httpbbk0701githubiomysiteoutput"
+bibtex_bibfiles = ["refs.bib"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
