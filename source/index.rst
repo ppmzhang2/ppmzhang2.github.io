@@ -13,5 +13,6 @@ Data Science Study Notes
    math/index.rst
    nlp/index.rst
    cv/index.rst
+   ref.rst
 
 .. disqus::
