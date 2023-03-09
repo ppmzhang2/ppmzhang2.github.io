@@ -7,30 +7,44 @@ Linear Regression: Ordinary Least Squares
 TL;DR
 =====
 
-- OLS estimator is unbiased if
-  `E [\epsilon_i] = 0, \forall i \in \left[ 1, n \right]`
+- OLS estimator is unbiased if:
+
+  - No Collinearity
+
+  - `\mathrm{E} \left[ \epsilon_i \right] = 0,`
+    `\forall i \in \left[ 1, n \right]`
 
 - OLS estimator is the Best Linear Unbiased Estimator (BLUE) if:
 
-  - `E [\epsilon_i] = 0, \forall i \in \left[ 1, n \right]`
+  - No Collinearity
 
-  - `Var [\epsilon_i] = \sigma^2, \forall i \in \left[ 1, n \right]`
+  - `\mathrm{E} \left[ \epsilon_i \right] = 0,`
+    `\forall i \in \left[ 1, n \right]`
 
-  - `Cov [\epsilon_i, \epsilon_j] = 0, \forall i \ne j`
+  - `\mathrm{Var} \left[ \epsilon_i \right] = \sigma^2,`
+    `\forall i \in \left[ 1, n \right]`
 
-- OLS estimator is equivalent to MLE (generalized linear model)
+  - `\mathrm{Cov} \left[ \epsilon_i, \epsilon_j \right] = 0,`
+    `\forall i \ne j`
 
-  - `E [\epsilon_i] = 0, \forall i \in \left[ 1, n \right]`
+- OLS estimator is equivalent to MLE (generalized linear model) if:
 
-  - `Var [\epsilon_i] = \sigma^2, \forall i \in \left[ 1, n \right]`
+  - No Collinearity
 
-  - `Cov [\epsilon_i, \epsilon_j] = 0, \forall i \ne j`
+  - `\mathrm{E} \left[ \epsilon_i \right] = 0,`
+    `\forall i \in \left[ 1, n \right]`
 
-  - random errors are identically and independently distributed (i.i.d.) from a
-    normal distribution.
+  - `\mathrm{Var} \left[ \epsilon_i \right] = \sigma^2,`
+    `\forall i \in \left[ 1, n \right]`
 
-Analytical Solution for Minimizing OLS
-======================================
+  - `\mathrm{Cov} \left[ \epsilon_i, \epsilon_j \right] = 0,`
+    `\forall i \ne j`
+
+  - random errors are **identically** and **independently** drawn from a
+    **normal distribution**.
+
+Problem and Hypothesis
+======================
 
 Suppose:
 
@@ -38,12 +52,16 @@ Suppose:
 
    \mathbf{y} = \mathbf{X} \mathbf{w}^* + \mathbf{\epsilon}
 
-where `\mathbf{X}` is a `n \times p` non-random, observable predictors
-(note that `\mathbf{X}_{i1} = 1` for all `i \in [1, n]`),
-`\mathbf{\epsilon}` is a `n`-dimensional random vector and
-`\mathbf{y}` is the `n`-dimensional observable random vector response.
-`\mathbf{w}^* = [w_1^*, \ldots, w_p^*]^T` are the **underlying non-random,
-unobservable coefficients**, which is to be estimated.
+where
+
+- `\mathbf{X}` is the design matrix of `n \times p` non-random, observable
+  predictors [#f01]_
+
+- `\mathbf{\epsilon}` is a `n`-dimensional random vector, which makes
+  `\mathbf{y}` the `n`-dimensional observable random vector response
+
+- `\mathbf{w}^* = [w_1^*, \ldots, w_p^*]^T` are the **underlying non-random,
+  unobservable coefficients**, which is to be estimated.
 
 Our hypothesis is:
 
@@ -51,7 +69,7 @@ Our hypothesis is:
 
    \hat{\mathbf{y}} = \mathbf{X} \mathbf{w}
 
-A linear estimator `\mathbf{w}` can be represented as:
+where the linear estimator `\mathbf{w}` can be represented as:
 
 .. math::
 
@@ -59,6 +77,20 @@ A linear estimator `\mathbf{w}` can be represented as:
 
 where `\mathbf{C}` is a `p \times n` matrix depends on the `n \times p`
 predictor `\mathbf{X}` and the `n \times 1` response `\mathbf{y}`.
+
+A natural thought would be that `\mathbf{c}` is the
+`pseudoinverse
+<https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse>`_
+of `\mathbf{X}`, which will be confirmed by the OLS.
+
+Assumptions of the OLS
+======================
+
+No Collinearity
+---------------
+
+To get the assumption we need to calculate the analytical solution to the OLS
+problem.
 
 With Ordinary Least Squares (OLS), the risk can be calculated as:
 
@@ -111,7 +143,11 @@ To minimize `R` :cite:p:`book_dl_` :cite:p:`book_mc_`:
    \therefore
    \mathbf{w}_{ols} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}
 
-An alternative form:
+This is exactly how the Moore–Penrose inverse is computed, if `\mathbf{X}` has
+linearly independent columns, which is the origin of the **no
+multi-collinearity** assumption.
+
+An alternative form is:
 
 .. math::
 
@@ -121,8 +157,8 @@ An alternative form:
    \\ &=
    \mathbf{w}^* + (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{\epsilon}
 
-Unbiasedness
-============
+Zero Mean Error and Unbiased Estimator
+--------------------------------------
 
 .. math::
 
@@ -155,8 +191,8 @@ Proof:
 
    \tag*{$\blacksquare$}
 
-BLUE
-====
+Homoscedasticity and BLUE
+-------------------------
 
 The OLS estimator is the Best Linear Unbiased Estimator (BLUE) if:
 
@@ -408,8 +444,8 @@ Since `\mathbf{D} \mathbf{D}^T` is positive semidefinite matrix:
 
    \tag*{$\blacksquare$}
 
-Normally Distributed Error
-==========================
+Normally Distributed Error and MLE
+----------------------------------
 
 The OLS is mathematically equivalent to Maximum Likelihood Estimation
 if the error term `\epsilon_1, \ldots, \epsilon_n` are identically and
@@ -477,13 +513,10 @@ To minimize `\ln \mathcal{L}`:
 
    \tag*{$\blacksquare$}
 
+Notes
+=====
 
-Reference
-=========
-
-.. bibliography::
-   :style: plain
-   :cited:
+.. [#f01] `\mathbf{X}_{i1} = 1` for all `i \in [1, n]`
 
 Back to :doc:`index`.
 

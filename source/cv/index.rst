@@ -9,7 +9,7 @@ Computer Vision (CV) related study notes:
    :caption: Contents:
 
    nerf/index.rst
-   yolo/index.rst
+   od/index.rst
    reference.rst
 
 Back to :doc:`../index`.
