@@ -4,7 +4,7 @@ Reference
 
 .. bibliography::
    :style: plain
-   :cited:
+   :all:
 
 Back to :doc:`./index`.
 
