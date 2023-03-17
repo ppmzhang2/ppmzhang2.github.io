@@ -140,7 +140,7 @@ and that:
 Yet Another Form
 ================
 
-Starting with the formula:
+Starting with the formula :cite:p:`wiki_slr_`:
 
 .. math::
 

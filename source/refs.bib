@@ -9,6 +9,28 @@
 %   ****************************************
 
 % books
+@book{book_islr_,
+  title     = {An Introduction to Statistical Learning:
+               with Applications in R},
+  author    = {Gareth James and
+               Daniela Witten and
+               Trevor Hastie and
+               Robert Tibshirani},
+  publisher = {Springer},
+  year      = {2013},
+  address   = {New York, NY, USA},
+  url       = {https://www.statlearning.com}
+}
+@book{book_eslv2_,
+  title     = {The Elements of Statistical Learning: Data Mining,
+               Inference, and Prediction},
+  author    = {Trevor Hastie and
+               Robert Tibshirani and
+               J. H. Friedman},
+  publisher = {Springer},
+  year      = {2009},
+  address   = {New York, NY, USA},
+}
 @book{book_dl_,
   title     = {Deep Learning},
   author    = {Ian J. Goodfellow and Yoshua Bengio and Aaron Courville},
@@ -16,6 +38,13 @@
   year      = {2016},
   address   = {Cambridge, MA, USA},
   url       = {http://www.deeplearningbook.org}
+}
+@book{book_ipsrp_,
+  title     = {Introduction to Probability, Statistics, and Random Processes},
+  author    = {H. Pishro-Nik},
+  publisher = {Kappa Research LLC},
+  year      = {2014},
+  url       = {https://www.probabilitycourse.com}
 }
 @misc{book_mc_,
   author    = "K. B. Petersen and M. S. Pedersen",
@@ -37,6 +66,13 @@
   url    = {https://en.wikipedia.org/wiki/Gauss–Markov_theorem},
   note   = "[Online; accessed 21-February-2023]"
 }
+@misc{wiki_slr_,
+  author = "Wikipedia",
+  title  = "{Simple Linear Regression}",
+  year   = "2023",
+  url    = {https://en.wikipedia.org/wiki/Simple_linear_regression},
+  note   = "[Online; accessed 17-March-2023]"
+}
 @misc{medium_ols_,
   author = {Andrew Rothman},
   title  = {OLS Regression, Gauss-Markov, BLUE, and understanding the math},
@@ -49,19 +85,36 @@
   note   = "[Online; accessed 21-February-2023]"
 }
 
+% inbook
+@inbook{bottou2012,
+  author    = {Bottou, Leon},
+  editor    = {Montavon, Gregoire and
+               Orr, Genevieve B. and
+               Muller, Klaus-Robert},
+  title     = {Stochastic Gradient Descent Tricks},
+  bookTitle = {Neural Networks: Tricks of the Trade: Second Edition},
+  year      = {2012},
+  publisher = {Springer Berlin Heidelberg},
+  address   = {Berlin, Heidelberg},
+  pages     = {421--436},
+  abstract  = {Chapter 1 strongly advocates the stochastic back-propagation
+               method to train neural networks.
+               This is in fact an instance of a more general technique called
+               stochastic gradient descent (SGD).
+               This chapter provides background material, explains why SGD is a
+               good learning algorithm when the training set is large, and
+               provides useful recommendations.},
+  isbn      = {978-3-642-35289-8},
+  doi       = {10.1007/978-3-642-35289-8_25},
+  url       = {https://doi.org/10.1007/978-3-642-35289-8_25}
+}
+
 % papers
-@misc{yolov1_,
-  doi       = {10.48550/ARXIV.1506.02640},
-  url       = {https://arxiv.org/abs/1506.02640},
-  author    = {Redmon, Joseph and Divvala, Santosh and Girshick, Ross and
-               Farhadi, Ali},
-  title     = {You Only Look Once: Unified, Real-Time Object Detection},
-  publisher = {arXiv},
-  year      = {2015},
-  keywords  = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer
-               and information sciences, FOS: Computer and information
-               sciences},
-  copyright = {arXiv.org perpetual, non-exclusive license}
+@misc{notation_ml_2020_,
+  url       = {https://github.com/mazhengcn/suggested-notation-for-machine-learning},
+  author    = {Beijing Academy of Artificial Intelligence},
+  title     = {Suggested Notation for Machine Learning},
+  year      = {2020},
 }
 @article{yolov2_,
   author     = {Joseph Redmon and
