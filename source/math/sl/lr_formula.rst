@@ -4,8 +4,8 @@ Linear Regression: Formula Derivation
 
 .. default-role:: math
 
-Simple Linear Regression Formula
-================================
+Originally Derived Formula
+==========================
 
 Suppose variable `x` and `y` follows a straight-line relationship, which can be
 described as:
@@ -88,8 +88,8 @@ which is the formula for the slope of the linear regression line.
 
    \tag*{$\blacksquare$}
 
-Another Form
-============
+Factored Form
+=============
 
 Starting with the formula:
 
@@ -133,14 +133,32 @@ and that:
    \beta_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
      {\sum_{i=1}^n (x_i - \bar{x})^2}
 
+Slope Weighted Average Form
+===========================
+
+Starting with the formula:
+
 .. math::
 
-   \tag*{$\blacksquare$}
+   \beta_1 &=
+     \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
+       {\sum_{i=1}^n (x_i - \bar{x})^2}
+     \\ &=
+     \frac{\sum_{i=1}^n (x_i - \bar{x})^2
+           \frac{y_i - \bar{y}}{x_i - \bar{x}}}
+       {\sum_{i=1}^n (x_i - \bar{x})^2}
+     \\ &=
+     \sum_{i=1}^n
+       \frac{(x_i - \bar{x})^2}{\sum_{i=1}^n (x_i - \bar{x})^2}
+       \frac{y_i - \bar{y}}{x_i - \bar{x}}
 
-Yet Another Form
-================
+This is also the reason why points may have a great influence on the
+coefficient if they are far from the mean value. :cite:p:`wiki_slr_`
 
-Starting with the formula :cite:p:`wiki_slr_`:
+Correlation Coefficient Form
+============================
+
+Starting with the formula :
 
 .. math::
 
@@ -163,11 +181,87 @@ Note the formula of correlation coefficient:
    \beta_1 = r \frac{\sigma_y}{\sigma_x}
 
 where `\sigma_x` and `\sigma_y` are the standard deviation of `x` and `y`
-respectively.
+respectively. :cite:p:`wiki_slr_`
+
+Expectation and Variance
+========================
+
+Starting with the formula:
 
 .. math::
 
-   \tag*{$\blacksquare$}
+   \beta_1 &=
+     \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
+       {\sum_{i=1}^n (x_i - \bar{x})^2}
+     \\ &=
+     \frac{
+       \sum_{i=1}^n
+       (x_i - \bar{x})
+       (\beta_0 + \beta_1 x_i + \epsilon - \beta_0 - \beta_1 \bar{x})}
+       {\sum_{i=1}^n (x_i - \bar{x})^2}
+     \\ &=
+     \frac{
+       \sum_{i=1}^n
+       (x_i - \bar{x})
+       (\beta_1 x_i - \beta_1 \bar{x} + \epsilon)}
+       {\sum_{i=1}^n (x_i - \bar{x})^2}
+
+Now we can calculate the expectation and variance of the slope with properties
+of these statistics:
+
+.. math::
+
+   \mathrm{E} \left[ \beta_1 \right] &=
+     \frac{
+       \sum_{i=1}^n
+       (x_i - \bar{x})
+       \mathrm{E} \left[ \beta_1 x_i - \beta_1 \bar{x} + \epsilon \right]
+    }
+    {\sum_{i=1}^n (x_i - \bar{x})^2}
+   \\ &=
+     \beta_1
+     \frac{
+       \sum_{i=1}^n
+       (x_i - \bar{x})^2
+     }
+     {\sum_{i=1}^n (x_i - \bar{x})^2}
+   \\ &=
+     \beta_1
+
+.. math::
+
+   \mathrm{Var} \left[ \beta_1 \right] &=
+     \frac{
+       \sum_{i=1}^n
+       (x_i - \bar{x})^2
+       \mathrm{Var} \left[ \beta_1 x_i - \beta_1 \bar{x} + \epsilon \right]
+    }
+    {(\sum_{i=1}^n (x_i - \bar{x})^2)^2}
+   \\ &=
+     \frac{
+       \sum_{i=1}^n
+       (x_i - \bar{x})^2
+       \mathrm{Var} \left[ \epsilon \right]
+    }
+    {(\sum_{i=1}^n (x_i - \bar{x})^2)^2}
+   \\ &=
+     \frac{
+       \mathrm{Var} \left[ \epsilon \right]
+    }
+    {\sum_{i=1}^n (x_i - \bar{x})^2}
+
+With the variance of slope we can construct the t-statistic:
+
+.. math::
+
+   t = \frac{\hat{\beta}_1 - 0}{\mathrm{SE} \left[ \beta_1 \right]}
+
+where:
+
+.. math::
+
+  \mathrm{SE} \left[ \beta_1 \right] =
+  \sqrt{\frac{\mathrm{Var} \left[ \beta_1 \right]}{n-2}}
 
 Back to :doc:`index`.
 
