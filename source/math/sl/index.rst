@@ -5,6 +5,7 @@ Statistical Learning
 .. toctree::
    :maxdepth: 2
 
+   mse.rst
    bayes.rst
    bayes_ex_1.rst
    bayes_ex_2.rst
