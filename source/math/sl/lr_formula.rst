@@ -12,15 +12,31 @@ described as:
 
 .. math::
 
-   y = \beta_0 + \beta_1 x
+   y = \beta_0^* + \beta_1^* x + \epsilon
+
+where zero-mean random variable `\epsilon` has a constant variance:
+
+.. math::
+
+   \mathrm{E} \left[ \epsilon \right] &= 0
+   \\
+   \mathrm{Var} \left[ \epsilon \right] &= \sigma_{\epsilon}^2
+
+We use the hypothesis model to get the prediction `\hat{y}`:
+
+.. math::
+
+   \hat{y} = \beta_0 + \beta_1 x
 
 We aim to find the slope (`\beta_1`) that minimizes the residual sum of
 squares (**RSS**):
 
 .. math::
 
-   \mathrm{RSS} =
-   \sum_{i=1}^n (y_i - \beta_1 x_i - \beta_0)^2
+   \mathrm{RSS} &=
+     \sum_{i=1}^n (y_i - \hat{y}_i)^2
+   \\ &=
+     \sum_{i=1}^n (y_i - \beta_1 x_i - \beta_0)^2
 
 where `\{ (x_i, y_i) \}_{i=1}^n` is the dataset.
 
@@ -197,13 +213,13 @@ Starting with the formula:
      \frac{
        \sum_{i=1}^n
        (x_i - \bar{x})
-       (\beta_0 + \beta_1 x_i + \epsilon - \beta_0 - \beta_1 \bar{x})}
+       (\beta_0^* + \beta_1^* x_i + \epsilon - \beta_0^* - \beta_1^* \bar{x})}
        {\sum_{i=1}^n (x_i - \bar{x})^2}
      \\ &=
      \frac{
        \sum_{i=1}^n
        (x_i - \bar{x})
-       (\beta_1 x_i - \beta_1 \bar{x} + \epsilon)}
+       (\beta_1^* x_i - \beta_1^* \bar{x} + \epsilon)}
        {\sum_{i=1}^n (x_i - \bar{x})^2}
 
 Now we can calculate the expectation and variance of the slope with properties
@@ -215,18 +231,18 @@ of these statistics:
      \frac{
        \sum_{i=1}^n
        (x_i - \bar{x})
-       \mathrm{E} \left[ \beta_1 x_i - \beta_1 \bar{x} + \epsilon \right]
+       \mathrm{E} \left[ \beta_1^* x_i - \beta_1^* \bar{x} + \epsilon \right]
     }
     {\sum_{i=1}^n (x_i - \bar{x})^2}
    \\ &=
-     \beta_1
+     \beta_1^*
      \frac{
        \sum_{i=1}^n
        (x_i - \bar{x})^2
      }
      {\sum_{i=1}^n (x_i - \bar{x})^2}
    \\ &=
-     \beta_1
+     \beta_1^*
 
 .. math::
 
@@ -234,7 +250,7 @@ of these statistics:
      \frac{
        \sum_{i=1}^n
        (x_i - \bar{x})^2
-       \mathrm{Var} \left[ \beta_1 x_i - \beta_1 \bar{x} + \epsilon \right]
+       \mathrm{Var} \left[ \beta_1^* x_i - \beta_1^* \bar{x} + \epsilon \right]
     }
     {(\sum_{i=1}^n (x_i - \bar{x})^2)^2}
    \\ &=
@@ -250,18 +266,15 @@ of these statistics:
     }
     {\sum_{i=1}^n (x_i - \bar{x})^2}
 
-With the variance of slope we can construct the t-statistic:
+where `\mathrm{Var} \left[ \epsilon \right]` can be estimated with residual:
 
 .. math::
 
-   t = \frac{\hat{\beta}_1 - 0}{\mathrm{SE} \left[ \beta_1 \right]}
+   \mathrm{Var} \left[ \epsilon \right] =
+     \frac{1}{n-2} \sum_{i=1}^n (y_i - \hat{y}_i)^2
 
-where:
-
-.. math::
-
-  \mathrm{SE} \left[ \beta_1 \right] =
-  \sqrt{\frac{\mathrm{Var} \left[ \beta_1 \right]}{n-2}}
+which makes it equal to slope's standard error of
+`\mathrm{SE} \left[ \beta_1 \right]`.
 
 Back to :doc:`index`.
 
