@@ -12,37 +12,34 @@
 #
 # import os
 # import sys
-# sys.path.insert(0, os.path.abspath('.'))
-
+# sys.path.insert(0, os.path.abspath("."))
 
 # -- Project information -----------------------------------------------------
 
-project = 'ML Notes'
-copyright = '2022, ZHANG, Meng'
-author = 'ZHANG, Meng'
-
+project = "Machine Learning Study"
+copyright = "2022, ZHANG, Meng"
+author = "ZHANG, Meng"
 
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+# extensions coming with Sphinx (named "sphinx.ext.*") or your custom
 # ones.
 extensions = [
-    'sphinx.ext.mathjax',
-    'sphinx_disqus.disqus',
-    'sphinxcontrib.bibtex',
+    "sphinx.ext.mathjax",
+    "sphinx_disqus.disqus",
+    "sphinxcontrib.bibtex",
 ]
 disqus_shortname = "httpbbk0701githubiomysiteoutput"
 bibtex_bibfiles = ["refs.bib"]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
-
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -50,10 +47,20 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 
-html_theme = "pydata_sphinx_theme"
+html_theme = "sphinx_material"
 html_theme_options = {
-  "github_url": "https://github.com/ppmzhang2/",
-  "search_bar_text": "Search this site...",
+    "nav_title": "ML Notes",
+    "base_url": "https://ppmzhang2.github.io",
+    "repo_url": "https://github.com/ppmzhang2/",
+    "color_primary": "blue",
+    "color_accent": "light-blue",
+    "globaltoc_depth": 3,
+    "globaltoc_collapse": False,
+    "globaltoc_includehidden": False,
+}
+html_sidebars = {
+    "**":
+    ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
