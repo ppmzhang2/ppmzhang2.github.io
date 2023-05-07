@@ -3,16 +3,17 @@
 
 [[package]]
 name = "ablog"
-version = "0.10.23"
-requires_python = ">=3.7"
+version = "0.11.3"
+requires_python = ">=3.9"
 summary = "A Sphinx extension that converts any documentation or personal website project into a full-fledged blog."
 dependencies = [
-    "docutils",
-    "feedgen",
-    "invoke",
-    "python-dateutil",
-    "sphinx",
-    "watchdog",
+    "docutils>=0.18",
+    "feedgen>=0.9.0",
+    "invoke>=1.6.0",
+    "packaging>=19.0",
+    "python-dateutil>=2.8.2",
+    "sphinx>=5.0.0",
+    "watchdog>=2.1.0",
 ]
 
 [[package]]
@@ -22,26 +23,15 @@ summary = "A configurable sidebar-enabled Sphinx theme"
 
 [[package]]
 name = "astroid"
-version = "2.11.2"
-requires_python = ">=3.6.2"
+version = "2.15.4"
+requires_python = ">=3.7.2"
 summary = "An abstract syntax tree for Python with inference support."
 dependencies = [
     "lazy-object-proxy>=1.4.0",
-    "setuptools>=20.0",
-    "wrapt<2,>=1.11",
+    "typing-extensions>=4.0.0; python_version < \"3.11\"",
+    "wrapt<2,>=1.11; python_version < \"3.11\"",
+    "wrapt<2,>=1.14; python_version >= \"3.11\"",
 ]
-
-[[package]]
-name = "atomicwrites"
-version = "1.4.0"
-requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-summary = "Atomic file writes."
-
-[[package]]
-name = "attrs"
-version = "21.4.0"
-requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-summary = "Classes Without Boilerplate"
 
 [[package]]
 name = "babel"
@@ -54,7 +44,7 @@ dependencies = [
 
 [[package]]
 name = "beautifulsoup4"
-version = "4.11.1"
+version = "4.12.2"
 requires_python = ">=3.6.0"
 summary = "Screen-scraping library"
 dependencies = [
@@ -74,8 +64,8 @@ summary = "The Real First Universal Charset Detector. Open, modern and actively 
 
 [[package]]
 name = "colorama"
-version = "0.4.4"
-requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "0.4.6"
+requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 summary = "Cross-platform colored terminal text."
 
 [[package]]
@@ -96,16 +86,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "css-html-js-minify"
+version = "2.5.5"
+requires_python = ">=3.6"
+summary = "CSS HTML JS Minifier"
+
+[[package]]
 name = "dill"
-version = "0.3.4"
-requires_python = ">=2.7, !=3.0.*"
+version = "0.3.6"
+requires_python = ">=3.7"
 summary = "serialize all of python"
 
 [[package]]
 name = "docutils"
-version = "0.17.1"
-requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "0.19"
+requires_python = ">=3.7"
 summary = "Docutils -- Python Documentation Utilities"
+
+[[package]]
+name = "exceptiongroup"
+version = "1.1.1"
+requires_python = ">=3.7"
+summary = "Backport of PEP 654 (exception groups)"
 
 [[package]]
 name = "feedgen"
@@ -208,12 +210,6 @@ requires_python = ">=3.6"
 summary = "plugin and hook calling mechanisms for python"
 
 [[package]]
-name = "py"
-version = "1.11.0"
-requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-summary = "library with cross-python path, ini-parsing, io, code, log facilities"
-
-[[package]]
 name = "pybtex"
 version = "0.24.0"
 requires_python = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*"
@@ -235,36 +231,26 @@ dependencies = [
 ]
 
 [[package]]
-name = "pydata-sphinx-theme"
-version = "0.8.1"
-requires_python = ">=3.7"
-summary = "Bootstrap-based Sphinx theme from the PyData community"
-dependencies = [
-    "beautifulsoup4",
-    "docutils!=0.17.0",
-    "packaging",
-    "sphinx<5,>=3.5.4",
-]
-
-[[package]]
 name = "pygments"
-version = "2.11.2"
-requires_python = ">=3.5"
+version = "2.15.1"
+requires_python = ">=3.7"
 summary = "Pygments is a syntax highlighting package written in Python."
 
 [[package]]
 name = "pylint"
-version = "2.13.5"
-requires_python = ">=3.6.2"
+version = "2.17.4"
+requires_python = ">=3.7.2"
 summary = "python code static checker"
 dependencies = [
-    "astroid<=2.12.0-dev0,>=2.11.2",
-    "colorama; sys_platform == \"win32\"",
-    "dill>=0.2",
+    "astroid<=2.17.0-dev0,>=2.15.4",
+    "colorama>=0.4.5; sys_platform == \"win32\"",
+    "dill>=0.2; python_version < \"3.11\"",
+    "dill>=0.3.6; python_version >= \"3.11\"",
     "isort<6,>=4.2.5",
     "mccabe<0.8,>=0.6",
     "platformdirs>=2.2.0",
     "tomli>=1.1.0; python_version < \"3.11\"",
+    "tomlkit>=0.10.1",
 ]
 
 [[package]]
@@ -275,23 +261,21 @@ summary = "pyparsing module - Classes and methods to define and execute parsing 
 
 [[package]]
 name = "pytest"
-version = "7.1.1"
+version = "7.3.1"
 requires_python = ">=3.7"
 summary = "pytest: simple powerful testing with Python"
 dependencies = [
-    "atomicwrites>=1.0; sys_platform == \"win32\"",
-    "attrs>=19.2.0",
     "colorama; sys_platform == \"win32\"",
+    "exceptiongroup>=1.0.0rc8; python_version < \"3.11\"",
     "iniconfig",
     "packaging",
     "pluggy<2.0,>=0.12",
-    "py>=1.8.2",
-    "tomli>=1.0.0",
+    "tomli>=1.0.0; python_version < \"3.11\"",
 ]
 
 [[package]]
 name = "pytest-cov"
-version = "3.0.0"
+version = "4.0.0"
 requires_python = ">=3.6"
 summary = "Pytest plugin for measuring coverage."
 dependencies = [
@@ -306,6 +290,26 @@ requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 summary = "Extensions to the standard Python datetime module"
 dependencies = [
     "six>=1.5",
+]
+
+[[package]]
+name = "python-slugify"
+version = "8.0.1"
+requires_python = ">=3.7"
+summary = "A Python slugify application that also handles Unicode"
+dependencies = [
+    "text-unidecode>=1.3",
+]
+
+[[package]]
+name = "python-slugify"
+version = "8.0.1"
+extras = ["unidecode"]
+requires_python = ">=3.7"
+summary = "A Python slugify application that also handles Unicode"
+dependencies = [
+    "Unidecode>=1.1.1",
+    "python-slugify==8.0.1",
 ]
 
 [[package]]
@@ -339,13 +343,13 @@ summary = "Easily download, build, install, upgrade, and uninstall Python packag
 
 [[package]]
 name = "setuptools-git-versioning"
-version = "1.9.2"
+version = "1.13.3"
 requires_python = ">=3.7"
 summary = "Use git repo data for building a version number according PEP-440"
 dependencies = [
     "packaging",
     "setuptools",
-    "toml>=0.10.2",
+    "toml>=0.10.2; python_version < \"3.11\"",
 ]
 
 [[package]]
@@ -361,26 +365,26 @@ summary = "This package provides 29 stemmers for 28 languages generated from Sno
 
 [[package]]
 name = "soupsieve"
-version = "2.3.2"
-requires_python = ">=3.6"
+version = "2.4.1"
+requires_python = ">=3.7"
 summary = "A modern CSS selector implementation for Beautiful Soup."
 
 [[package]]
 name = "sphinx"
-version = "4.5.0"
-requires_python = ">=3.6"
+version = "7.0.0"
+requires_python = ">=3.8"
 summary = "Python documentation generator"
 dependencies = [
-    "Jinja2>=2.3",
-    "Pygments>=2.0",
+    "Jinja2>=3.0",
+    "Pygments>=2.13",
     "alabaster<0.8,>=0.7",
-    "babel>=1.3",
-    "colorama>=0.3.5; sys_platform == \"win32\"",
-    "docutils<0.18,>=0.14",
-    "imagesize",
-    "packaging",
-    "requests>=2.5.0",
-    "snowballstemmer>=1.1",
+    "babel>=2.9",
+    "colorama>=0.4.5; sys_platform == \"win32\"",
+    "docutils<0.20,>=0.18.1",
+    "imagesize>=1.3",
+    "packaging>=21.0",
+    "requests>=2.25.0",
+    "snowballstemmer>=2.0",
     "sphinxcontrib-applehelp",
     "sphinxcontrib-devhelp",
     "sphinxcontrib-htmlhelp>=2.0.0",
@@ -396,6 +400,19 @@ requires_python = ">=3.6.2,<4.0.0"
 summary = "Embed Disqus comments in Sphinx documents/pages."
 dependencies = [
     "sphinx",
+]
+
+[[package]]
+name = "sphinx-material"
+version = "0.0.35"
+requires_python = ">=3.6"
+summary = "Material sphinx theme"
+dependencies = [
+    "beautifulsoup4",
+    "css-html-js-minify",
+    "lxml",
+    "python-slugify[unidecode]",
+    "sphinx>=2.0",
 ]
 
 [[package]]
@@ -447,6 +464,11 @@ requires_python = ">=3.5"
 summary = "sphinxcontrib-serializinghtml is a sphinx extension which outputs \"serialized\" HTML files (json and pickle)."
 
 [[package]]
+name = "text-unidecode"
+version = "1.3"
+summary = "The most basic Text::Unidecode port"
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 requires_python = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
@@ -457,6 +479,24 @@ name = "tomli"
 version = "2.0.1"
 requires_python = ">=3.7"
 summary = "A lil' TOML parser"
+
+[[package]]
+name = "tomlkit"
+version = "0.11.8"
+requires_python = ">=3.7"
+summary = "Style preserving TOML library"
+
+[[package]]
+name = "typing-extensions"
+version = "4.5.0"
+requires_python = ">=3.7"
+summary = "Backported and Experimental Type Hints for Python 3.7+"
+
+[[package]]
+name = "unidecode"
+version = "1.3.6"
+requires_python = ">=3.5"
+summary = "ASCII transliterations of Unicode text"
 
 [[package]]
 name = "urllib3"
@@ -478,41 +518,37 @@ summary = "Module for decorators, wrappers and monkey patching."
 
 [[package]]
 name = "yapf"
-version = "0.32.0"
+version = "0.33.0"
 summary = "A formatter for Python code."
+dependencies = [
+    "tomli>=2.0.1",
+]
 
 [metadata]
-lock_version = "4.1"
-content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c315aeed"
+lock_version = "4.2"
+groups = ["default", "dev"]
+content_hash = "sha256:a5fbfbf52350d2e60d671a75cd1cd5120a6c10209adfb42108c4965ee85a3d27"
 
 [metadata.files]
-"ablog 0.10.23" = [
-    {url = "https://files.pythonhosted.org/packages/83/99/d176dcf78ea2f43f60520a631da91881f0f35fc8f38d1a830fa97d74a12c/ablog-0.10.23.tar.gz", hash = "sha256:7eaa81d7b74dcdc0d9985c379e3f394f9cef33363a48dfc9c5b07720048e6acf"},
-    {url = "https://files.pythonhosted.org/packages/f2/4f/1ef531ea1d65aff9e21ed98acadbb5f1baf463ccc290f992c0b0a9be5f5c/ablog-0.10.23-py3-none-any.whl", hash = "sha256:86457994f016a4d3042d69e6d0858de000f7e0aed44eed9030b2ba746d19b7df"},
+"ablog 0.11.3" = [
+    {url = "https://files.pythonhosted.org/packages/62/11/85d5fec5503e8cad63cac14a1e26c5edded4e933c3b40542eeaf07d518d1/ablog-0.11.3.tar.gz", hash = "sha256:944ecb3e5df50b6262fcfdca8f8654329c33657f31e8298de8a198aa1c0df82e"},
+    {url = "https://files.pythonhosted.org/packages/82/08/fea5bd2b0b2c85752db947e2c1eca4e077e8ed09e63109885afaa9c59f6b/ablog-0.11.3-py3-none-any.whl", hash = "sha256:cb1c87ba7a5d040408c0856b3721eeb5c1eac8c285d6062839b312cc5e4babe2"},
 ]
 "alabaster 0.7.12" = [
     {url = "https://files.pythonhosted.org/packages/10/ad/00b090d23a222943eb0eda509720a404f531a439e803f6538f35136cae9e/alabaster-0.7.12-py2.py3-none-any.whl", hash = "sha256:446438bdcca0e05bd45ea2de1668c1d9b032e1a9154c2c259092d77031ddd359"},
     {url = "https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz", hash = "sha256:a661d72d58e6ea8a57f7a86e37d86716863ee5e92788398526d58b26a4e4dc02"},
 ]
-"astroid 2.11.2" = [
-    {url = "https://files.pythonhosted.org/packages/0b/93/98b506fe286a486a66694a39014bea6537e765fce70bb0ffc297c5806e2a/astroid-2.11.2.tar.gz", hash = "sha256:8d0a30fe6481ce919f56690076eafbb2fb649142a89dc874f1ec0e7a011492d0"},
-    {url = "https://files.pythonhosted.org/packages/4f/5c/42befbb2d6eafa25bf1dcbc50dbae2e8482745eaa99cd83fc45b83ae4b07/astroid-2.11.2-py3-none-any.whl", hash = "sha256:cc8cc0d2d916c42d0a7c476c57550a4557a083081976bf42a73414322a6411d9"},
-]
-"atomicwrites 1.4.0" = [
-    {url = "https://files.pythonhosted.org/packages/2c/a0/da5f49008ec6e9a658dbf5d7310a4debd397bce0b4db03cf8a410066bb87/atomicwrites-1.4.0-py2.py3-none-any.whl", hash = "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197"},
-    {url = "https://files.pythonhosted.org/packages/55/8d/74a75635f2c3c914ab5b3850112fd4b0c8039975ecb320e4449aa363ba54/atomicwrites-1.4.0.tar.gz", hash = "sha256:ae70396ad1a434f9c7046fd2dd196fc04b12f9e91ffb859164193be8b6168a7a"},
-]
-"attrs 21.4.0" = [
-    {url = "https://files.pythonhosted.org/packages/be/be/7abce643bfdf8ca01c48afa2ddf8308c2308b0c3b239a44e57d020afa0ef/attrs-21.4.0-py2.py3-none-any.whl", hash = "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4"},
-    {url = "https://files.pythonhosted.org/packages/d7/77/ebb15fc26d0f815839ecd897b919ed6d85c050feeb83e100e020df9153d2/attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
+"astroid 2.15.4" = [
+    {url = "https://files.pythonhosted.org/packages/36/50/c2bde258f4b8021ee9075932ace925245a1ad9a816a0cab269f04f480c3b/astroid-2.15.4.tar.gz", hash = "sha256:c81e1c7fbac615037744d067a9bb5f9aeb655edf59b63ee8b59585475d6f80d8"},
+    {url = "https://files.pythonhosted.org/packages/6d/79/5684480fc8be4b9e3ec55d78376d82e88b6658a2328a7fded88738aa1286/astroid-2.15.4-py3-none-any.whl", hash = "sha256:a1b8543ef9d36ea777194bc9b17f5f8678d2c56ee6a45b2c2f17eec96f242347"},
 ]
 "babel 2.9.1" = [
     {url = "https://files.pythonhosted.org/packages/17/e6/ec9aa6ac3d00c383a5731cc97ed7c619d3996232c977bb8326bcbb6c687e/Babel-2.9.1.tar.gz", hash = "sha256:bc0c176f9f6a994582230df350aa6e05ba2ebe4b3ac317eab29d9be5d2768da0"},
     {url = "https://files.pythonhosted.org/packages/aa/96/4ba93c5f40459dc850d25f9ba93f869a623e77aaecc7a9344e19c01942cf/Babel-2.9.1-py2.py3-none-any.whl", hash = "sha256:ab49e12b91d937cd11f0b67cb259a57ab4ad2b59ac7a3b41d6c06c0ac5b0def9"},
 ]
-"beautifulsoup4 4.11.1" = [
-    {url = "https://files.pythonhosted.org/packages/9c/d8/909c4089dbe4ade9f9705f143c9f13f065049a9d5e7d34c828aefdd0a97c/beautifulsoup4-4.11.1-py3-none-any.whl", hash = "sha256:58d5c3d29f5a36ffeb94f02f0d786cd53014cf9b3b3951d42e0080d8a9498d30"},
-    {url = "https://files.pythonhosted.org/packages/e8/b0/cd2b968000577ec5ce6c741a54d846dfa402372369b8b6861720aa9ecea7/beautifulsoup4-4.11.1.tar.gz", hash = "sha256:ad9aa55b65ef2808eb405f46cf74df7fcb7044d5cbc26487f96eb2ef2e436693"},
+"beautifulsoup4 4.12.2" = [
+    {url = "https://files.pythonhosted.org/packages/57/f4/a69c20ee4f660081a7dedb1ac57f29be9378e04edfcb90c526b923d4bebc/beautifulsoup4-4.12.2-py3-none-any.whl", hash = "sha256:bd2520ca0d9d7d12694a53d44ac482d181b4ec1888909b035a3dbf40d0f57d4a"},
+    {url = "https://files.pythonhosted.org/packages/af/0b/44c39cf3b18a9280950ad63a579ce395dda4c32193ee9da7ff0aed547094/beautifulsoup4-4.12.2.tar.gz", hash = "sha256:492bbc69dca35d12daac71c4db1bfff0c876c00ef4a2ffacce226d4638eb72da"},
 ]
 "certifi 2021.10.8" = [
     {url = "https://files.pythonhosted.org/packages/37/45/946c02767aabb873146011e665728b680884cd8fe70dde973c640e45b775/certifi-2021.10.8-py2.py3-none-any.whl", hash = "sha256:d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569"},
@@ -522,9 +558,9 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/06/b3/24afc8868eba069a7f03650ac750a778862dc34941a4bebeb58706715726/charset_normalizer-2.0.12-py3-none-any.whl", hash = "sha256:6881edbebdb17b39b4eaaa821b438bf6eddffb4468cf344f09f89def34a8b1df"},
     {url = "https://files.pythonhosted.org/packages/56/31/7bcaf657fafb3c6db8c787a865434290b726653c912085fbd371e9b92e1c/charset-normalizer-2.0.12.tar.gz", hash = "sha256:2857e29ff0d34db842cd7ca3230549d1a697f96ee6d3fb071cfa6c7393832597"},
 ]
-"colorama 0.4.4" = [
-    {url = "https://files.pythonhosted.org/packages/1f/bb/5d3246097ab77fa083a61bd8d3d527b7ae063c7d8e8671b1cf8c4ec10cbe/colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
-    {url = "https://files.pythonhosted.org/packages/44/98/5b86278fbbf250d239ae0ecb724f8572af1c91f4a11edf4d36a206189440/colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
+"colorama 0.4.6" = [
+    {url = "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
+    {url = "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
 "coverage 6.3.2" = [
     {url = "https://files.pythonhosted.org/packages/03/22/38506bc2af4fc49bb49cb76c52ed4523ff80277ad98fd46e981736419fb2/coverage-6.3.2-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:fd9e830e9d8d89b20ab1e5af09b32d33e1a08ef4c4e14411e559556fd788e6b2"},
@@ -569,13 +605,21 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/f2/45/824cb20113fa6a2bf97b6f4a592361a30460f8f24335e033f2d31ee1a487/coverage-6.3.2-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c76aeef1b95aff3905fb2ae2d96e319caca5b76fa41d3470b19d4e4a3a313512"},
     {url = "https://files.pythonhosted.org/packages/fe/ae/1574d61ed41a8d82a5643affcd9beb7f626cbcab3d09c8a714054f670d75/coverage-6.3.2-cp38-cp38-musllinux_1_1_aarch64.whl", hash = "sha256:ec6bc7fe73a938933d4178c9b23c4e0568e43e220aef9472c4f6044bfc6dd0f0"},
 ]
-"dill 0.3.4" = [
-    {url = "https://files.pythonhosted.org/packages/57/b7/c4aa04a27040e6a3b09f5a652976ead00b66504c014425a7aad887aa8d7f/dill-0.3.4.zip", hash = "sha256:9f9734205146b2b353ab3fec9af0070237b6ddae78452af83d2fca84d739e675"},
-    {url = "https://files.pythonhosted.org/packages/b6/c3/973676ceb86b60835bb3978c6db67a5dc06be6cfdbd14ef0f5a13e3fc9fd/dill-0.3.4-py2.py3-none-any.whl", hash = "sha256:7e40e4a70304fd9ceab3535d36e58791d9c4a776b38ec7f7ec9afc8d3dca4d4f"},
+"css-html-js-minify 2.5.5" = [
+    {url = "https://files.pythonhosted.org/packages/75/61/f52e5225abe8e36ed5396e5ae3074df5f4ef994b540e9b4fd55a39b03cfd/css-html-js-minify-2.5.5.zip", hash = "sha256:4a9f11f7e0496f5284d12111f3ba4ff5ff2023d12f15d195c9c48bd97013746c"},
+    {url = "https://files.pythonhosted.org/packages/e8/21/1260081a2c67105a3bd0f8692ff3c80b5f0cb5fe9f3f8fd4a990f17b8a39/css_html_js_minify-2.5.5-py2.py3-none-any.whl", hash = "sha256:3da9d35ac0db8ca648c1b543e0e801d7ca0bab9e6bfd8418fee59d5ae001727a"},
 ]
-"docutils 0.17.1" = [
-    {url = "https://files.pythonhosted.org/packages/4c/17/559b4d020f4b46e0287a2eddf2d8ebf76318fd3bd495f1625414b052fdc9/docutils-0.17.1.tar.gz", hash = "sha256:686577d2e4c32380bb50cbb22f575ed742d58168cee37e99117a854bcd88f125"},
-    {url = "https://files.pythonhosted.org/packages/4c/5e/6003a0d1f37725ec2ebd4046b657abb9372202655f96e76795dca8c0063c/docutils-0.17.1-py2.py3-none-any.whl", hash = "sha256:cf316c8370a737a022b72b56874f6602acf974a37a9fba42ec2876387549fc61"},
+"dill 0.3.6" = [
+    {url = "https://files.pythonhosted.org/packages/7c/e7/364a09134e1062d4d5ff69b853a56cf61c223e0afcc6906b6832bcd51ea8/dill-0.3.6.tar.gz", hash = "sha256:e5db55f3687856d8fbdab002ed78544e1c4559a130302693d839dfe8f93f2373"},
+    {url = "https://files.pythonhosted.org/packages/be/e3/a84bf2e561beed15813080d693b4b27573262433fced9c1d1fea59e60553/dill-0.3.6-py3-none-any.whl", hash = "sha256:a07ffd2351b8c678dfc4a856a3005f8067aea51d6ba6c700796a4d9e280f39f0"},
+]
+"docutils 0.19" = [
+    {url = "https://files.pythonhosted.org/packages/6b/5c/330ea8d383eb2ce973df34d1239b3b21e91cd8c865d21ff82902d952f91f/docutils-0.19.tar.gz", hash = "sha256:33995a6753c30b7f577febfc2c50411fec6aac7f7ffeb7c4cfe5991072dcf9e6"},
+    {url = "https://files.pythonhosted.org/packages/93/69/e391bd51bc08ed9141ecd899a0ddb61ab6465309f1eb470905c0c8868081/docutils-0.19-py3-none-any.whl", hash = "sha256:5e1de4d849fee02c63b040a4a3fd567f4ab104defd8a5511fbbc24a8a017efbc"},
+]
+"exceptiongroup 1.1.1" = [
+    {url = "https://files.pythonhosted.org/packages/61/97/17ed81b7a8d24d8f69b62c0db37abbd8c0042d4b3fc429c73dab986e7483/exceptiongroup-1.1.1-py3-none-any.whl", hash = "sha256:232c37c63e4f682982c8b6459f33a8981039e5fb8756b2074364e5055c498c9e"},
+    {url = "https://files.pythonhosted.org/packages/cc/38/57f14ddc8e8baeddd8993a36fe57ce7b4ba174c35048b9a6d270bb01e833/exceptiongroup-1.1.1.tar.gz", hash = "sha256:d484c3090ba2889ae2928419117447a14daf3c1231d5e30d0aae34f354f01785"},
 ]
 "feedgen 0.9.0" = [
     {url = "https://files.pythonhosted.org/packages/0b/60/7714c7f1339e063ad2e0964870797610c23191c180fc2713be100cc82d1a/feedgen-0.9.0.tar.gz", hash = "sha256:8e811bdbbed6570034950db23a4388453628a70e689a6e8303ccec430f5a804a"},
@@ -768,10 +812,6 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/9e/01/f38e2ff29715251cf25532b9082a1589ab7e4f571ced434f98d0139336dc/pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
     {url = "https://files.pythonhosted.org/packages/a1/16/db2d7de3474b6e37cbb9c008965ee63835bba517e22cdb8c35b5116b5ce1/pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
-"py 1.11.0" = [
-    {url = "https://files.pythonhosted.org/packages/98/ff/fec109ceb715d2a6b4c4a85a61af3b40c723a961e8828319fbcb15b868dc/py-1.11.0.tar.gz", hash = "sha256:51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"},
-    {url = "https://files.pythonhosted.org/packages/f6/f0/10642828a8dfb741e5f3fbaac830550a518a775c7fff6f04a007259b0548/py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
-]
 "pybtex 0.24.0" = [
     {url = "https://files.pythonhosted.org/packages/46/9b/fd39836a6397fb363446d83075a7b9c2cc562f4c449292e039ed36084376/pybtex-0.24.0.tar.gz", hash = "sha256:818eae35b61733e5c007c3fcd2cfb75ed1bc8b4173c1f70b56cc4c0802d34755"},
     {url = "https://files.pythonhosted.org/packages/ad/5f/40d8e90f985a05133a8895fc454c6127ecec3de8b095dd35bba91382f803/pybtex-0.24.0-py2.py3-none-any.whl", hash = "sha256:e1e0c8c69998452fea90e9179aa2a98ab103f3eed894405b7264e517cc2fcc0f"},
@@ -780,33 +820,33 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/54/82/360c8d20d8fffdaac243d3b0d1633a037ea3af9a51aa47d7af5b0c059b49/pybtex-docutils-1.0.2.tar.gz", hash = "sha256:43aa353b6d498fd5ac30f0073a98e332d061d34fe619d3d50d1761f8fd4aa016"},
     {url = "https://files.pythonhosted.org/packages/ef/9b/d14374c7ef41e8fcf214a7d563407d7f7215d82d3dab53b0329535d251b5/pybtex_docutils-1.0.2-py3-none-any.whl", hash = "sha256:6f9e3c25a37bcaac8c4f69513272706ec6253bb708a93d8b4b173f43915ba239"},
 ]
-"pydata-sphinx-theme 0.8.1" = [
-    {url = "https://files.pythonhosted.org/packages/03/25/2be0a130c5c642c635bdda59bf8d35e1b8e1809446ef7a274c291ad585bf/pydata_sphinx_theme-0.8.1-py3-none-any.whl", hash = "sha256:af2c99cb0b43d95247b1563860942ba75d7f1596360594fce510caaf8c4fcc16"},
-    {url = "https://files.pythonhosted.org/packages/1b/de/8ab912bf0dd7d37f686ff6d29715615c96e226da895525638b7c2026e7d4/pydata_sphinx_theme-0.8.1.tar.gz", hash = "sha256:96165702253917ece13dd895e23b96ee6dce422dcc144d560806067852fe1fed"},
+"pygments 2.15.1" = [
+    {url = "https://files.pythonhosted.org/packages/34/a7/37c8d68532ba71549db4212cb036dbd6161b40e463aba336770e80c72f84/Pygments-2.15.1-py3-none-any.whl", hash = "sha256:db2db3deb4b4179f399a09054b023b6a586b76499d36965813c71aa8ed7b5fd1"},
+    {url = "https://files.pythonhosted.org/packages/89/6b/2114e54b290824197006e41be3f9bbe1a26e9c39d1f5fa20a6d62945a0b3/Pygments-2.15.1.tar.gz", hash = "sha256:8ace4d3c1dd481894b2005f560ead0f9f19ee64fe983366be1a21e171d12775c"},
 ]
-"pygments 2.11.2" = [
-    {url = "https://files.pythonhosted.org/packages/1d/17/ed4d2df187995561b28f1073df24137cb750e12f9879d291cc8ab67c65d2/Pygments-2.11.2-py3-none-any.whl", hash = "sha256:44238f1b60a76d78fc8ca0528ee429702aae011c265fe6a8dd8b63049ae41c65"},
-    {url = "https://files.pythonhosted.org/packages/94/9c/cb656d06950268155f46d4f6ce25d7ffc51a0da47eadf1b164bbf23b718b/Pygments-2.11.2.tar.gz", hash = "sha256:4e426f72023d88d03b2fa258de560726ce890ff3b630f88c21cbb8b2503b8c6a"},
-]
-"pylint 2.13.5" = [
-    {url = "https://files.pythonhosted.org/packages/9f/53/e1d8da0d381e4a303cc812238e733073abdd9099525c42cb100b20faf8b9/pylint-2.13.5-py3-none-any.whl", hash = "sha256:c149694cfdeaee1aa2465e6eaab84c87a881a7d55e6e93e09466be7164764d1e"},
-    {url = "https://files.pythonhosted.org/packages/aa/b2/e19502f2419ef2da4ac2785da42e77c5bf598a7f2ab59261917f2419b028/pylint-2.13.5.tar.gz", hash = "sha256:dab221658368c7a05242e673c275c488670144123f4bd262b2777249c1c0de9b"},
+"pylint 2.17.4" = [
+    {url = "https://files.pythonhosted.org/packages/04/4c/3f7d42a1378c40813772bc5f25184144da09f00ffbe3f60ae985ffa7e10f/pylint-2.17.4-py3-none-any.whl", hash = "sha256:7a1145fb08c251bdb5cca11739722ce64a63db479283d10ce718b2460e54123c"},
+    {url = "https://files.pythonhosted.org/packages/7e/d4/aba77d10841710fea016422f419dfe501dee05fa0fc3898dc048f7bf3f60/pylint-2.17.4.tar.gz", hash = "sha256:5dcf1d9e19f41f38e4e85d10f511e5b9c35e1aa74251bf95cdd8cb23584e2db1"},
 ]
 "pyparsing 3.0.8" = [
     {url = "https://files.pythonhosted.org/packages/31/df/789bd0556e65cf931a5b87b603fcf02f79ff04d5379f3063588faaf9c1e4/pyparsing-3.0.8.tar.gz", hash = "sha256:7bf433498c016c4314268d95df76c81b842a4cb2b276fa3312cfb1e1d85f6954"},
     {url = "https://files.pythonhosted.org/packages/d9/41/d9cfb4410589805cd787f8a82cddd13142d9bf7449d12adf2d05a4a7d633/pyparsing-3.0.8-py3-none-any.whl", hash = "sha256:ef7b523f6356f763771559412c0d7134753f037822dad1b16945b7b846f7ad06"},
 ]
-"pytest 7.1.1" = [
-    {url = "https://files.pythonhosted.org/packages/d2/ac/556e4410326ce77eeb1d1ec35a3e3ec847fb3e5cb30673729d2eeeffc970/pytest-7.1.1-py3-none-any.whl", hash = "sha256:92f723789a8fdd7180b6b06483874feca4c48a5c76968e03bb3e7f806a1869ea"},
-    {url = "https://files.pythonhosted.org/packages/f0/8c/1fb22b4e526a7461b4797042ed9d9c26a7a69673a148709bf50692b874fb/pytest-7.1.1.tar.gz", hash = "sha256:841132caef6b1ad17a9afde46dc4f6cfa59a05f9555aae5151f73bdf2820ca63"},
+"pytest 7.3.1" = [
+    {url = "https://files.pythonhosted.org/packages/1b/d1/72df649a705af1e3a09ffe14b0c7d3be1fd730da6b98beb4a2ed26b8a023/pytest-7.3.1-py3-none-any.whl", hash = "sha256:3799fa815351fea3a5e96ac7e503a96fa51cc9942c3753cda7651b93c1cfa362"},
+    {url = "https://files.pythonhosted.org/packages/ec/d9/36b65598f3d19d0a14d13dc87ad5fa42869ae53bb7471f619a30eaabc4bf/pytest-7.3.1.tar.gz", hash = "sha256:434afafd78b1d78ed0addf160ad2b77a30d35d4bdf8af234fe621919d9ed15e3"},
 ]
-"pytest-cov 3.0.0" = [
-    {url = "https://files.pythonhosted.org/packages/20/49/b3e0edec68d81846f519c602ac38af9db86e1e71275528b3e814ae236063/pytest_cov-3.0.0-py3-none-any.whl", hash = "sha256:578d5d15ac4a25e5f961c938b85a05b09fdaae9deef3bb6de9a6e766622ca7a6"},
-    {url = "https://files.pythonhosted.org/packages/61/41/e046526849972555928a6d31c2068410e47a31fb5ab0a77f868596811329/pytest-cov-3.0.0.tar.gz", hash = "sha256:e7f0f5b1617d2210a2cabc266dfe2f4c75a8d32fb89eafb7ad9d06f6d076d470"},
+"pytest-cov 4.0.0" = [
+    {url = "https://files.pythonhosted.org/packages/ea/70/da97fd5f6270c7d2ce07559a19e5bf36a76f0af21500256f005a69d9beba/pytest-cov-4.0.0.tar.gz", hash = "sha256:996b79efde6433cdbd0088872dbc5fb3ed7fe1578b68cdbba634f14bb8dd0470"},
+    {url = "https://files.pythonhosted.org/packages/fe/1f/9ec0ddd33bd2b37d6ec50bb39155bca4fe7085fa78b3b434c05459a860e3/pytest_cov-4.0.0-py3-none-any.whl", hash = "sha256:2feb1b751d66a8bd934e5edfa2e961d11309dc37b73b0eabe73b5945fee20f6b"},
 ]
 "python-dateutil 2.8.2" = [
     {url = "https://files.pythonhosted.org/packages/36/7a/87837f39d0296e723bb9b62bbb257d0355c7f6128853c78955f57342a56d/python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
     {url = "https://files.pythonhosted.org/packages/4c/c4/13b4776ea2d76c115c1d1b84579f3764ee6d57204f6be27119f13a61d0a9/python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
+]
+"python-slugify 8.0.1" = [
+    {url = "https://files.pythonhosted.org/packages/b4/85/6aa722a11307ec572682023b76cad4c52cda708dfc25fcb4b4a6051da7ab/python_slugify-8.0.1-py2.py3-none-any.whl", hash = "sha256:70ca6ea68fe63ecc8fa4fcf00ae651fc8a5d02d93dcd12ae6d4fc7ca46c4d395"},
+    {url = "https://files.pythonhosted.org/packages/de/63/0f60208d0d3dde1a87d30a82906fa9b00e902b57f1ae9565d780de4b41d1/python-slugify-8.0.1.tar.gz", hash = "sha256:ce0d46ddb668b3be82f4ed5e503dbc33dd815d83e2eb6824211310d3fb172a27"},
 ]
 "pytz 2022.1" = [
     {url = "https://files.pythonhosted.org/packages/2f/5f/a0f653311adff905bbcaa6d3dfaf97edcf4d26138393c6ccd37a484851fb/pytz-2022.1.tar.gz", hash = "sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7"},
@@ -862,9 +902,9 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/ea/a3/3d3cbbb7150f90c4cf554048e1dceb7c6ab330e4b9138a40e130a4cc79e1/setuptools-62.1.0.tar.gz", hash = "sha256:47c7b0c0f8fc10eec4cf1e71c6fdadf8decaa74ffa087e68cd1c20db7ad6a592"},
     {url = "https://files.pythonhosted.org/packages/fb/58/9efbfe68482dab9557c49d433a60fff9efd7ed8835f829eba8297c2c124a/setuptools-62.1.0-py3-none-any.whl", hash = "sha256:26ead7d1f93efc0f8c804d9fafafbe4a44b179580a7105754b245155f9af05a8"},
 ]
-"setuptools-git-versioning 1.9.2" = [
-    {url = "https://files.pythonhosted.org/packages/66/32/334cb4c36a919faa629276d35b24a033335fc3f0a8257139369505d03985/setuptools-git-versioning-1.9.2.tar.gz", hash = "sha256:3cee8ff9e73d2092f9e281a324a0a62c21e0cc66c233597c3d679f0b9cab0e40"},
-    {url = "https://files.pythonhosted.org/packages/9c/28/b16d2cda71bbb2fb4acfa61ccbe25a6c920964a37aab0e5ae51148182f87/setuptools_git_versioning-1.9.2-py3-none-any.whl", hash = "sha256:66acb4f5896956e5d2aec2250b1e41342a0bf3228e577d54171d9a06d5f8637b"},
+"setuptools-git-versioning 1.13.3" = [
+    {url = "https://files.pythonhosted.org/packages/22/87/806fa641c71265d0e8538fd58a9596700d5bf53ce8f2df3392c1a066276a/setuptools-git-versioning-1.13.3.tar.gz", hash = "sha256:9dfc59a31dcadcae04bcddc50534ccfc07a25a3180ab5cc1b1e3730217971c63"},
+    {url = "https://files.pythonhosted.org/packages/b7/3b/99abd999c3e88cd91097498d5455d9013fc7ae647e28b458cb45ccf0836b/setuptools_git_versioning-1.13.3-py3-none-any.whl", hash = "sha256:0ae47836c30563c30f06d2e1e97fab4455a6b770f7a0496793239eccf4a6dd9f"},
 ]
 "six 1.16.0" = [
     {url = "https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
@@ -874,17 +914,21 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/44/7b/af302bebf22c749c56c9c3e8ae13190b5b5db37a33d9068652e8f73b7089/snowballstemmer-2.2.0.tar.gz", hash = "sha256:09b16deb8547d3412ad7b590689584cd0fe25ec8db3be37788be3810cbf19cb1"},
     {url = "https://files.pythonhosted.org/packages/ed/dc/c02e01294f7265e63a7315fe086dd1df7dacb9f840a804da846b96d01b96/snowballstemmer-2.2.0-py2.py3-none-any.whl", hash = "sha256:c8e1716e83cc398ae16824e5572ae04e0d9fc2c6b985fb0f900f5f0c96ecba1a"},
 ]
-"soupsieve 2.3.2" = [
-    {url = "https://files.pythonhosted.org/packages/3b/3d/a7865440c393baf403899d79e724ad0a9805199962917745d9277f1db40e/soupsieve-2.3.2.tar.gz", hash = "sha256:0bcc6d7432153063e3df09c3ac9442af3eba488715bfcad6a4c38ccb2a523124"},
-    {url = "https://files.pythonhosted.org/packages/7d/1e/294d3cb3fc81212914043beba5eeb38882c0b449402353c549745e823fcf/soupsieve-2.3.2-py3-none-any.whl", hash = "sha256:a714129d3021ec17ce5be346b1007300558b378332c289a1a20e7d4de6ff18a5"},
+"soupsieve 2.4.1" = [
+    {url = "https://files.pythonhosted.org/packages/47/9e/780779233a615777fbdf75a4dee2af7a345f4bf74b42d4a5f836800b9d91/soupsieve-2.4.1.tar.gz", hash = "sha256:89d12b2d5dfcd2c9e8c22326da9d9aa9cb3dfab0a83a024f05704076ee8d35ea"},
+    {url = "https://files.pythonhosted.org/packages/49/37/673d6490efc51ec46d198c75903d99de59baffdd47aea3d071b80a9e4e89/soupsieve-2.4.1-py3-none-any.whl", hash = "sha256:1c1bfee6819544a3447586c889157365a27e10d88cde3ad3da0cf0ddf646feb8"},
 ]
-"sphinx 4.5.0" = [
-    {url = "https://files.pythonhosted.org/packages/91/96/9cbbc7103fb482d5809fe4976ecb9b627058210d02817fcbfeebeaa8f762/Sphinx-4.5.0-py3-none-any.whl", hash = "sha256:ebf612653238bcc8f4359627a9b7ce44ede6fdd75d9d30f68255c7383d3a6226"},
-    {url = "https://files.pythonhosted.org/packages/d5/b9/b831ea20dde3c3b726e41403eaee92cc448083cef310790c31c6ccfb22e3/Sphinx-4.5.0.tar.gz", hash = "sha256:7bf8ca9637a4ee15af412d1a1d9689fec70523a68ca9bb9127c2f3eeb344e2e6"},
+"sphinx 7.0.0" = [
+    {url = "https://files.pythonhosted.org/packages/0a/41/0c3785bce311f85a6e47b151563fec269676f4abdf1171d310d79e8098bb/Sphinx-7.0.0.tar.gz", hash = "sha256:283c44aa28922bb4223777b44ac0d59af50a279ac7690dfe945bb2b9575dc41b"},
+    {url = "https://files.pythonhosted.org/packages/ee/0e/2c819414c8dad75c55f7ced4044ac48c6fcce8b7a2614bad12612aa4b1ac/sphinx-7.0.0-py3-none-any.whl", hash = "sha256:3cfc1c6756ef1b132687b813ec6ea2214cb7a7e5d1dcb2772006cb895a0fa469"},
 ]
 "sphinx-disqus 1.2.0" = [
     {url = "https://files.pythonhosted.org/packages/08/01/8a39e1553d3b3c97f33882e7dca4b200141a18134796792fd36b8d86b29e/sphinx_disqus-1.2.0-py3-none-any.whl", hash = "sha256:75d3c1eebe054b10bf4866d8faefd8ac64563dad665bc2d607aedba83b6ba12e"},
     {url = "https://files.pythonhosted.org/packages/55/b6/b1ad8310ad58bfdee3f6a888a3d3d26cf88bc4fe24b40e5c991d5fafcd0d/sphinx-disqus-1.2.0.tar.gz", hash = "sha256:7ae439646a80b910172f75d0a0d848a551c6b785a14661a5345de4f593bd8f0a"},
+]
+"sphinx-material 0.0.35" = [
+    {url = "https://files.pythonhosted.org/packages/74/9c/492343fb8080c8518171efdf3924d9c02166204e2e01e5b4acb80094434d/sphinx_material-0.0.35.tar.gz", hash = "sha256:27f0f1084aa0201b43879aef24a0521b78dc8df4942b003a4e7d79ab11515852"},
+    {url = "https://files.pythonhosted.org/packages/9b/43/427d85bb6f9ccb6bc5081ecd8768fd0859b3213411ad12cef27cb5fe719a/sphinx_material-0.0.35-py3-none-any.whl", hash = "sha256:a62a0a48d4c32edc260f9bdbca658e7d149beb10e1d338848b0076bb13be0775"},
 ]
 "sphinxcontrib-applehelp 1.0.2" = [
     {url = "https://files.pythonhosted.org/packages/9f/01/ad9d4ebbceddbed9979ab4a89ddb78c9760e74e6757b1880f1b2760e8295/sphinxcontrib-applehelp-1.0.2.tar.gz", hash = "sha256:a072735ec80e7675e3f432fcae8610ecf509c5f1869d17e2eecff44389cdbc58"},
@@ -914,6 +958,10 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/b5/72/835d6fadb9e5d02304cf39b18f93d227cd93abd3c41ebf58e6853eeb1455/sphinxcontrib-serializinghtml-1.1.5.tar.gz", hash = "sha256:aa5f6de5dfdf809ef505c4895e51ef5c9eac17d0f287933eb49ec495280b6952"},
     {url = "https://files.pythonhosted.org/packages/c6/77/5464ec50dd0f1c1037e3c93249b040c8fc8078fdda97530eeb02424b6eea/sphinxcontrib_serializinghtml-1.1.5-py2.py3-none-any.whl", hash = "sha256:352a9a00ae864471d3a7ead8d7d79f5fc0b57e8b3f95e9867eb9eb28999b92fd"},
 ]
+"text-unidecode 1.3" = [
+    {url = "https://files.pythonhosted.org/packages/a6/a5/c0b6468d3824fe3fde30dbb5e1f687b291608f9473681bbf7dabbf5a87d7/text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"},
+    {url = "https://files.pythonhosted.org/packages/ab/e2/e9a00f0ccb71718418230718b3d900e71a5d16e701a3dae079a21e9cd8f8/text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93"},
+]
 "toml 0.10.2" = [
     {url = "https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
     {url = "https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
@@ -921,6 +969,18 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
 "tomli 2.0.1" = [
     {url = "https://files.pythonhosted.org/packages/97/75/10a9ebee3fd790d20926a90a2547f0bf78f371b2f13aa822c759680ca7b9/tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {url = "https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
+"tomlkit 0.11.8" = [
+    {url = "https://files.pythonhosted.org/packages/10/37/dd53019ccb72ef7d73fff0bee9e20b16faff9658b47913a35d79e89978af/tomlkit-0.11.8.tar.gz", hash = "sha256:9330fc7faa1db67b541b28e62018c17d20be733177d290a13b24c62d1614e0c3"},
+    {url = "https://files.pythonhosted.org/packages/ef/a8/b1c193be753c02e2a94af6e37ee45d3378a74d44fe778c2434a63af92731/tomlkit-0.11.8-py3-none-any.whl", hash = "sha256:8c726c4c202bdb148667835f68d68780b9a003a9ec34167b6c673b38eff2a171"},
+]
+"typing-extensions 4.5.0" = [
+    {url = "https://files.pythonhosted.org/packages/31/25/5abcd82372d3d4a3932e1fa8c3dbf9efac10cc7c0d16e78467460571b404/typing_extensions-4.5.0-py3-none-any.whl", hash = "sha256:fb33085c39dd998ac16d1431ebc293a8b3eedd00fd4a32de0ff79002c19511b4"},
+    {url = "https://files.pythonhosted.org/packages/d3/20/06270dac7316220643c32ae61694e451c98f8caf4c8eab3aa80a2bedf0df/typing_extensions-4.5.0.tar.gz", hash = "sha256:5cb5f4a79139d699607b3ef622a1dedafa84e115ab0024e0d9c044a9479ca7cb"},
+]
+"unidecode 1.3.6" = [
+    {url = "https://files.pythonhosted.org/packages/0b/25/37c77fc07821cd06592df3f18281f5e716bc891abd6822ddb9ff941f821e/Unidecode-1.3.6.tar.gz", hash = "sha256:fed09cf0be8cf415b391642c2a5addfc72194407caee4f98719e40ec2a72b830"},
+    {url = "https://files.pythonhosted.org/packages/be/ea/90e14e807da5a39e5b16789acacd48d63ca3e4f23dfa964a840eeadebb13/Unidecode-1.3.6-py3-none-any.whl", hash = "sha256:547d7c479e4f377b430dd91ac1275d593308dce0fc464fb2ab7d41f82ec653be"},
 ]
 "urllib3 1.26.9" = [
     {url = "https://files.pythonhosted.org/packages/1b/a5/4eab74853625505725cefdf168f48661b2cd04e7843ab836f3f63abf81da/urllib3-1.26.9.tar.gz", hash = "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"},
@@ -1018,7 +1078,7 @@ content_hash = "sha256:974d3404a49cc579c513f0a18ba2df263016bf9635aab0dcdc229926c
     {url = "https://files.pythonhosted.org/packages/fa/01/3c5d57f130c16d583f17cd07c46194c00bdea53ed0260b26780897834793/wrapt-1.14.0-cp38-cp38-win_amd64.whl", hash = "sha256:b0ed6ad6c9640671689c2dbe6244680fe8b897c08fd1fab2228429b66c518e5e"},
     {url = "https://files.pythonhosted.org/packages/fc/02/a1414546cd536b07b9263068eff6f86f02181aefbe7c12a0266d902129e3/wrapt-1.14.0-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:a65bffd24409454b889af33b6c49d0d9bcd1a219b972fba975ac935f17bdf627"},
 ]
-"yapf 0.32.0" = [
-    {url = "https://files.pythonhosted.org/packages/47/88/843c2e68f18a5879b4fbf37cb99fbabe1ffc4343b2e63191c8462235c008/yapf-0.32.0-py2.py3-none-any.whl", hash = "sha256:8fea849025584e486fd06d6ba2bed717f396080fd3cc236ba10cb97c4c51cf32"},
-    {url = "https://files.pythonhosted.org/packages/c2/cd/d0d1e95b8d78b8097d90ca97af92f4af7fb2e867262a2b6e37d6f48e612a/yapf-0.32.0.tar.gz", hash = "sha256:a3f5085d37ef7e3e004c4ba9f9b3e40c54ff1901cd111f05145ae313a7c67d1b"},
+"yapf 0.33.0" = [
+    {url = "https://files.pythonhosted.org/packages/32/ec/531851d561ecb656bd58dc102338d0aa07e086788f351c63a9f6b8a00fe6/yapf-0.33.0-py2.py3-none-any.whl", hash = "sha256:4c2b59bd5ffe46f3a7da48df87596877189148226ce267c16e8b44240e51578d"},
+    {url = "https://files.pythonhosted.org/packages/83/6e/72395cbbd59eedc48913f8694d445acbdba699c50312001b702c5ff46001/yapf-0.33.0.tar.gz", hash = "sha256:da62bdfea3df3673553351e6246abed26d9fe6780e548a5af9e70f6d2b4f5b9a"},
 ]

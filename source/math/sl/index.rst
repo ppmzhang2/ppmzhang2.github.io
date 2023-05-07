@@ -9,6 +9,8 @@ Statistical Learning
    bayes.rst
    bayes_ex_1.rst
    bayes_ex_2.rst
+   lda.rst
+   lda_dr.rst
    lr_ols.rst
    lr_formula.rst
    gd.rst

@@ -7,6 +7,7 @@ authors = [
 ]
 dependencies = [
     "sphinxcontrib-bibtex>=2.5.0",
+    "sphinx-material>=0.0.35",
 ]
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -20,7 +21,6 @@ dev = [
     "setuptools-git-versioning>=1.9.2",
     "pylint>=2.13.5",
     "ablog>=0.10.23",
-    "pydata-sphinx-theme>=0.8.1",
     "sphinx-disqus>=1.2.0",
 ]
 [tool.pdm]
