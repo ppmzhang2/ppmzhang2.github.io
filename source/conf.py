@@ -51,9 +51,10 @@ html_theme = "sphinx_material"
 html_theme_options = {
     "nav_title": "ML Notes",
     "base_url": "https://ppmzhang2.github.io",
-    "repo_url": "https://github.com/ppmzhang2/",
+    "repo_url": "https://github.com/ppmzhang2/ppmzhang2.github.io",
     "color_primary": "blue",
     "color_accent": "light-blue",
+    "logo_icon": "&#xe869",
     "globaltoc_depth": 3,
     "globaltoc_collapse": False,
     "globaltoc_includehidden": False,
