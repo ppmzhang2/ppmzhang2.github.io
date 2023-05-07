@@ -6,9 +6,11 @@
 Machine Learning Study Notes
 ============================
 
+.. feed-entry::
+   :date: 2023-05-07
+
 .. toctree::
    :maxdepth: 2
-   :caption: Fields:
 
    math/index.rst
    nlp/index.rst

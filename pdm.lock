@@ -394,15 +394,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "sphinx-disqus"
-version = "1.2.0"
-requires_python = ">=3.6.2,<4.0.0"
-summary = "Embed Disqus comments in Sphinx documents/pages."
-dependencies = [
-    "sphinx",
-]
-
-[[package]]
 name = "sphinx-material"
 version = "0.0.35"
 requires_python = ">=3.6"
@@ -450,6 +441,14 @@ name = "sphinxcontrib-jsmath"
 version = "1.0.1"
 requires_python = ">=3.5"
 summary = "A sphinx extension which renders display math in HTML via JavaScript"
+
+[[package]]
+name = "sphinxcontrib-newsfeed"
+version = "0.1.4"
+summary = "News Feed extension for Sphinx"
+dependencies = [
+    "Sphinx",
+]
 
 [[package]]
 name = "sphinxcontrib-qthelp"
@@ -527,7 +526,7 @@ dependencies = [
 [metadata]
 lock_version = "4.2"
 groups = ["default", "dev"]
-content_hash = "sha256:a5fbfbf52350d2e60d671a75cd1cd5120a6c10209adfb42108c4965ee85a3d27"
+content_hash = "sha256:c672654a2567c0b484830f323660451415cc2056bec9fd495b624c3109a7cbc2"
 
 [metadata.files]
 "ablog 0.11.3" = [
@@ -922,10 +921,6 @@ content_hash = "sha256:a5fbfbf52350d2e60d671a75cd1cd5120a6c10209adfb42108c4965ee
     {url = "https://files.pythonhosted.org/packages/0a/41/0c3785bce311f85a6e47b151563fec269676f4abdf1171d310d79e8098bb/Sphinx-7.0.0.tar.gz", hash = "sha256:283c44aa28922bb4223777b44ac0d59af50a279ac7690dfe945bb2b9575dc41b"},
     {url = "https://files.pythonhosted.org/packages/ee/0e/2c819414c8dad75c55f7ced4044ac48c6fcce8b7a2614bad12612aa4b1ac/sphinx-7.0.0-py3-none-any.whl", hash = "sha256:3cfc1c6756ef1b132687b813ec6ea2214cb7a7e5d1dcb2772006cb895a0fa469"},
 ]
-"sphinx-disqus 1.2.0" = [
-    {url = "https://files.pythonhosted.org/packages/08/01/8a39e1553d3b3c97f33882e7dca4b200141a18134796792fd36b8d86b29e/sphinx_disqus-1.2.0-py3-none-any.whl", hash = "sha256:75d3c1eebe054b10bf4866d8faefd8ac64563dad665bc2d607aedba83b6ba12e"},
-    {url = "https://files.pythonhosted.org/packages/55/b6/b1ad8310ad58bfdee3f6a888a3d3d26cf88bc4fe24b40e5c991d5fafcd0d/sphinx-disqus-1.2.0.tar.gz", hash = "sha256:7ae439646a80b910172f75d0a0d848a551c6b785a14661a5345de4f593bd8f0a"},
-]
 "sphinx-material 0.0.35" = [
     {url = "https://files.pythonhosted.org/packages/74/9c/492343fb8080c8518171efdf3924d9c02166204e2e01e5b4acb80094434d/sphinx_material-0.0.35.tar.gz", hash = "sha256:27f0f1084aa0201b43879aef24a0521b78dc8df4942b003a4e7d79ab11515852"},
     {url = "https://files.pythonhosted.org/packages/9b/43/427d85bb6f9ccb6bc5081ecd8768fd0859b3213411ad12cef27cb5fe719a/sphinx_material-0.0.35-py3-none-any.whl", hash = "sha256:a62a0a48d4c32edc260f9bdbca658e7d149beb10e1d338848b0076bb13be0775"},
@@ -949,6 +944,10 @@ content_hash = "sha256:a5fbfbf52350d2e60d671a75cd1cd5120a6c10209adfb42108c4965ee
 "sphinxcontrib-jsmath 1.0.1" = [
     {url = "https://files.pythonhosted.org/packages/b2/e8/9ed3830aeed71f17c026a07a5097edcf44b692850ef215b161b8ad875729/sphinxcontrib-jsmath-1.0.1.tar.gz", hash = "sha256:a9925e4a4587247ed2191a22df5f6970656cb8ca2bd6284309578f2153e0c4b8"},
     {url = "https://files.pythonhosted.org/packages/c2/42/4c8646762ee83602e3fb3fbe774c2fac12f317deb0b5dbeeedd2d3ba4b77/sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl", hash = "sha256:2ec2eaebfb78f3f2078e73666b1415417a116cc848b72e5172e596c871103178"},
+]
+"sphinxcontrib-newsfeed 0.1.4" = [
+    {url = "https://files.pythonhosted.org/packages/2a/dc/47314ad0fd1d0eb77f005481cffeb872eb0d13b049a6b40f1fec9da1fb33/sphinxcontrib_newsfeed-0.1.4-py2-none-any.whl", hash = "sha256:6556e6cb4b4d060c5795f30bc2630589c720ec3678861473155172901f295a9b"},
+    {url = "https://files.pythonhosted.org/packages/2b/5e/8bc839b5c4ef030bf26eede24208a49f25d00033cbd4969b3895264f14db/sphinxcontrib-newsfeed-0.1.4.tar.gz", hash = "sha256:f78c865b1a32d249644a9c46f395b547df0dc21ed69b70898d64235b4755efb4"},
 ]
 "sphinxcontrib-qthelp 1.0.3" = [
     {url = "https://files.pythonhosted.org/packages/2b/14/05f9206cf4e9cfca1afb5fd224c7cd434dcc3a433d6d9e4e0264d29c6cdb/sphinxcontrib_qthelp-1.0.3-py2.py3-none-any.whl", hash = "sha256:bd9fc24bcb748a8d51fd4ecaade681350aa63009a347a8c14e637895444dfab6"},

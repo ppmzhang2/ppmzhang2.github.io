@@ -27,8 +27,8 @@ author = "ZHANG, Meng"
 # ones.
 extensions = [
     "sphinx.ext.mathjax",
-    "sphinx_disqus.disqus",
     "sphinxcontrib.bibtex",
+    "sphinxcontrib.newsfeed",
 ]
 disqus_shortname = "httpbbk0701githubiomysiteoutput"
 bibtex_bibfiles = ["refs.bib"]
