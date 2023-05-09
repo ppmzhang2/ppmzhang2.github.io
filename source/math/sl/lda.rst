@@ -4,10 +4,10 @@ LDA: Classification
 
 Linear Discriminant Analysis (LDA) assumes:
 
-- class-conditional Gaussian probability densities
+- Normality: the class-conditional PDF follows a multivariate Gaussian
+  distribution with class-specific mean vectors.
 
-- all densities with class-specific mean vectors and a shared covariance matrix
-  for all classes
+- Homoscedasticity: all class-conditional covariance matrices are equal
 
 .. default-role:: math
 
@@ -64,12 +64,13 @@ The mean vector for each class `k` is:
 where `n_k` is the number of samples in class `k` and `\mathcal{D}_k` is the
 set of samples in class `k`.
 
-The shared covariance matrix is derived from the concept of pooled variance.
+The shared covariance matrix is derived from the concept of pooled variance
+:cite:p:`wiki_pooled_`.
 The covariance matrix for class `k` is:
 
 .. math::
 
-   \sigma_k =
+   \Sigma_k =
      \frac{1}{n_k - 1}
      \sum_{\mathbf{x} \in \mathcal{D}_k}
      (\mathbf{x} - \mathbf{\mu}_k)
@@ -81,10 +82,10 @@ matrices for each class, using weights `n_k - 1`:
 .. math::
 
    \Sigma &=
-     \frac{\sum_{k = 1}^K (n_k - 1) \sigma_k}{\sum_{k = 1}^K (n_k - 1)}
+     \frac{\sum_{k = 1}^K (n_k - 1) \Sigma_k}{\sum_{k = 1}^K (n_k - 1)}
      \\ &=
      \frac{1}{N - K}
-     \sum_{k = 1}^K (n_k - 1) \sigma_k
+     \sum_{k = 1}^K (n_k - 1) \Sigma_k
      \\ &=
      \frac{1}{N - K}
      \sum_{k = 1}^K
@@ -171,6 +172,8 @@ two classes are equal:
      \mathbf{\mu}_i^T \Sigma^{-1} \mathbf{\mu}_i -
      \mathbf{\mu}_j^T \Sigma^{-1} \mathbf{\mu}_j
    ) + \ln \frac{\pi_i}{\pi_j} = 0
+
+Obviously, the decision boundary is a **linear function** of `\mathbf{x}`.
 
 Back to :doc:`index`.
 
