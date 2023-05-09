@@ -129,8 +129,7 @@ Loss Function
   - localization: smooth `L_1` [#f01]_.
     It is only activated for positive predictions
 
-Notes
-=====
+.. rubric:: Footnotes
 
 .. [#f01] `L_1 =
    \begin{cases} 0.5 x^2 & |x| < 1

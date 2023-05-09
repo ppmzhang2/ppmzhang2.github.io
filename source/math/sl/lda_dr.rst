@@ -29,20 +29,22 @@ The within-class scatter matrix for class :math:`k` is defined as:
 
 .. math::
 
-   S_{W_k} = \sum_{\mathbf{x} \in \mathcal{D}_k}
+   \mathbf{S}_{W_k} =
+   \sum_{\mathbf{x} \in \mathcal{D}_k}
    (\mathbf{x} - \mathbf{\mu}_k) (\mathbf{x} - \mathbf{\mu}_k)^T
 
 The within-class scatter matrix for the entire dataset is defined as:
 
 .. math::
 
-   S_W = \sum_{k=1}^K S_{W_k}
+   \mathbf{S}_W = \sum_{k=1}^K \mathbf{S}_{W_k}
 
 The between-class scatter matrix is defined as:
 
 .. math::
 
-   S_B = \sum_{k=1}^K
+   \mathbf{S}_B =
+   \sum_{k=1}^K
    N_k (\mathbf{\mu}_k - \mathbf{\mu}) (\mathbf{\mu}_k - \mathbf{\mu})^T
 
 where :math:`\mathbf{\mu}` is the mean vector of the entire dataset:
@@ -50,7 +52,6 @@ where :math:`\mathbf{\mu}` is the mean vector of the entire dataset:
 .. math::
 
    \mathbf{\mu} = \frac{1}{N} \sum_{\mathbf{x} \in \mathcal{D}} \mathbf{x}
-
 
 Optimal Projection
 ==================
@@ -84,7 +85,8 @@ The within-class scatter matrix for the projected dataset is defined as:
 
 .. math::
 
-   S'_{W} &= \sum_{k=1}^K \sum_{y \in \mathcal{D}'_k} (y - \mu_k')^2
+   \mathbf{S}'_{W} &=
+   \sum_{k=1}^K \sum_{y \in \mathcal{D}'_k} (y - \mu_k')^2
    \\ &=
    \sum_{k=1}^K \sum_{y \in \mathcal{D}'_k}
    (y - \mu_k') (y - \mu_k')^T
@@ -97,13 +99,14 @@ The within-class scatter matrix for the projected dataset is defined as:
    \mathbf{w}^T (\mathbf{x} - \mathbf{\mu}_k)
    (\mathbf{x} - \mathbf{\mu}_k)^T \mathbf{w}
    \\ &=
-   \mathbf{w}^T S_W \mathbf{w}
+   \mathbf{w}^T \mathbf{S}_W \mathbf{w}
 
 The between-class scatter matrix for the projected dataset is defined as:
 
 .. math::
 
-   S'_{B} &= \sum_{k=1}^K N_k (\mu_k' - \mu')^2
+   \mathbf{S}'_{B} &=
+   \sum_{k=1}^K N_k (\mu_k' - \mu')^2
    \\ &=
    \sum_{k=1}^K N_k (\mu_k' - \mu') (\mu_k' - \mu')^T
    \\ &=
@@ -115,16 +118,16 @@ The between-class scatter matrix for the projected dataset is defined as:
    \mathbf{w}^T (\mathbf{\mu}_k - \mathbf{\mu})
    (\mathbf{\mu}_k - \mathbf{\mu})^T \mathbf{w}
    \\ &=
-   \mathbf{w}^T S_B \mathbf{w}
+   \mathbf{w}^T \mathbf{S}_B \mathbf{w}
 
 The ratio of between-class variance to within-class variance is defined as:
 
 .. math::
 
    J(\mathbf{w}) &=
-   \frac{S'_{B}}{S'_{W}}
+   \frac{\mathbf{S}'_{B}}{\mathbf{S}'_{W}}
    \\ &=
-   \frac{\mathbf{w}^T S_B \mathbf{w}}{\mathbf{w}^T S_W \mathbf{w}}
+   \frac{\mathbf{w}^T \mathbf{S}_B \mathbf{w}} {\mathbf{w}^T \mathbf{S}_W \mathbf{w}}
 
 Lagrangian Function
 ===================
@@ -134,15 +137,16 @@ Our goal is to find the optimal projection :math:`\mathbf{w}` that maximizes
 However, if we multiply :math:`\mathbf{w}` by a constant, :math:`J(\mathbf{w})`
 will not change, i.e: :math:`J(\mathbf{w}) = J(c \mathbf{w})` for any
 constant :math:`c \neq 0`.
-By introducing the constraint :math:`\mathbf{w}^T S_W \mathbf{w} = 1`, we
-ensure that the solution is unique.
+By introducing the constraint :math:`\mathbf{w}^T \mathbf{S}_W \mathbf{w} = 1`,
+we ensure that the solution is unique.
 
 We define the Lagrangian function as:
 
 .. math::
 
    L(\mathbf{w}, \lambda) =
-   \mathbf{w}^T S_B \mathbf{w} - \lambda (\mathbf{w}^T S_W \mathbf{w} - 1)
+   \mathbf{w}^T \mathbf{S}_B \mathbf{w} -
+   \lambda (\mathbf{w}^T \mathbf{S}_W \mathbf{w} - 1)
 
 The stationary point of :math:`L(\mathbf{w}, \lambda)` can be found by
 solving the following equation:
@@ -150,21 +154,21 @@ solving the following equation:
 .. math::
 
    \frac{\partial L}{\partial \mathbf{w}} &=
-   2 S_B \mathbf{w} - 2 \lambda S_W \mathbf{w}
+   2 \mathbf{S}_B \mathbf{w} - 2 \lambda \mathbf{S}_W \mathbf{w}
    \\ &= 0
 
 which is equivalent to:
 
 .. math::
 
-   S_B \mathbf{w} = \lambda S_W \mathbf{w}
+   \mathbf{S}_B \mathbf{w} = \lambda \mathbf{S}_W \mathbf{w}
 
-When :math:`S_W` is nonsingular [#f01]_, the equation can be further simplified
-to:
+When :math:`\mathbf{S}_W` is nonsingular [#f01]_, the equation can be further
+simplified to:
 
 .. math::
 
-   S_W^{-1} S_B \mathbf{w} = \lambda \mathbf{w}
+   \mathbf{S}_W^{-1} \mathbf{S}_B \mathbf{w} = \lambda \mathbf{w}
 
 
 By plugging back into :math:`J(\mathbf{w})`, we get:
@@ -172,18 +176,23 @@ By plugging back into :math:`J(\mathbf{w})`, we get:
 .. math::
 
    J(\mathbf{w}) &=
-   \frac{\mathbf{w}^T S_B \mathbf{w}}{\mathbf{w}^T S_W \mathbf{w}}
+   \frac{\mathbf{w}^T \mathbf{S}_B \mathbf{w}}
+   {\mathbf{w}^T \mathbf{S}_W \mathbf{w}}
    \\ &=
-   \frac{\mathbf{w}^T \lambda S_W \mathbf{w}}{\mathbf{w}^T S_W \mathbf{w}}
+   \frac{\mathbf{w}^T \lambda \mathbf{S}_W \mathbf{w}}
+   {\mathbf{w}^T \mathbf{S}_W \mathbf{w}}
    \\ &=
    \lambda
 
 Therefore maximizing :math:`J(\mathbf{w})` is equivalent to
 **finding the eigenvectors corresponding to the largest eigenvalues**
-of the matrix :math:`S_W^{-1} S_B`.
+of the matrix :math:`\mathbf{S}_W^{-1} \mathbf{S}_B`.
 
-.. [#f01] if :math:`S_W` is singular, we can add a small multiple of the
-   identity matrix to :math:`S_W` to make it invertible :cite:p:`rolda_`.
+.. rubric:: Footnotes
+
+.. [#f01] if :math:`\mathbf{S}_W` is singular, we can add a small multiple of
+   the identity matrix to :math:`\mathbf{S}_W` to make it invertible
+   :cite:p:`rolda_`.
    The solution after regularization might not be exactly the same as the
    solution without regularization, but it will be similar, especially when
    the regularization term is small.

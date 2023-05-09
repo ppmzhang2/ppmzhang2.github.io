@@ -143,9 +143,22 @@ To minimize `R` :cite:p:`book_dl_` :cite:p:`book_mc_`:
    \therefore
    \mathbf{w}_{ols} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}
 
-This is exactly how the Moore–Penrose inverse is computed, if `\mathbf{X}` has
-linearly independent columns, which is the origin of the **no
-multi-collinearity** assumption.
+.. note::
+
+   Why the **no multi-collinearity** assumption is needed:
+
+   - When matrix `\mathbf{X}` has linearly independent columns, its
+     Moore–Penrose inverse :cite:p:`wiki_mpi_` `\mathbf{X}^+` can be computed as:
+   
+     .. math::
+   
+        \mathbf{X}^+ = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T
+
+   - Obviously `\mathbf{X}^T \mathbf{X}` is a Gram matrix :cite:p:`wiki_gram_`
+     over reals, which is symmetric and positive semi-definite, and it is
+     invertible if and only if its determinant is non-zero, which is equivalent
+     to the condition that `\mathbf{X}` has linearly independent columns
+     [#f02]_.
 
 An alternative form is:
 
@@ -513,10 +526,13 @@ To minimize `\ln \mathcal{L}`:
 
    \tag*{$\blacksquare$}
 
-Notes
-=====
+.. rubric:: Footnotes
 
 .. [#f01] `\mathbf{X}_{i1} = 1` for all `i \in [1, n]`
+
+.. [#f02] Particularly, if `\mathbf{X}` is centered, then
+   `\mathbf{X}^T \mathbf{X}` is the scatter matrix of `\mathbf{X}`,
+   proportional to the covariance matrix of `\mathbf{X}`.
 
 Back to :doc:`index`.
 

@@ -187,8 +187,7 @@ We adopted the IoU Risk instead of the mean squared error (MSE), as it does not
 directly depend on the coordinates or scale of the bounding boxes, and it could
 be more robust to data imbalance and various object scales.
 
-Notes
-=====
+.. rubric:: Footnotes
 
 .. [#f01] assume each bounding box of each grid cell has **only one** ground
    truth box.
