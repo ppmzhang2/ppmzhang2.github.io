@@ -31,8 +31,7 @@ where `c` denotes object category, `x` and `y` are the bounding box center
 coordinates, `w` and `h` represent width and height of the bounding box
 respectively [#f01]_.
 
-Notes
-=====
+.. rubric:: Footnotes
 
 .. [#f01] `\mathbb{W} \subseteq \mathbb{Z},`
    `\mathbb{H} \subseteq \mathbb{Z},`

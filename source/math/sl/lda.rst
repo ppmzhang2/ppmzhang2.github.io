@@ -24,17 +24,18 @@ where `\mathbf{x}_i \in \mathbb{R}^p` is a `p`-dimensional sample and
 `y_i \in \{ 1, \ldots, K \}` is the class label for sample `\mathbf{x}_i`.
 
 According to the LDA assumption, `\mathbf{x}` is sampled from a random vector
-`\mathbf{X} = (X_1, \ldots, X_p)^T` with a multivariate Gaussian distribution:
+`\mathbf{X} = (X_1, \ldots, X_p)^T` with a conditional multivariate Gaussian
+distribution:
 
 .. math::
 
-   \mathbf{X} \mid k \sim \mathcal{N} (\mathbf{\mu}_k, \Sigma)
+   \mathbf{X} \mid k \sim \mathcal{N} (\mathbf{\mu}_k, \mathbf{\Sigma})
 
 where:
 
 - `\mathbf{\mu}_k` is the mean vector for class `k`
 
-- `\Sigma` is the shared covariance matrix.
+- `\mathbf{\Sigma}` is the shared covariance matrix.
 
 The probability density function:
 
@@ -43,12 +44,12 @@ The probability density function:
    f (\mathbf{x} \mid k) =
      \frac
      {1}
-     {\sqrt{(2 \pi)^p \lvert \Sigma \rvert}}
+     {\sqrt{(2 \pi)^p \lvert \mathbf{\Sigma} \rvert}}
      \exp
      \left(
        -\frac{1}{2}
        (\mathbf{x} - \mathbf{\mu}_k)^T
-       \Sigma^{-1}
+       \mathbf{\Sigma}^{-1}
        (\mathbf{x} - \mathbf{\mu}_k)
      \right)
 
@@ -70,7 +71,7 @@ The covariance matrix for class `k` is:
 
 .. math::
 
-   \Sigma_k =
+   \mathbf{\Sigma}_k =
      \frac{1}{n_k - 1}
      \sum_{\mathbf{x} \in \mathcal{D}_k}
      (\mathbf{x} - \mathbf{\mu}_k)
@@ -81,11 +82,12 @@ matrices for each class, using weights `n_k - 1`:
 
 .. math::
 
-   \Sigma &=
-     \frac{\sum_{k = 1}^K (n_k - 1) \Sigma_k}{\sum_{k = 1}^K (n_k - 1)}
+   \mathbf{\Sigma} &=
+     \frac{\sum_{k = 1}^K (n_k - 1) \mathbf{\Sigma}_k}
+       {\sum_{k = 1}^K (n_k - 1)}
      \\ &=
      \frac{1}{N - K}
-     \sum_{k = 1}^K (n_k - 1) \Sigma_k
+     \sum_{k = 1}^K (n_k - 1) \mathbf{\Sigma}_k
      \\ &=
      \frac{1}{N - K}
      \sum_{k = 1}^K
@@ -127,24 +129,52 @@ Taking the logarithm of both sides, we have:
 .. math::
 
    \therefore
+   \hat{y} = \arg \max_{k}
+     \left(
+       - \frac{1}{2} p \ln {2 \pi}
+       - \frac{1}{2} \ln \lvert \mathbf{\Sigma} \rvert
+       - \frac{1}{2} (\mathbf{x} - \mathbf{\mu}_k)^T
+         \mathbf{\Sigma}^{-1}
+         (\mathbf{x} - \mathbf{\mu}_k)
+       + \ln \pi_k
+     \right)
+
+According to :ref:`ref-sl-mgd-cov` of previous page, `\mathbf{\Sigma}_k` is
+symmetric and positive semi-definite.
+Therefore, `\mathbf{\Sigma}` and `\mathbf{\Sigma}^{-1}` are also symmetric and
+positive semi-definite.
+
+.. math::
+
+   \therefore
+   - \frac{1}{2} (\mathbf{x} - \mathbf{\mu}_k)^T
+   \mathbf{\Sigma}^{-1}
+   (\mathbf{x} - \mathbf{\mu}_k) &=
+   - \frac{1}{2} \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{x} +
+   \frac{1}{2} \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_k +
+   \frac{1}{2} \mathbf{\mu}_k^T \mathbf{\Sigma}^{-1} \mathbf{x} -
+   \frac{1}{2} \mathbf{\mu}_k^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_k
+   \\ &=
+   - \frac{1}{2} \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{x} +
+   \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_k -
+   \frac{1}{2} \mathbf{\mu}_k^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_k
+
+By removing the terms that do not depend on `k`, we have:
+
+.. math::
+
    \hat{y} &= \arg \max_{k}
      \left(
-       - \frac{1}{2} p \ln {2 \pi} - \frac{1}{2} \ln \lvert \Sigma \rvert
-       - \frac{1}{2} (\mathbf{x} - \mathbf{\mu}_k)^T \Sigma^{-1}
-         (\mathbf{x} - \mathbf{\mu}_k)
+       - \frac{1}{2} (\mathbf{x}
+       - \mathbf{\mu}_k)^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \mathbf{\mu}_k)
        + \ln \pi_k
      \right)
-   \\ &= \arg \max_{k}
+   \\ &=
+   \arg \max_{k}
      \left(
-       - \frac{1}{2} (\mathbf{x} - \mathbf{\mu}_k)^T \Sigma^{-1}
-         (\mathbf{x} - \mathbf{\mu}_k)
-       + \ln \pi_k
-     \right)
-   \\ &= \arg \max_{k}
-     \left(
-       \mathbf{x}^T \Sigma^{-1} \mathbf{\mu}_k -
-       \frac{1}{2} \mathbf{\mu}_k^T
-         \Sigma^{-1} \mathbf{\mu}_k + \ln \pi_k
+       \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_k -
+       \frac{1}{2} \mathbf{\mu}_k^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_k +
+       \ln \pi_k
      \right)
 
 The decision boundary is the set of points where the posterior probabilities of
@@ -157,20 +187,20 @@ two classes are equal:
 .. math::
 
    \therefore
-   \mathbf{x}^T \Sigma^{-1} \mathbf{\mu}_i -
-   \frac{1}{2} \mathbf{\mu}_i^T \Sigma^{-1} \mathbf{\mu}_i +
+   \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_i -
+   \frac{1}{2} \mathbf{\mu}_i^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_i +
    \ln \pi_i -
-   \mathbf{x}^T \Sigma^{-1} \mathbf{\mu}_j +
-   \frac{1}{2} \mathbf{\mu}_j^T \Sigma^{-1} \mathbf{\mu}_j -
+   \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_j +
+   \frac{1}{2} \mathbf{\mu}_j^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_j -
    \ln \pi_j = 0
 
 .. math::
 
    \therefore
-   \mathbf{x}^T \Sigma^{-1} (\mathbf{\mu}_i - \mathbf{\mu}_j) -
+   \mathbf{x}^T \mathbf{\Sigma}^{-1} (\mathbf{\mu}_i - \mathbf{\mu}_j) -
    \frac{1}{2} (
-     \mathbf{\mu}_i^T \Sigma^{-1} \mathbf{\mu}_i -
-     \mathbf{\mu}_j^T \Sigma^{-1} \mathbf{\mu}_j
+     \mathbf{\mu}_i^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_i -
+     \mathbf{\mu}_j^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_j
    ) + \ln \frac{\pi_i}{\pi_j} = 0
 
 Obviously, the decision boundary is a **linear function** of `\mathbf{x}`.
