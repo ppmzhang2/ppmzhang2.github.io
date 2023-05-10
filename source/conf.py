@@ -13,13 +13,32 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
+from docutils import nodes
+from docutils.parsers.rst import Directive
 
 # -- Project information -----------------------------------------------------
 
 project = 'ML Notes'
 copyright = '2022, ZHANG, Meng'
 author = 'ZHANG, Meng'
+
+
+class DisqusDirective(Directive):
+    has_content = False
+    required_arguments = 0
+    optional_arguments = 0
+
+    def run(self):
+        docname = self.state.document.settings.env.docname
+        disqus_node = nodes.raw(
+            '',
+            '<div id="disqus_thread" data-identifier="%s"></div>' % docname,
+            format='html')
+        return [disqus_node]
+
+
+def setup(app):
+    app.add_directive('disqus', DisqusDirective)
 
 
 # -- General configuration ---------------------------------------------------
@@ -29,10 +48,8 @@ author = 'ZHANG, Meng'
 # ones.
 extensions = [
     'sphinx.ext.mathjax',
-    'sphinx_disqus.disqus',
     'sphinxcontrib.bibtex',
 ]
-disqus_shortname = "httpbbk0701githubiomysiteoutput"
 bibtex_bibfiles = ["refs.bib"]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -43,7 +60,6 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -52,11 +68,14 @@ exclude_patterns = []
 
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
-  "github_url": "https://github.com/ppmzhang2/",
-  "search_bar_text": "Search this site...",
+    "github_url": "https://github.com/ppmzhang2/",
+    "search_bar_text": "Search this site...",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []
+html_static_path = ["_static"]
+html_js_files = [
+    "js/disqus.js",
+]
