@@ -188,7 +188,7 @@ Therefore maximizing :math:`J(\mathbf{w})` is equivalent to
 **finding the eigenvectors corresponding to the largest eigenvalues**
 of the matrix :math:`\mathbf{S}_W^{-1} \mathbf{S}_B`.
 
-.. rubric:: Footnotes
+----
 
 .. [#f01] if :math:`\mathbf{S}_W` is singular, we can add a small multiple of
    the identity matrix to :math:`\mathbf{S}_W` to make it invertible
