@@ -66,11 +66,21 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 
-html_theme = "pydata_sphinx_theme"
+html_theme = "piccolo_theme"
+html_title = "Machine Learning Notes"
+html_short_title = "ML Notes"
+# Set the logo
+# html_logo = "_static/logo.png"
+# Set the favicon
+# html_favicon = "_static/favicon.ico"
+# Set the color palette
 html_theme_options = {
-    "github_url": "https://github.com/ppmzhang2/",
-    "search_bar_text": "Search this site...",
+    "source_url": "https://github.com/ppmzhang2/ppmzhang2.github.io",
+    "source_icon": "github",
+    # "banner_text": "Explore Machine Learning - One Note at a Time",
+    # "banner_hiding": "temporary",
 }
+pygments_style = "friendly"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
