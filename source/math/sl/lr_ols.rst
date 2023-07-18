@@ -526,7 +526,7 @@ To minimize `\ln \mathcal{L}`:
 
    \tag*{$\blacksquare$}
 
-.. rubric:: Footnotes
+----
 
 .. [#f01] `\mathbf{X}_{i1} = 1` for all `i \in [1, n]`
 
