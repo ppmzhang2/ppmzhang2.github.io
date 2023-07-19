@@ -18,6 +18,7 @@ Statistical Learning
    gd.rst
    pg.rst
    appx_a.rst
+   appx_b.rst
 
 Back to :doc:`../index`.
 
