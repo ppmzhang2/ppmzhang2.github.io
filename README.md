@@ -7,5 +7,5 @@ To generate pages locally:
 
 ```sh
 make clean
-pdm run sphinx-build source dist -b html
+sphinx-build source dist -b html
 ```
