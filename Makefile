@@ -4,7 +4,7 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
 SPHINXOPTS    ?=
-SPHINXBUILD   ?= pdm run sphinx-build
+SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = .
 
@@ -22,6 +22,11 @@ help:
 ###############################################################################
 # COMMANDS
 ###############################################################################
+.PHONY: update-setup
+## update requirements.txt
+update-req:
+	pip freeze > requirements.txt
+
 .PHONY: install-pdm
 ## install pdm before environment setup
 install-pdm:

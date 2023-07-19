@@ -6,7 +6,7 @@ on:
 
 jobs:
   pages:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -14,12 +14,10 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: |
-          make install-pdm
-          pdm config python.use_venv False
-          make deploy-dev
+          pip install -r requirements.txt
       - name: Sphinx build
         run: |
-          pdm run sphinx-build source dist -b html
+          sphinx-build source dist -b html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
