@@ -15,6 +15,7 @@ Statistical Learning
    qda.rst
    lr_ols.rst
    lr_formula.rst
+   bp.rst
    gd.rst
    pg.rst
    appx_a.rst
