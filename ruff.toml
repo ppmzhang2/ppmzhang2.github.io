@@ -23,9 +23,9 @@ exclude = [
 extend-exclude = []
 line-length = 79
 indent-width = 4
-target-version = "py311"
+target-version = "py313"
 show-fixes = true
-src = ["client.py"]
+src = ["source"]
 
 [lint]
 select = [

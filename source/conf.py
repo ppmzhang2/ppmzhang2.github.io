@@ -55,6 +55,35 @@ extensions = [
     "sphinxcontrib.bibtex",
     "myst_parser",
 ]
+# myst_enable_extensions = [
+#     "amsmath",  # Enables LaTeX math environments
+#     "dollarmath",  # Enables $ and $$ syntax for inline and block math
+# ]
+myst_enable_extensions = [
+    "dollarmath",
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+    "attrs_block",
+    "attrs_inline",
+    # "linkify",
+    "replacements",
+    # "citations",
+]
+mathjax3_config = {
+    "tex": {
+        "inlineMath": [["$", "$"], ["\\(", "\\)"]],
+        "displayMath": [["$$", "$$"], ["\\[", "\\]"]],
+    },
+}
 bibtex_bibfiles = ["refs.bib"]
 
 # Add any paths that contain templates here, relative to this directory.
