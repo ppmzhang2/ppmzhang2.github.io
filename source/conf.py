@@ -19,8 +19,8 @@ from docutils.parsers.rst import Directive
 # -- Project information -----------------------------------------------------
 
 project = 'ML Notes'
-copyright = '2022, ZHANG, Meng'
-author = 'ZHANG, Meng'
+copyright = '2022, Juan Cervantes'
+author = 'Juan Cervantes'
 
 
 class DisqusDirective(Directive):
@@ -46,9 +46,14 @@ def setup(app):
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 extensions = [
     'sphinx.ext.mathjax',
     'sphinxcontrib.bibtex',
+    'myst_parser',
 ]
 bibtex_bibfiles = ["refs.bib"]
 
