@@ -73,10 +73,9 @@ Training with the whole training set $\Omega$ for each step is **Batch
 Gradient Descent**. When $|\Omega| = 1$ it is **Stochastic Gradient
 Descent (SGD)**. A compromised solution is to train for each step a
 subset of the training dataset, which is the **Mini-Batch Gradient
-Descent**.[^fn1] 
+Descent**.[^fn1]
 
-[^fn1]:
-    <https://cilvr.cs.nyu.edu/diglib/lsml/bottou-sgd-tricks-2012.pdf>
+[^fn1]: <https://cilvr.cs.nyu.edu/diglib/lsml/bottou-sgd-tricks-2012.pdf>
 
 ---
 

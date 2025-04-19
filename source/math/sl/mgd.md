@@ -74,6 +74,7 @@ $$
 $$
 
 (ref-sl-mgd-cov)=
+
 ## Properties of the Covariance Matrix
 
 ```{admonition} Theorem
