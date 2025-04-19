@@ -1,0 +1,24 @@
+[project]
+name = "ml-notes"
+version = "0.1.0"
+description = "Machine Learning Notes"
+authors = [
+    {name = "Juan Cervantes", email = "stall-breezes.0t@icloud.com"},
+]
+readme = "README.md"
+requires-python = ">=3.13"
+license = {text = "MIT"}
+dependencies = [
+    "sphinx>=8.2.3",
+    "sphinxcontrib-bibtex>=2.6.3",
+    "piccolo-theme>=0.24.0",
+    "myst-parser>=4.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipython>=9.1.0",
+    "pyright>=1.1.399",
+    "ruff>=0.11.6",
+    "yapf>=0.43.0",
+]

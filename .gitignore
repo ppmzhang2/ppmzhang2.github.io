@@ -1,0 +1,24 @@
+# general things to ignore
+build/
+dist/
+*.egg-info/
+*.egg
+*.py[cod]
+__pycache__/
+*.so
+*~
+
+# pyenv local version
+.python-version
+
+# due to using tox and pytest
+.tox
+.cache
+.coverage
+.coverage.*
+coverage.xml
+
+.DS_Store
+
+__pypackages__/
+.pdm-python
