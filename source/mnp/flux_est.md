@@ -49,12 +49,17 @@ Compartments (in Mt/year)._
 
 - Marine Ejection: emission from ocean to atmosphere (bubble burst, sea spray,
   resuspension)
+
 - Marine Recycling: deposition from marine sources. When deposition occurs in
   the ocean, ~99% particles ejected from the sea are recycled back to the ocean.
   When deposition occurs on land, ~7% of particles ejected from the sea were on
   land.
 - Land Emission: Tyre wear, brake wear, soil erosion, resuspension
+
 - Fluvial: Riverine transport of MnP from land to ocean
+
+{#rec-deposition}
+
 - Deposition Mechanisms
 
   - Dry Deposition: Gravity-driven settling of particles directly onto surfaces.

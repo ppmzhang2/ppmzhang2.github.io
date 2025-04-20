@@ -58,16 +58,16 @@ title: GLOMAP MnP Representation
 ```
 
 _Figure 1. Scheme of the GLOMAP MnP representation.
+(Check Terminology for definitions of [modes](#rec-aerosol-mode) and
+[MnP particle types](#rec-mnp-particle-types))
 In UKESM1.1, microplastics are added to GLOMAP as fragments and fibres.
 Fragments enter all insoluble modes (except nucleation);
 fibres only the super-coarse mode.
 Fragments can age into soluble modes.
-All particles undergo dry and wet deposition._
+All particles undergo [dry and wet deposition](#rec-deposition)._
 
 ## Explanation
 
-- Check in Terminology for definitions [modes](#rec-aerosol-mode) and
-  [MnP particle types](#rec-mnp-particle-types).
 - Emission: MPs are emitted directly into all insoluble modes except nucleation.
 - Super-coarse insoluble mode has no pathway to soluble modes via aging.
 - Aging process: Involves accumulation of soluble species (e.g., sulfate)
