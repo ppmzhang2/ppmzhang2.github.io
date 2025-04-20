@@ -11,6 +11,7 @@ title: "Machine Learning Notes: A Learner's Perspective"
 math/index
 nlp/index
 cv/index
+mnp/index
 ref
 ```
 
