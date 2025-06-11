@@ -6,17 +6,25 @@ title: "Multiplying Positives Makes a Positive"
 
 **Proposition**
 
-$$\forall a > 0, \forall b > 0: \quad ab > 0.$$
+$$
+\forall a > 0, \forall b > 0
+\quad (a, b \in \mathbb{R}):
+\quad ab > 0.
+$$
 
-## Lemma: Positive Integer Case
+## Verifying for Rationals
 
-**Statement**
+**Lemma**:
 
 $$
 \begin{aligned}
-& \forall a > 0, \forall b > 0 \quad (b \in \mathbb{N}): \quad ab > 0
+& \forall a > 0, \forall b > 0
+\quad (a \in \mathbb{R}, b \in \mathbb{N}):
+\quad ab > 0
 \\\\
-& \forall a < 0, \forall b > 0 \quad (b \in \mathbb{N}): \quad ab < 0
+& \forall a < 0, \forall b > 0
+\quad (a \in \mathbb{R}, b \in \mathbb{N}):
+\quad ab < 0
 \end{aligned}
 $$
 
@@ -47,10 +55,14 @@ By induction, the statement holds for all $b \in \mathbb{N}$.
 
 Similar reasoning applies for $a < 0$ and $b \in \mathbb{N}$, yielding $ab < 0$.
 
-## Theorem 1: Positive Rational Case
+$$\tag*{$\blacksquare$}$$
+
+**Theorem 1**:
 
 $$
-\forall a > 0, \forall b > 0 \quad (b \in \mathbb{Q}): \quad ab > 0
+\forall a > 0, \forall b > 0
+\quad (a \in \mathbb{R}, b \in \mathbb{Q}):
+\quad ab > 0
 $$
 
 **Proof** (by contradiction):
@@ -58,8 +70,10 @@ $$
 Suppose the theorem is false, i.e.:
 
 $$
-\exists a_0 > 0, \exists b_0 > 0 \quad (b_0 \in \mathbb{Q})
-\quad S.T. a_0 b_0 < 0
+\exists a_0 > 0, \exists b_0 > 0
+\quad (a_0 \in \mathbb{R}, b_0 \in \mathbb{Q}):
+\quad S.T. \quad
+a_0 b_0 < 0
 $$
 
 Let $b_0 = \frac{m}{n}$, where $m, n \in \mathbb{N}$.
@@ -89,82 +103,160 @@ $$
 This leads to a contradiction.
 Therefore, our assumption is false, and the theorem holds.
 
-## Theorem 2: Positive Irrational Case
+$$\tag*{$\blacksquare$}$$
+
+## The Proof
+
+Before extending to the real numbers, we need to establish two key points:
+
+- continuity of multiplication for real numbers.
+
+- the limit of a bounded sequence of positive rational numbers is strictly positive.
+
+**Theorem 2**:
 
 $$
-\forall a > 0, \forall b > 0 \quad (b \in \mathbb{R} \setminus \mathbb{Q}):
-\quad ab > 0
+\forall \epsilon > 0:
+\quad \exists \delta > 0
+\quad S.T. \quad
+\forall x \in \mathbb{R}:
+\quad |x - c| < \delta \implies |ax - ac| < \epsilon
 $$
+
+Obviously, $\forall \epsilon > 0$, we can choose:
+
+$$
+\delta = \frac{\epsilon}{2|a|}
+$$
+
+$$
+\therefore
+|ax - ac| = |a| |x - c| = |a| \cdot \frac{\epsilon}{2|a|} =
+\frac{\epsilon}{2} < \epsilon
+$$
+
+**Theorem 3**:
+
+If a real sequence $S_n \to S$ as $n \to \infty$, then:
+
+$$
+S_n > c > 0
+\quad (\forall n \ge N)
+\implies
+S \ge c > 0
+$$
+
+**Proof** (by contradiction):
+
+Assume the opposite, i.e.
+
+$$
+S < c
+$$
+
+$$
+\therefore
+\frac{c - S}{2} > 0
+$$
+
+Select $\epsilon = \frac{c - S}{2}$, we have:
+
+$$
+\exists M \in \mathbb{N} \quad S.T. \quad
+\forall n \ge M:
+\quad |S_n - b| < \frac{c - S}{2}
+$$
+
+$$
+\therefore
+S_n < S + \frac{c - S}{2} = \frac{S + c}{2} < c
+$$
+
+According to the assumption, we also have:
+
+$$
+S_n > c
+\quad (\forall n \ge N)
+$$
+
+For all $n \ge \max(N, M)$, $S_n$ should be both greater than $c$ and less
+than $c$, which is a contradiction.
+
+Therefore, our assumption is false, and the theorem holds.
+
+$$\tag*{$\blacksquare$}$$
+
+Now we can prove the proposition.
 
 **Proof**:
 
-Let $b \in \mathbb{R} \setminus \mathbb{Q}$, with $b > 0$.
-Define a rational approximation of $b$ by truncating to $n$ decimal digits:
+Construct a sequence of rational numbers $b_n \in \mathbb{Q}$ such that:
 
 $$
-r(b, n) = \text{rational approximation of } b \text{ to } n \text{ decimal digits}
+\begin{aligned}
+& \forall n \in \mathbb{N}: b_n > 0
+\\\\
+& \lim_{n \to \infty} b_n = b
+\end{aligned}
 $$
 
-Example:
+This is possible by the density of $\mathbb{Q}$ in $\mathbb{R}$.
+For the same reason, we can select:
 
 $$
-r(\pi,n) = 3. \overbrace{1415926 \cdots}^n
-$$
-
-and define the remainder:
-
-$$
-\xi(b, n) = b - r(b, n)
-$$
-
-Then:
-
-$$
-ab = a \cdot r(b, n) + a \cdot \xi(b, n)
-\quad
-(\text{Distributive Property})
-$$
-
-Since $r(b, n) \in \mathbb{Q}$ and $r(b, n) > 0$, by Theorem 1:
-
-$$
-a \cdot r(b, n) > 0
-$$
-
-Let $\epsilon > 0$ be such that:
-
-$$
-0 < \epsilon < \frac{1}{2} a \cdot r(b, n)
+q \in \mathbb{Q} \quad S.T. \quad 0 < q < b
 $$
 
 $$
 \because
-\lim_{n \to \infty} \xi(b, n) = 0
+\lim_{n \to \infty} b_n = b
 $$
 
 $$
 \therefore
-\lim_{n \to \infty} | a \cdot \xi(b, n) | = 0
+\exists N \in \mathbb{N} \quad
+S.T. \quad \forall n \ge N: \quad
+b_n > q
+$$
+
+$$
+\therefore
+b_n - q > 0
+$$
+
+Since $a > 0$, $b_n - q > 0$, and $b_n - q \in \mathbb{Q}$,
+applying **Theorem 1**:
+
+$$
+a (b_n - q) > 0
+$$
+
+$$
+\therefore
+a b_n > a q
 \quad
-(\text{Zero Property})
+\forall n \ge N
 $$
 
-$$
-\therefore
-\exists N \in \mathbb{N} \quad S.T. \forall n > N: \quad
-|a \cdot \xi(b, n)| < \epsilon
-$$
+Define function:
 
 $$
-\therefore
-ab = a \cdot r(b, n) + a \cdot \xi(b, n) >
-a \cdot r(b, n) - |a \cdot \xi(b, n)| >
-\frac{1}{2} a \cdot r(b, n) > 0
+f(x) = a x
 $$
 
-## Conclusion
+Since $f(x)$ is continuous (**Theorem 2**) for $x \in \mathbb{R}$, we have:
 
-From the lemma and theorems above, the proposition holds.
+$$
+\lim_{n \to \infty} f(b_n) = \lim_{n \to \infty} a b_n = ab
+$$
+
+Let sequence $S_n = a b_n$.
+Then $S_n \to ab$ as $n \to \infty$.
+Also since $S_n > a q > 0$ for all $n \ge N$, applying **Theorem 3**:
+
+$$
+ab \ge a q > 0
+$$
 
 $$\tag*{$\blacksquare$}$$
 

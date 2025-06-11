@@ -4,6 +4,8 @@ title: Terminology
 
 # Terminology
 
+> _{sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read_
+
 This is a non-exhaustive list of terms and acronyms used in papers
 {cite}`mnp_alan_2022_s43017_022_00292_`
 {cite}`mnp_harb_2023_3c00164_`
