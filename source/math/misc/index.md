@@ -1,16 +1,14 @@
 ---
-title: Mathematics
+title: Miscellaneous
 ---
 
-# Mathematics
+# Miscellaneous
 
 ```{toctree}
 :maxdepth: 2
 :caption: "Contents:"
 
-ft/index
-sl/index
-misc/index
+svm_kernel
 ```
 
 ---
