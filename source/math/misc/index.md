@@ -8,7 +8,7 @@ title: Miscellaneous
 :maxdepth: 2
 :caption: "Contents:"
 
-svm_kernel
+proof_mulpos
 ```
 
 ---

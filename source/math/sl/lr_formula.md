@@ -4,260 +4,139 @@ title: "Linear Regression: Formula Derivation"
 
 # Linear Regression: Formula Derivation
 
-## Originally Derived Formula
+(ref-sl-lr-functional)=
 
-Suppose variable $x$ and $y$ follows a straight-line relationship, which
-can be described as:
+## Functional Representation
 
-$$y = \beta_0^* + \beta_1^* x + \epsilon$$
-
-where zero-mean random variable $\epsilon$ has a constant variance:
+Define a Hilbert space:
 
 $$
-\mathrm{E} \left[ \epsilon \right] &= 0
-\\
-\mathrm{Var} \left[ \epsilon \right] &= \sigma_{\epsilon}^2
+\mathcal{H} = \mathbb{R}^p
 $$
 
-We use the hypothesis model to get the prediction $\hat{y}$:
-
-$$\hat{y} = \beta_0 + \beta_1 x$$
-
-We aim to find the slope ($\beta_1$) that minimizes the residual sum of
-squares (**RSS**):
+with inner product:
 
 $$
-\mathrm{RSS} &=
-  \sum_{i=1}^n (y_i - \hat{y}_i)^2
-\\ &=
-  \sum_{i=1}^n (y_i - \beta_1 x_i - \beta_0)^2
+\langle u, v \rangle = u^\top v = \sum_{j=1}^p u_j v_j
 $$
 
-where $\{ (x_i, y_i) \}_{i=1}^n$ is the dataset.
+We are given data $\{ (x_i, y_i) \}_{i=1}^N$, with $x_i \in \mathcal{H}$, $y_i \in \mathbb{R}$.
 
-To find the minimum value of $\mathrm{RSS}$, we take the derivative
-w.r.t $\beta_0$ and $\beta_1$ and set to $0$:
-
-$$
-\begin{cases}
-\frac{\partial}{\partial \beta_0} \mathrm{RSS} =
-\sum_{i=1}^n -2 (y_i - \beta_1 x_i - \beta_0) = 0
-\\
-\frac{\partial}{\partial \beta_1} \mathrm{RSS} =
-\sum_{i=1}^n 2 (y_i - \beta_1 x_i - \beta_0) (-x_i) = 0
-\end{cases}
-$$
-
-Find the value of $\beta_0$:
+It turns out that the predictor is a linear functional:
 
 $$
-0 &=
-\sum_{i=1}^n -2 (y_i - \beta_1 x_i - \beta_0)
-\\ &=
-\sum_{i=1}^n (y_i - \beta_1 x_i - \beta_0)
-\\ &=
-\sum_{i=1}^n y_i - \sum_{i=1}^n \beta_1 x_i - \sum_{i=1}^n \beta_0
-\\ &=
-n \bar{y} - n \beta_1 \bar{x} - n \beta_0
-\\ &=
-\bar{y} - \beta_1 \bar{x} - \beta_0
+f^{\ast}: \mathcal{H} \mapsto \mathbb{R}
 $$
 
-$$
-\therefore
-\beta_0 = \bar{y} - \beta_1 \bar{x}
-$$
-
-$$\tag*{$\blacksquare$}$$
-
-Find the value of $\beta_1$:
+By Riesz representation theorem, in a Hilbert space $\mathcal{H}$, for every
+continuous linear functional $f \in \mathcal{H}^*$, there exists a **unique**
+$\beta \in \mathcal{H}$ such that:
 
 $$
-0 &=
-\sum_{i=1}^n (- x_i y_i + \beta_1 x_i^2 + \beta_0 x_i)
-\\ &=
-\sum_{i=1}^n (- x_i y_i + \beta_1 x_i^2 + \bar{y} x_i - \beta_1 \bar{x} x_i)
+f(x) = \langle x, \beta \rangle
+\quad
+\forall x \in \mathcal{H}
 $$
 
-$$
-\therefore
-\beta_1 &= \frac{\sum_{i=1}^n (x_i y_i - \bar{y} x_i)}
-  {\sum_{i=1}^n (x_i^2 - \bar{x} x_i)}
-\\ &=
-\frac{\sum_{i=1}^n x_i y_i - \bar{y} \sum_{i=1}^n x_i}
-  {\sum_{i=1}^n x_i^2 - \bar{x} \sum_{i=1}^n x_i}
-\\ &=
-\frac{ \sum_{i=1}^n x_i y_i - n \bar{x} \bar{y} }
-  { \sum_{i=1}^n x_i^2 - n \bar{x}^2 }
-$$
-
-which is the formula for the slope of the linear regression line.
-
-$$\tag*{$\blacksquare$}$$
-
-## Factored Form
-
-Starting with the formula:
+Thus, fitting the model means finding $\beta^{\ast}$ such that:
 
 $$
-\beta_1 = \frac{\sum_{i=1}^n x_i y_i - n \bar{y} \bar{x}}
-{\sum_{i=1}^n x_i^2 - n \bar{x}^2}
+\beta^{\ast} = \arg \min_{\beta \in \mathcal{H}}
+\ell \left(
+  \{\langle x_1, \beta \rangle, y_1\}, \ldots,
+  \{\langle x_N, \beta \rangle, y_N\}
+\right)
 $$
 
-Note that:
+where $\ell$ is the loss function.
+
+(ref-sl-formula-ls)=
+
+## Least Squares Solution
+
+Here we use the squared loss:
 
 $$
-\sum_{i=1}^n x_i y_i - n \bar{y} \bar{x} &=
-\sum_{i=1}^n (x_i - \bar{x} + \bar{x})(y_i - \bar{y} + \bar{y}) -
-  n \bar{y} \bar{x}
-\\ &=
-\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) +
-  \bar{y} \sum_{i=1}^n (x_i - \bar{x}) +
-  \bar{x} \sum_{i=1}^n (y_i - \bar{y}) +
-  n \bar{x} \bar{y} - n \bar{x} \bar{y}
-\\ &=
-\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
+\ell (\beta) = \sum_{i=1}^N (y_i - \langle x_i, \beta \rangle)^2
 $$
 
-and that:
+Rewrite in matrix form:
 
 $$
-\sum_{i=1}^n x_i^2 - n \bar{x}^2 &=
-\sum_{i=1}^n (x_i - \bar{x} + \bar{x})^2 - n \bar{x}^2
-\\ &=
-\sum_{i=1}^n (x_i - \bar{x})^2 +
-  2\bar{x} \sum_{i=1}^n (x_i - \bar{x}) +
-  n \bar{x}^2 - n \bar{x}^2
-\\ &=
-\sum_{i=1}^n (x_i - \bar{x})^2
+\ell (\beta) = \| y - X \beta \|^2
 $$
 
-$$
-\therefore
-\beta_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
-  {\sum_{i=1}^n (x_i - \bar{x})^2}
-$$
+where $X$ is the $N \times p$ design matrix with $X_{ij} = x_{ij}$, $y$ is the
+$N \times 1$ vector of responses.
 
-## Slope Weighted Average Form
-
-Starting with the formula:
+The most straightforward way to find $\beta^{\ast}$ is to take the gradient
+w.r.t. $\beta$ first:
 
 $$
-\beta_1 &=
-  \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
-    {\sum_{i=1}^n (x_i - \bar{x})^2}
-  \\ &=
-  \frac{\sum_{i=1}^n (x_i - \bar{x})^2
-        \frac{y_i - \bar{y}}{x_i - \bar{x}}}
-    {\sum_{i=1}^n (x_i - \bar{x})^2}
-  \\ &=
-  \sum_{i=1}^n
-    \frac{(x_i - \bar{x})^2}{\sum_{i=1}^n (x_i - \bar{x})^2}
-    \frac{y_i - \bar{y}}{x_i - \bar{x}}
+\begin{align*}
+\nabla_\beta \ell (\beta) &=
+  \nabla_\beta \left(
+    y^\top y - 2 \beta^\top X^\top y + \beta^\top X^\top X \beta
+  \right) \\
+  &= -2 X^\top y + 2 X^\top X \beta
+\end{align*}
 $$
 
-This is also the reason why points may have a great influence on the
-coefficient if they are far from the mean value.{cite}`wiki_slr_`
-
-## Correlation Coefficient Form
-
-Starting with the formula :
+Setting the gradient to zero gives:
 
 $$
-\beta_1 &= \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
-  {\sum_{i=1}^n (x_i - \bar{x})^2}
-\\ &=
-\frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
-  {\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}
-\\ &=
-\frac{\mathrm{Cov} (x, y)}{\sigma_x^2}
+X^\top X \beta^{\ast} = X^\top y
 $$
 
-Note the formula of correlation coefficient:
-
-$$r = \frac{\mathrm{Cov} (x, y)}{\sigma_x \sigma_y}$$
-
-$$\beta_1 = r \frac{\sigma_y}{\sigma_x}$$
-
-where $\sigma_x$ and $\sigma_y$ are the standard deviation of $x$ and
-$y$ respectively.{cite}`wiki_slr_`
-
-## Expectation and Variance
-
-Starting with the formula:
+We can solve $\beta^{\ast}$ if $X^\top X$ is invertible i.e. full rank.
+This is why the **no collinearity** assumption is needed for linear regression:
 
 $$
-\beta_1 &=
-  \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}
-    {\sum_{i=1}^n (x_i - \bar{x})^2}
-  \\ &=
-  \frac{
-    \sum_{i=1}^n
-    (x_i - \bar{x})
-    (\beta_0^* + \beta_1^* x_i + \epsilon - \beta_0^* - \beta_1^* \bar{x})}
-    {\sum_{i=1}^n (x_i - \bar{x})^2}
-  \\ &=
-  \frac{
-    \sum_{i=1}^n
-    (x_i - \bar{x})
-    (\beta_1^* x_i - \beta_1^* \bar{x} + \epsilon)}
-    {\sum_{i=1}^n (x_i - \bar{x})^2}
+\beta^{\ast} = (X^\top X)^{-1} X^\top y
 $$
 
-Now we can calculate the expectation and variance of the slope with
-properties of these statistics:
+This is the formula for the least squares solution of linear regression.
+
+```{note}
+- $X^+ = (X^\top X)^{-1} X^\top$ is known as the Moore--Penrose
+  inverse {cite}`wiki_mpi_` of $X$.
+
+- $X^\top X$ is a Gram matrix{cite}`wiki_gram_` over reals, which is symmetric
+  and positive semi-definite, and it is invertible if and only if its
+  determinant is non-zero, which is equivalent to the condition that $X$ has
+  linearly independent columns.
+  Particularly, if $X$ is centered, then $X^\top X$ is the scatter matrix of
+  $X$, proportional to the covariance matrix $\text{cov} (X)$.
+
+```
+
+A more intuitive way is to note that response vector $y$ is a fixed point in
+$\mathbb{R}^N$. We can define:
 
 $$
-\mathrm{E} \left[ \beta_1 \right] &=
-  \frac{
-    \sum_{i=1}^n
-    (x_i - \bar{x})
-    \mathrm{E} \left[ \beta_1^* x_i - \beta_1^* \bar{x} + \epsilon \right]
- }
- {\sum_{i=1}^n (x_i - \bar{x})^2}
-\\ &=
-  \beta_1^*
-  \frac{
-    \sum_{i=1}^n
-    (x_i - \bar{x})^2
-  }
-  {\sum_{i=1}^n (x_i - \bar{x})^2}
-\\ &=
-  \beta_1^*
+\mathcal{S} = \text{span} \{ x^{(1)}, \ldots, x^{(p)} \} \subset \mathbb{R}^N
 $$
 
-$$
-\mathrm{Var} \left[ \beta_1 \right] &=
-  \frac{
-    \sum_{i=1}^n
-    (x_i - \bar{x})^2
-    \mathrm{Var} \left[ \beta_1^* x_i - \beta_1^* \bar{x} + \epsilon \right]
- }
- {(\sum_{i=1}^n (x_i - \bar{x})^2)^2}
-\\ &=
-  \frac{
-    \sum_{i=1}^n
-    (x_i - \bar{x})^2
-    \mathrm{Var} \left[ \epsilon \right]
- }
- {(\sum_{i=1}^n (x_i - \bar{x})^2)^2}
-\\ &=
-  \frac{
-    \mathrm{Var} \left[ \epsilon \right]
- }
- {\sum_{i=1}^n (x_i - \bar{x})^2}
-$$
+where $x^{(i)}$ is the $i$-th column of $X$.
 
-where $\mathrm{Var} \left[ \epsilon \right]$ can be estimated with
-residual:
+Thus $X \beta \in \mathcal{S}$.
+
+To minimize $\| y - X \beta \|$ is to make $X \beta$ the orthogonal projection
+of $y$ onto $\mathcal{S}$, so that $y - X \beta$ is orthogonal to
+$\mathcal{S}$, i.e.:
 
 $$
-\mathrm{Var} \left[ \epsilon \right] =
-  \frac{1}{n-2} \sum_{i=1}^n (y_i - \hat{y}_i)^2
+\langle y - X \beta^{\ast}, x^{(i)} \rangle = 0
+\quad \forall i = 1, \ldots, p
 $$
 
-which makes it equal to slope\'s standard error of
-$\mathrm{SE} \left[ \beta_1 \right]$.
+Rewrite in matrix form:
+
+$$
+X^\top (y - X \beta^{\ast}) = 0
+$$
+
+which is equivalent to the previous equation.
 
 ---
 

@@ -8,7 +8,6 @@ title: "Statistical Learning"
 :maxdepth: 2
 :caption: "Contents:"
 
-proof_mulpos
 mse
 bayes
 bayes_ex_1
@@ -17,8 +16,12 @@ mgd
 lda
 lda_dr
 qda
-lr_ols
 lr_formula
+lr_snr
+lr_ols
+lr_ols_formula
+lr_ridge
+svm_kernel
 bp
 gd
 pg
