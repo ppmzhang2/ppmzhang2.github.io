@@ -29,468 +29,325 @@ title: "Linear Regression: Ordinary Least Squares"
   - random errors are **identically** and **independently** drawn from a
     **normal distribution**.
 
-## Problem and Hypothesis
+## Hypothesis
 
-Suppose:
-
-$$\mathbf{y} = \mathbf{X} \mathbf{w}^* + \mathbf{\epsilon}$$
-
-where
-
-- $\mathbf{X}$ is the design matrix of $n \times p$ non-random,
-  observable predictors[^1]
-- $\mathbf{\epsilon}$ is a $n$-dimensional random vector, which makes
-  $\mathbf{y}$ the $n$-dimensional observable random vector response
-- $\mathbf{w}^* = [w_1^*, \ldots, w_p^*]^T$ are the **underlying
-  non-random, unobservable coefficients**, which is to be estimated.
-
-Our hypothesis is:
-
-$$\hat{\mathbf{y}} = \mathbf{X} \mathbf{w}$$
-
-where the linear estimator $\mathbf{w}$ can be represented as:
-
-$$\mathbf{w} = \mathbf{C} \mathbf{y}$$
-
-where $\mathbf{C}$ is a $p \times n$ matrix depends on the $n \times p$
-predictor $\mathbf{X}$ and the $n \times 1$ response $\mathbf{y}$.
-
-A natural thought would be that $\mathbf{c}$ is the
-[pseudoinverse](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse)
-of $\mathbf{X}$, which will be confirmed by the OLS.
-
-## Assumptions of the OLS
-
-### No Collinearity
-
-To get the assumption we need to calculate the analytical solution to
-the OLS problem.
-
-With Ordinary Least Squares (OLS), the risk can be calculated as:
+By [previous derivation](#ref-sl-lr-functional) we conclude that the linear
+predictor $f : \mathbb{R}^p \mapsto \mathbb{R}$ is a linear functional:
 
 $$
-R (\hat{\mathbf{w}}) =
-\frac{1}{n} \lVert \hat{\mathbf{y}} - \mathbf{y} \rVert_2^2
+f (x) = x^\top \beta
 $$
 
-To minimize $R$ {cite}`book_dl_` {cite}`book_mc_`:
+where $x \in \mathbb{R}^p$ as the input vector, $\beta \in \mathbb{R}^p$ as the
+linear coefficients.
 
-$$\nabla_{\mathbf{w}} R = 0$$
+We suppose that there is a **underlying non-random unobservable coefficients**
+$\beta^{\ast} \in \mathbb{R}^p$ such that for every data point
+$\{ x, y \} \in \mathbb{R}^p \times \mathbb{R}$:
+
+$$
+y = x^\top \beta^{\ast} + \varepsilon
+$$
+
+where $\varepsilon$ is a random error term, which is assumed to be independent
+of the input vector $x$.
+
+Also from [previous chapter](#ref-sl-formula-ls), the Ordinary Least Squares
+(OLS) solution can be expressed as:
+
+$$
+\beta_{\text{ols}} = (X^\top X)^{-1} X^\top y
+$$
+
+If **no collinearity** holds i.e. $X^\top X$ is invertible.
 
 $$
 \therefore
-\nabla_{\mathbf{w}} R &=
-\nabla_{\mathbf{w}}
-\frac{1}{n} \lVert \hat{\mathbf{y}} - \mathbf{y} \rVert_2^2
-\\ &=
-\nabla_{\mathbf{w}}
-  (\hat{\mathbf{y}} - \mathbf{y})^T
-  (\hat{\mathbf{y}} - \mathbf{y})
-\\ &=
-\nabla_{\mathbf{w}}
-  (\mathbf{X} \mathbf{w} - \mathbf{y})^T
-  (\mathbf{X} \mathbf{w} - \mathbf{y})
-\\ &=
-\nabla_{\mathbf{w}}
-  (\mathbf{w}^T \mathbf{X}^T - \mathbf{y}^T)
-  (\mathbf{X} \mathbf{w} - \mathbf{y})
-\\ &=
-\nabla_{\mathbf{w}}
-  (\mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w} -
-   \mathbf{w}^T \mathbf{X}^T \mathbf{y} -
-   \mathbf{y}^T \mathbf{X} \mathbf{w} +
-  \mathbf{y}^T \mathbf{y})
-\\ &=
-\nabla_{\mathbf{w}}
-  (\mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w} -
-   2 \mathbf{w}^T \mathbf{X}^T \mathbf{y} -
-   \mathbf{y}^T \mathbf{y})
-\\ &=
-2 \mathbf{X}^T \mathbf{X} \mathbf{w} - 2 \mathbf{X}^T \mathbf{y}
-\\ &= 0
+\beta_{\text{ols}}
+&= (X^\top X)^{-1} X^\top (X \beta^{\ast} + \epsilon) \\
+&= (X^\top X)^{-1} X^\top X \beta^{\ast} +
+   (X^\top X)^{-1} X^\top \epsilon \\
+&= \beta^{\ast} + (X^\top X)^{-1} X^\top \epsilon
 $$
 
-$$
-\therefore
-\mathbf{w}_{ols} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}
-$$
+where $\epsilon$ is the vector of random errors
+$\varepsilon_1, \ldots, \varepsilon_n$.
 
-```{note}
-Why the **no multi-collinearity** assumption is needed:
-
-- When matrix $\mathbf{X}$ has linearly independent columns, its
-  Moore--Penrose inverse {cite}`wiki_mpi_` $\mathbf{X}^+$ can be computed as:
-
-  $$\mathbf{X}^+ = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T$$
-
-- Obviously $\mathbf{X}^T \mathbf{X}$ is a Gram matrix{cite}`wiki_gram_`
-  over reals, which is symmetric and positive semi-definite, and it is
-  invertible if and only if its determinant is non-zero, which is
-  equivalent to the condition that $\mathbf{X}$ has linearly independent
-  columns [^2].
-```
-
-An alternative form is:
+## Zero Mean Error and Unbiased Estimator
 
 $$
-\mathbf{w}_{ols} &=
-(\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T
-(\mathbf{X} \mathbf{w}^* + \mathbf{\epsilon})
-\\ &=
-\mathbf{w}^* + (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{\epsilon}
-$$
-
-### Zero Mean Error and Unbiased Estimator
-
-$$
-\mathrm{E} \left[ \mathbf{\epsilon} \right] = \mathbf{0}
+\mathrm{E} \left[ \epsilon \right] = 0
 \implies
-\mathrm{E} \left[ \mathbf{w}_{ols} \right] = \mathbf{w}^*
+\mathrm{E} \left[ \beta_{\text{ols}} \right] = \beta^{\ast}
 $$
 
 Proof:
 
 $$
 \mathrm{E} \left[
-  \mathbf{w}_{ols}
-\right] &=
-\mathrm{E} \left[
-  \mathbf{w}^* +
-  (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{\epsilon}
+  \beta_{\text{ols}}
 \right]
-\\ &=
-\mathbf{w}^* +
-(\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T
-\mathrm{E} \left[ \mathbf{\epsilon} \right]
-\\ &=
-\mathbf{w}^* +
-(\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{0}
-\\ &=
-\mathbf{w}^*
+&= \mathrm{E} \left[
+  \beta^{\ast} + (X^\top X)^{-1} X^\top \epsilon
+\right] \\
+&= \beta^{\ast} + X^\top (X^\top X)^{-1} \mathrm{E} \left[ \epsilon \right] \\
+&= \beta^{\ast}
 $$
 
 $$\tag*{$\blacksquare$}$$
 
-### Homoscedasticity and BLUE
+## Homoscedasticity and BLUE
 
 The OLS estimator is the Best Linear Unbiased Estimator (BLUE) if:
 
 $$
 \forall i \in \left[ 0, n \right] &:
-\mathrm{E} \left[ \mathbf{\epsilon} \right] = 0,
-\mathrm{Var} \left[ \mathbf{\epsilon} \right] = \sigma^2
-\\
+\mathrm{E} \left[ \epsilon \right] = 0,
+\mathrm{Var} \left[ \epsilon \right] = \sigma^2 \\
 \forall i \ne j &:
-\mathrm{Cov} \left[ \mathbf{\epsilon} \right] = 0
+\mathrm{Cov} \left[ \epsilon \right] = 0
 $$
 
 Proof{cite}`medium_ols_` {cite}`wiki_gmt_`:
 
 $$
-\mathbf{\epsilon} \mathbf{\epsilon}^T &=
+\epsilon \epsilon^T &=
 \begin{bmatrix}
-  \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n
+  \varepsilon_1 \\ \varepsilon_2 \\ \vdots \\ \varepsilon_n
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-  \epsilon_1 & \epsilon_2 & \cdots & \epsilon_n
-\end{bmatrix}
-\\ &=
-\begin{bmatrix}
-  \epsilon_1 \epsilon_1 & \epsilon_1 \epsilon_2 & \cdots &
-    \epsilon_1 \epsilon_n
-  \\
-  \epsilon_2 \epsilon_1 & \epsilon_2 \epsilon_2 & \cdots &
-    \epsilon_2 \epsilon_n
-  \\
-  \vdots & \vdots & \ddots & \vdots
-  \\
-  \epsilon_n \epsilon_1 & \epsilon_n \epsilon_2 & \cdots &
-    \epsilon_n \epsilon_n
-\end{bmatrix}
-\\ &=
-\begin{bmatrix}
-  (\epsilon_1 - 0) (\epsilon_1 - 0) & (\epsilon_1 - 0) (\epsilon_2 - 0)
-    & \cdots & (\epsilon_1 - 0) (\epsilon_n - 0)
-  \\
-  (\epsilon_2 - 0) (\epsilon_1 - 0) & (\epsilon_2 - 0) (\epsilon_2 - 0)
-    & \cdots & (\epsilon_2 - 0) (\epsilon_n - 0)
-  \\
-  \vdots & \vdots & \ddots & \vdots
-  \\
-  (\epsilon_n - 0) (\epsilon_1 - 0) & (\epsilon_n - 0) (\epsilon_2 - 0)
-    & \cdots & (\epsilon_n - 0) (\epsilon_n - 0)
+  \varepsilon_1 & \varepsilon_2 & \cdots & \varepsilon_n
+\end{bmatrix} \\
+&= \begin{bmatrix}
+  \varepsilon_1 \varepsilon_1 & \varepsilon_1 \varepsilon_2 & \cdots &
+    \varepsilon_1 \varepsilon_n \\
+  \varepsilon_2 \varepsilon_1 & \varepsilon_2 \varepsilon_2 & \cdots &
+    \varepsilon_2 \varepsilon_n \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \varepsilon_n \varepsilon_1 & \varepsilon_n \varepsilon_2 & \cdots &
+    \varepsilon_n \varepsilon_n
+\end{bmatrix} \\
+&= \begin{bmatrix}
+  (\varepsilon_1 - 0) (\varepsilon_1 - 0) &
+  (\varepsilon_1 - 0) (\varepsilon_2 - 0) & \cdots &
+  (\varepsilon_1 - 0) (\varepsilon_n - 0) \\
+  (\varepsilon_2 - 0) (\varepsilon_1 - 0) &
+  (\varepsilon_2 - 0) (\varepsilon_2 - 0) & \cdots &
+  (\varepsilon_2 - 0) (\varepsilon_n - 0) \\
+  \vdots & \vdots & \ddots & \vdots \\
+  (\varepsilon_n - 0) (\varepsilon_1 - 0) &
+  (\varepsilon_n - 0) (\varepsilon_2 - 0) & \cdots &
+  (\epsilon_n - 0) (\epsilon_n - 0)
 \end{bmatrix}
 $$
 
 $$
 \therefore
 \mathrm{E} \left[
-  \mathbf{\epsilon} \mathbf{\epsilon}^T
+  \epsilon \epsilon^T
 \right] &=
 \begin{bmatrix}
   \mathrm{E} \left[
-    (\epsilon_1 - 0) (\epsilon_1 - 0)
+    (\varepsilon_1 - 0) (\varepsilon_1 - 0)
   \right] &
   \mathrm{E} \left[
-    (\epsilon_1 - 0) (\epsilon_2 - 0)
-  \right] &
-  \cdots &
-  \mathrm{E} \left[
-    (\epsilon_1 - 0) (\epsilon_n - 0)
-  \right]
-  \\
-  \mathrm{E} \left[
-    (\epsilon_2 - 0) (\epsilon_1 - 0)
-  \right] &
-  \mathrm{E} \left[
-    (\epsilon_2 - 0) (\epsilon_2 - 0)
+    (\varepsilon_1 - 0) (\varepsilon_2 - 0)
   \right] &
   \cdots &
   \mathrm{E} \left[
-    (\epsilon_2 - 0) (\epsilon_n - 0)
-  \right]
-  \\
-  \vdots & \vdots & \ddots & \vdots
-  \\
+    (\varepsilon_1 - 0) (\varepsilon_n - 0)
+  \right] \\
   \mathrm{E} \left[
-    (\epsilon_n - 0) (\epsilon_1 - 0)
+    (\varepsilon_2 - 0) (\varepsilon_1 - 0)
   \right] &
   \mathrm{E} \left[
-    (\epsilon_n - 0) (\epsilon_2 - 0)
+    (\varepsilon_2 - 0) (\varepsilon_2 - 0)
   \right] &
   \cdots &
   \mathrm{E} \left[
-    (\epsilon_n - 0) (\epsilon_n - 0)
+    (\varepsilon_2 - 0) (\varepsilon_n - 0)
+  \right] \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \mathrm{E} \left[
+    (\varepsilon_n - 0) (\varepsilon_1 - 0)
+  \right] &
+  \mathrm{E} \left[
+    (\varepsilon_n - 0) (\varepsilon_2 - 0)
+  \right] &
+  \cdots &
+  \mathrm{E} \left[
+    (\varepsilon_n - 0) (\varepsilon_n - 0)
   \right]
 \end{bmatrix}
 \\ &=
 \begin{bmatrix}
-  \mathrm{Var} \left[ \epsilon_1 \right] &
-  \mathrm{Cov} \left[ \epsilon_1, \epsilon_2 \right] &
+  \mathrm{Var} \left[ \varepsilon_1 \right] &
+  \mathrm{Cov} \left[ \varepsilon_1, \varepsilon_2 \right] &
   \cdots &
-  \mathrm{Cov} \left[ \epsilon_1, \epsilon_n \right]
-  \\
-  \mathrm{Cov} \left[ \epsilon_2, \epsilon_1 \right] &
-  \mathrm{Var} \left[ \epsilon_2 \right] &
+  \mathrm{Cov} \left[ \varepsilon_1, \varepsilon_n \right] \\
+  \mathrm{Cov} \left[ \varepsilon_2, \varepsilon_1 \right] &
+  \mathrm{Var} \left[ \varepsilon_2 \right] &
   \cdots &
-  \mathrm{Cov} \left[ \epsilon_2, \epsilon_n \right]
-  \\
-  \vdots & \vdots & \ddots & \vdots
-  \\
-  \mathrm{Cov} \left[ \epsilon_n, \epsilon_1 \right] &
-  \mathrm{Cov} \left[ \epsilon_n, \epsilon_2 \right] &
+  \mathrm{Cov} \left[ \varepsilon_2, \varepsilon_n \right] \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \mathrm{Cov} \left[ \varepsilon_n, \varepsilon_1 \right] &
+  \mathrm{Cov} \left[ \varepsilon_n, \varepsilon_2 \right] &
   \cdots &
-  \mathrm{Var} \left[ \epsilon_n \right]
-\end{bmatrix}
-\\ &=
-\sigma^2 \mathbf{I}
+  \mathrm{Var} \left[ \varepsilon_n \right]
+\end{bmatrix} \\
+&= \sigma^2 I
 $$
 
 $$
 \therefore
-\mathrm{Var} \left[ \mathbf{w}_{ols} \right] &=
-\mathrm{E} \left[
-  (\mathbf{w}_{ols} - \mathrm{E} \left[
-    \mathbf{w}_{ols}
-  \right])
-  (\mathbf{w}_{ols} - \mathrm{E} \left[
-    \mathbf{w}_{ols}
-  \right])^T
-\right]
-\\ &=
-\mathrm{E} \left[
-  ((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{\epsilon})
-  ((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{\epsilon})^T
-\right]
-\\ &=
-\mathrm{E} \left[
-  (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{\epsilon}
-  \mathbf{\epsilon}^T \mathbf{X} (\mathbf{X}^T \mathbf{X})^{-1}
-\right]
-\\ &=
-  (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T
+\mathrm{Var} \left[ \beta_{\text{ols}} \right]
+&= \mathrm{E} \left[
+  (\beta_{\text{ols}} - \mathrm{E} \left[ \beta_{\text{ols}} \right])
+  (\beta_{\text{ols}} - \mathrm{E} \left[ \beta_{\text{ols}} \right])^T
+\right] \\
+&= \mathrm{E} \left[
+  ((X^\top X)^{-1} X^\top \epsilon)
+  ((X^\top X)^{-1} X^\top \epsilon)^T
+\right] \\
+&= \mathrm{E} \left[
+  (X^\top X)^{-1} X^\top \epsilon
+  \epsilon^\top X (X^\top X)^{-1}
+\right] \\
+&= (X^\top X)^{-1} X^\top
   \mathrm{E} \left[
-    \mathbf{\epsilon} \mathbf{\epsilon}^T
+    \epsilon \epsilon^\top
   \right]
-  \mathbf{X} (\mathbf{X}^T \mathbf{X})^{-1}
-\\ &=
-  \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}
-  \mathbf{X}^T \mathbf{X} (\mathbf{X}^T \mathbf{X})^{-1}
-\\ &=
-  \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}
+  X (X^\top X)^{-1} \\
+&= \sigma^2 (X^\top X)^{-1}
+  X^\top X (X^\top X)^{-1} \\
+&= \sigma^2 (X^\top X)^{-1}
 $$
 
-Let $\tilde{\mathbf{w}} = \tilde{\mathbf{C}} \mathbf{y}$ be another
-**unbiased linear estimator** of $\mathbf{w}^*$ with
-$\tilde{\mathbf{C}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D}$
-where $\mathbf{D}$ is a $p \times n$ non-zero matrix.
-
-$$
-\mathrm{E} \left[ \tilde{\mathbf{w}} \right] &=
-\mathrm{E} \left[ \tilde{\mathbf{C}} \mathbf{y} \right]
-\\ &=
-\mathrm{E} \left[
-  ((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D})
-  (\mathbf{X} \mathbf{w}^* + \mathbf{\epsilon})
-\right]
-\\ &=
-((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D})
-\mathbf{X} \mathbf{w}^* +
-((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D})
-\mathrm{E} \left[ \mathbf{\epsilon} \right]
-\\ &=
-((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D})
-\mathbf{X} \mathbf{w}^*
-\\ &=
-\mathbf{w}^* + \mathbf{D} \mathbf{X} \mathbf{w}^*
-$$
-
-Since $\tilde{\mathbf{w}}$ is unbiased:
+Let $\tilde{\beta} = \tilde{C} y$ be another
+**unbiased linear estimator** of $\beta^\ast$ with
+$\tilde{C} = (X^\top X)^{-1} X^\top + D$
+where $D$ is a $p \times n$ non-zero matrix.
 
 $$
 \therefore
-\mathbf{D} \mathbf{X} = 0
+\mathrm{E} \left[ \tilde{\beta} \right]
+&= \mathrm{E} \left[ \tilde{C} y \right] \\
+&= \mathrm{E} \left[
+  ((X^\top X)^{-1} X^\top + D)
+  (X \beta^\ast + \epsilon)
+\right] \\
+&= ((X^\top X)^{-1} X^\top + D) X \beta^\ast +
+   ((X^\top X)^{-1} X^\top + D)
+   \mathrm{E} \left[ \epsilon \right] \\
+&= ((X^\top X)^{-1} X^\top + D) X \beta^\ast \\
+&= \beta^\ast + D X \beta^\ast
+$$
+
+Since $\tilde{\beta}$ is unbiased:
+
+$$
+\therefore
+D X = 0
 $$
 
 $$
 \therefore
-\mathrm{Var} \left[
-  \tilde{\mathbf{w}}
-\right] &=
-\mathrm{Var} \left[
-  \tilde{\mathbf{C}} \mathbf{y}
-\right]
-\\ &=
-\tilde{\mathbf{C}} \mathrm{Var} \left[ \mathbf{y} \right]
-\tilde{\mathbf{C}}^T
-\\ &=
-\sigma^2 \tilde{\mathbf{C}} \tilde{\mathbf{C}}^T
-\\ &=
-\sigma^2
-((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D})
-((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D})^T
-\\ &=
-\sigma^2
-((\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T + \mathbf{D})
-(\mathbf{X} (\mathbf{X}^T \mathbf{X})^{-1} + \mathbf{D}^T)
-\\ &=
-\sigma^2
-((\mathbf{X}^T \mathbf{X})^{-1} +
- (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{D}^T +
- \mathbf{D} \mathbf{X} (\mathbf{X}^T \mathbf{X})^{-1} +
- \mathbf{D} \mathbf{D}^T)
-\\ &=
-\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1} +
-\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1} (\mathbf{D} \mathbf{X})^T +
-\sigma^2 \mathbf{D} \mathbf{X} (\mathbf{X}^T \mathbf{X})^{-1} +
-\sigma^2 \mathbf{D} \mathbf{D}^T
+\mathrm{Var} \left[ \tilde{\beta} \right]
+&= \mathrm{Var} \left[ \tilde{C} y \right] \\
+&= \tilde{C} \mathrm{Var} \left[ y \right] \tilde{C}^\top \\
+&= \sigma^2 \tilde{C} \tilde{C}^T \\
+&= \sigma^2 ((X^\top X)^{-1} X^\top + D) ((X^\top X)^{-1} X^\top + D)^T \\
+&= \sigma^2 ((X^\top X)^{-1} X^\top + D) (X (X^\top X)^{-1} + D^T) \\
+&= \sigma^2 ((X^\top X)^{-1} + (X^\top X)^{-1} X^\top D^\top +
+              D X (X^\top X)^{-1} + D D^\top) \\
+&= \sigma^2 (X^\top X)^{-1} + \sigma^2 (X^\top X)^{-1} (D X)^\top +
+   \sigma^2 D X (X^\top X)^{-1} + \sigma^2 D D^\top
 $$
 
 $$
 \because
-\mathbf{D} \mathbf{X} = 0
+D X = 0
 $$
 
 $$
 \therefore
-\mathrm{Var} \left[
-  \tilde{\mathbf{w}}
-\right] &=
-\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1} +
-\sigma^2 \mathbf{D} \mathbf{D}^T
-\\ &=
-\mathrm{Var} \left[ \mathbf{w}_{ols} \right] +
-\sigma^2 \mathbf{D} \mathbf{D}^T
+\mathrm{Var} \left[ \tilde{\beta} \right]
+&= \sigma^2 (X^\top X)^{-1} + \sigma^2 D D^T \\
+&= \mathrm{Var} \left[ \beta_{\text{ols}} \right] + \sigma^2 D D^\top
 $$
 
-Since $\mathbf{D} \mathbf{D}^T$ is positive semidefinite matrix:
-
-$$
-\because
-\mathbf{D} \mathbf{D}^T \text{ is positive semidefinite}
-$$
+Since $D D^\top$ is positive semidefinite matrix:
 
 $$
 \therefore
-\mathrm{Var} \left[ \tilde{\mathbf{w}} \right] >
-\mathrm{Var} \left[ \mathbf{w}_{ols} \right]
+\mathrm{Var} \left[ \tilde{\beta} \right] >
+\mathrm{Var} \left[ \beta_{\text{ols}} \right]
 $$
 
 $$\tag*{$\blacksquare$}$$
 
-### Normally Distributed Error and MLE
+## Normally Distributed Error and MLE
 
 The OLS is mathematically equivalent to Maximum Likelihood Estimation if
-the error term $\epsilon_1, \ldots, \epsilon_n$ are identically and
+the error term $\varepsilon_1, \ldots, \varepsilon_n$ are identically and
 independently distributed from a normal distribution of zero mean.
 
 Proof:
 
 $$
 \because
-\epsilon_i =
+\varepsilon_i =
 y_i - \hat{y}_i =
-y_i - \mathbf{x}_i \mathbf{w}
+y_i - x_i \beta
 \sim
 N(\mu, 0)
 $$
 
 $$
 \therefore
-\mathcal{L} (\mathbf{w} \mid \mathbf{X}) &=
+\mathcal{L} (\beta \mid X) &=
 \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2 \pi}}
-e^{-\frac{(y_i - \mathbf{x}_i \mathbf{w})^2}{2 \sigma^2}}
+e^{-\frac{(y_i - x_i \beta)^2}{2 \sigma^2}}
 \\ &=
 (\frac{1}{\sigma \sqrt{2 \pi}})^n
 \prod_{i=1}^{n}
-e^{-\frac{(y_i - \mathbf{x}_i \mathbf{w})^2}{2 \sigma^2}}
+e^{-\frac{(y_i - x_i \beta)^2}{2 \sigma^2}}
 \\ &=
 (2 \pi \sigma^2)^{-\frac{n}{2}}
 \prod_{i=1}^{n}
-e^{-\frac{(y_i - \mathbf{x}_i \mathbf{w})^2}{2 \sigma^2}}
+e^{-\frac{(y_i - x_i \beta)^2}{2 \sigma^2}}
 $$
 
 $$
 \therefore
-\ln \mathcal{L} (\mathbf{w} \mid \mathbf{X}) &=
--\frac{n}{2} \ln (2 \pi \sigma^2) +
-\sum_{i=1}^n
--\frac{(y_i - \mathbf{x}_i \mathbf{w})^2}{2 \sigma^2}
-\\ &=
--\frac{n}{2} \ln (2 \pi \sigma^2) - \frac{1}{2 \sigma^2}
-\sum_{i=1}^n
-(y_i - \mathbf{x}_i \mathbf{w})^2
-\\ &=
--\frac{n}{2} \ln (2 \pi \sigma^2) - \frac{1}{2 \sigma^2}
-(\mathbf{y} - \mathbf{X} \mathbf{w})^T (\mathbf{y} - \mathbf{X} \mathbf{w})
+\ln \mathcal{L} (\beta \mid X)
+&= -\frac{n}{2} \ln (2 \pi \sigma^2) +
+   \sum_{i=1}^n -\frac{(y_i - x_i \beta)^2}{2 \sigma^2} \\
+&= -\frac{n}{2} \ln (2 \pi \sigma^2) -
+   \frac{1}{2 \sigma^2} \sum_{i=1}^n (y_i - x_i \beta)^2 \\
+&= -\frac{n}{2} \ln (2 \pi \sigma^2) -
+   \frac{1}{2 \sigma^2} (y - X \beta)^\top (y - X \beta)
 $$
 
 To minimize $\ln \mathcal{L}$:
 
 $$
-\nabla_{\mathbf{w}} \ln \mathcal{L} (\mathbf{w} \mid \mathbf{X}) = 0
+\nabla_{\beta} \ln \mathcal{L} (\beta \mid X) = 0
 \\
 \implies
-(\mathbf{y} - \mathbf{X} \mathbf{w})^T
-(\mathbf{y} - \mathbf{X} \mathbf{w}) = 0
+(y - X \beta)^T
+(y - X \beta) = 0
 $$
 
 $$
 \therefore
-\mathbf{w}_{mle} =
-(\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y} =
-\mathbf{w}_{ols}
+\beta_{\text{mle}}
+= (X^\top X)^{-1} X^\top y
+= \beta_{\text{ols}}
 $$
 
 $$\tag*{$\blacksquare$}$$
-
-[^1]: $\mathbf{X}_{i1} = 1$ for all $i \in [1, n]$
-
-[^2]:
-    Particularly, if $\mathbf{X}$ is centered, then
-    $\mathbf{X}^T \mathbf{X}$ is the scatter matrix of $\mathbf{X}$,
-    proportional to the covariance matrix of $\mathbf{X}$.
 
 ---
 
