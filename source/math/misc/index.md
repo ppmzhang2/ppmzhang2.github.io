@@ -10,7 +10,7 @@ title: Miscellaneous
 
 proof_mulpos
 cov_circ
-quiz_landing
+kkt_landing
 ```
 
 ---
