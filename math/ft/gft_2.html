@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Generalized Fourier Transform: Tempered Distribution &#8212; Machine Learning Notes</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic_mod.css?v=9b2032db" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/disqus.js?v=568ff333"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <script src="../../_static/js/petite-vue.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Generalized Fourier Transform: Delta Distribution" href="gft_3.html" />
+    <link rel="prev" title="Generalized Fourier Transform: Schwartz Space" href="gft_1.html" /> 
+  </head><body data-dark_mode_code_blocks="true">
+
+<div id="top_nav">
+    
+
+    <nav>
+        
+            
+        
+
+        <p id="toggle_sidebar">
+            <a href="#" title="Toggle sidebar">|||</a>
+        </p>
+        <h1><a href="../../index.html" title="Go to homepage">ML Notes</a></h1>
+            <a id="source_link" href="https://github.com/ppmzhang2/ppmzhang2.github.io">
+    
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+            <path fill="white" d="M 244.8,8 C 106.1,8 0,113.3 0,252 c 0,110.9 69.8,205.8 169.5,239.2 12.8,2.3 17.3,-5.6 17.3,-12.1 0,-6.2 -0.3,-40.4 -0.3,-61.4 0,0 -70,15 -84.7,-29.8 0,0 -11.4,-29.1 -27.8,-36.6 0,0 -22.9,-15.7 1.6,-15.4 0,0 24.9,2 38.6,25.8 21.9,38.6 58.6,27.5 72.9,20.9 2.3,-16 8.8,-27.1 16,-33.7 -55.9,-6.2 -112.3,-14.3 -112.3,-110.5 0,-27.5 7.6,-41.3 23.6,-58.9 -2.6,-6.5 -11.1,-33.3 2.6,-67.9 20.9,-6.5 69,27 69,27 20,-5.6 41.5,-8.5 62.8,-8.5 21.3,0 42.8,2.9 62.8,8.5 0,0 48.1,-33.6 69,-27 13.7,34.7 5.2,61.4 2.6,67.9 16,17.7 25.8,31.5 25.8,58.9 0,96.5 -58.9,104.2 -114.8,110.5 9.2,7.9 17,22.9 17,46.4 0,33.7 -0.3,75.4 -0.3,83.6 0,6.5 4.6,14.4 17.3,12.1 C 428.2,457.8 496,362.9 496,252 496,113.3 383.5,8 244.8,8 Z"/>
+        </svg>
+    
+</a>
+        
+
+        <a id="mode_toggle" href="#" @click.prevent="handleClick" :title="mode">
+    <template v-if="mode == 'light'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_light"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M67.48,18.073c1.913,-1.912 1.913,-5.018 0,-6.931c-1.912,-1.912 -5.018,-1.912 -6.931,0l-6.798,6.799c-1.912,1.912 -1.912,5.018 0,6.931c1.913,1.912 5.018,1.912 6.931,-0l6.798,-6.799Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.728,61.108c1.912,-1.913 1.912,-5.018 -0,-6.931c-1.913,-1.913 -5.019,-1.913 -6.931,-0l-6.799,6.798c-1.912,1.913 -1.912,5.019 0,6.931c1.913,1.913 5.019,1.913 6.931,0l6.799,-6.798Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.682,54.177c-1.913,-1.913 -5.018,-1.913 -6.931,-0c-1.912,1.913 -1.912,5.018 0,6.931l6.798,6.798c1.913,1.913 5.019,1.913 6.931,0c1.913,-1.912 1.913,-5.018 0,-6.931l-6.798,-6.798Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M4.901,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,-0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M18.929,11.142c-1.912,-1.912 -5.018,-1.912 -6.931,0c-1.912,1.913 -1.912,5.019 0,6.931l6.799,6.799c1.912,1.912 5.018,1.912 6.931,-0c1.912,-1.913 1.912,-5.019 -0,-6.931l-6.799,-6.799Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.108,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c-0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c-0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'dark'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_dark"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.901,2.196 -4.901,4.901c0,2.705 2.197,4.901 4.901,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.662,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.989,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.732,61.103c1.91,-1.91 1.91,-5.011 0,-6.921l-0.009,-0.01c-1.91,-1.91 -5.012,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.909,1.91 5.011,1.91 6.92,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.672,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.52,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l-0,-0.01c-0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.901,2.196 -4.901,4.901c0,2.704 2.197,4.9 4.901,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.73,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 -0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.098,34.623c-2.699,0 -4.891,2.192 -4.891,4.892l-0,0.019c-0,2.699 2.192,4.891 4.891,4.891c2.7,0 4.892,-2.192 4.892,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.892,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'darkest'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_darkest"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><path d="M39.315,23.791c8.684,-0 15.734,7.05 15.734,15.733c0,8.684 -7.05,15.734 -15.734,15.734c-8.683,0 -15.733,-7.05 -15.733,-15.734c-0,-8.683 7.05,-15.733 15.733,-15.733Zm0,4.737c6.069,0 10.997,4.927 10.997,10.996c-0,6.069 -4.928,10.996 -10.997,10.996c-6.068,0 -10.996,-4.927 -10.996,-10.996c0,-6.069 4.928,-10.996 10.996,-10.996Z" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.216,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.9,2.196 -4.9,4.901c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.666,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.99,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.737,61.103c1.909,-1.91 1.909,-5.011 -0,-6.921l-0.01,-0.01c-1.91,-1.91 -5.011,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.91,1.91 5.011,1.91 6.921,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.676,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.524,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l0,-0.01c0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.216,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901c-0,2.704 2.196,4.9 4.9,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.734,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.103,34.623c-2.7,0 -4.892,2.192 -4.892,4.892l-0,0.019c-0,2.699 2.192,4.891 4.892,4.891c2.699,0 4.891,-2.192 4.891,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.891,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+</a>
+
+<script>
+(function() {
+    const LOCAL_STORAGE_KEY = 'piccoloThemeMode'
+
+    var initialMode = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+    if (initialMode) {
+        // Make sure the value in local storage is valid
+        if (['light', 'dark', 'darkest'].indexOf(initialMode) == -1) {
+            initialMode = 'light'
+            localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+        }
+    } else {
+        // Check if the client prefers dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            initialMode = 'dark'
+        } else {
+            initialMode = 'light'
+        }
+        localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+    }
+
+    document.documentElement.dataset.mode = initialMode
+
+    PetiteVue.createApp({
+        'mode': initialMode,
+        handleClick() {
+            let currentMode = this.mode
+
+            if (currentMode == 'light') {
+                this.mode = 'dark'
+            } else if (currentMode == 'dark') {
+                this.mode = 'darkest'
+            } else if (currentMode == 'darkest') {
+                this.mode = 'light'
+            }
+
+            document.documentElement.dataset.mode = this.mode
+            localStorage.setItem(LOCAL_STORAGE_KEY, this.mode)
+
+            console.log(this.mode)
+        }
+    }).mount('#mode_toggle')
+})()
+</script>
+            <p class="mobile_search_link">
+                <a href="../../search.html" title="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 64" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+                        <path d="M14.873 40.009c-2.315-3.943-3.642-8.532-3.642-13.429C11.231 11.91 23.141 0 37.811 0s26.58 11.91 26.58 26.58-11.91 26.58-26.58 26.58a26.44 26.44 0 0 1-14.277-4.161L9.739 62.794a3.12 3.12 0 0 1-4.413 0L.913 58.382c-1.217-1.218-1.217-3.196 0-4.413l13.96-13.96zM37.811 8.054c10.225 0 18.526 8.301 18.526 18.526s-8.301 18.526-18.526 18.526-18.526-8.301-18.526-18.526S27.586 8.054 37.811 8.054z" fill="#fff" />
+                    </svg>
+                </a>
+            </p>
+        
+
+        <div class="searchbox_wrapper">
+            
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+    </nav>
+</div>
+
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Mathematics</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Fourier Transform</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="examples.html">Important Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="duality.html">Duality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conv.html">Convolution: Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="convapp_rodcooling.html">Convolution: Cooling of a Rod</a></li>
+<li class="toctree-l3"><a class="reference internal" href="convapp_prob.html">Convolution: Central Limit Theorem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gft_1.html">Generalized Fourier Transform: Schwartz Space</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Generalized Fourier Transform: Tempered Distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gft_3.html">Generalized Fourier Transform: Delta Distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_diffraction.html">Application One: Diffraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../sl/index.html">Statistical Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/index.html">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../nlp/index.html">NLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv/index.html">Computer Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mnp/index.html">Micro-nanoplastics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ref.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="generalized-fourier-transform-tempered-distribution">
+<h1>Generalized Fourier Transform: Tempered Distribution<a class="headerlink" href="#generalized-fourier-transform-tempered-distribution" title="Link to this heading">¶</a></h1>
+<p>A tempered distribution is a <strong>linear functional</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\DeclareMathOperator{\sgn}{sgn}
+f: \mathcal{S} \to \mathbb{C}
+\]</div>
+<ul>
+<li><p>The space of all tempered distributions denoted <span class="math notranslate nohighlight">\(\mathcal{S}'\)</span>, is the
+dual space of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p></li>
+<li><p>The value in <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> that the distribution <span class="math notranslate nohighlight">\(f \in \mathcal{S}'\)</span>
+assigns to <span class="math notranslate nohighlight">\(\phi \in \mathcal{S}\)</span> is usually denoted by:</p>
+<div class="math notranslate nohighlight">
+\[\langle f, \phi \rangle\]</div>
+</li>
+</ul>
+<p>Properties without proof:</p>
+<ul>
+<li><p>Linearity</p>
+<div class="math notranslate nohighlight">
+\[
+  a \langle f, \phi \rangle + b \langle f, \psi \rangle =
+  \langle f, a \phi + b \psi \rangle
+  \]</div>
+</li>
+<li><p>Continuity</p>
+<div class="math notranslate nohighlight">
+\[
+  \lim_{n \to \infty} \phi_n = \phi
+  \implies
+  \lim_{n \to \infty} \langle f, \phi_n \rangle = \langle f, \phi \rangle
+  \]</div>
+</li>
+</ul>
+<section id="delta-distribution">
+<h2>Delta Distribution<a class="headerlink" href="#delta-distribution" title="Link to this heading">¶</a></h2>
+<p>The <span class="math notranslate nohighlight">\(\delta\)</span> distribution, aka the <strong>unit impulse</strong>, is a generalized
+function or distribution.</p>
+<p>Operationally, the effect of <span class="math notranslate nohighlight">\(\delta\)</span> is to evalute the function at the
+origin (i.e. pull out the value of origin).</p>
+<section id="classical-interpretation">
+<h3>Classical Interpretation<a class="headerlink" href="#classical-interpretation" title="Link to this heading">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\delta (x) =
+\begin{cases}
+  \infty &amp; x = 0
+  \\
+  0 &amp; x \ne 0
+\end{cases}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{+\infty} \delta (x) dx = 1\]</div>
+<p>It can be viewed as a sequence of bump functions:</p>
+<blockquote>
+<div><p>That is really operationally how it appear: by limiting process you
+were concentrating things and you were just pulling out the value at
+the origin.</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\delta(x) = \lim_{b \to 0} \frac{1}{|b| \sqrt{\pi}} e^{-(\frac{x}{b})^2}\]</div>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{+\infty} \delta (x) \phi (x) dx = \phi(0)\]</div>
+</section>
+<section id="distribution-interpretation">
+<h3>Distribution Interpretation<a class="headerlink" href="#distribution-interpretation" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>It is a mathematical modus operandi by turning the solution of a
+problem into a definiation</p>
+</div></blockquote>
+<p><strong>We define</strong> that <span class="math notranslate nohighlight">\(\delta\)</span> distribution maps every continuous function
+to its value at zero of its domain:</p>
+<div class="math notranslate nohighlight">
+\[\langle \delta, \phi \rangle = \phi(0)\]</div>
+<p><span class="math notranslate nohighlight">\(\delta\)</span> is also linear and continuous:</p>
+<div class="math notranslate nohighlight">
+\[
+a \langle \delta, \phi \rangle + b \langle \delta, \psi \rangle =
+\langle \delta, a \phi + b \psi \rangle
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\lim_{n \to \infty} \phi_n = \phi
+\implies
+\lim_{n \to \infty} \langle \delta, \phi_n \rangle =
+\langle \delta, \phi \rangle
+\]</div>
+<p>Define a new distribution <span class="math notranslate nohighlight">\(\delta_a\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\delta_a: \phi \in \mathcal{S} \mapsto
+  \langle \delta_a, \phi \rangle = \phi(a)
+\]</div>
+</section>
+</section>
+<section id="function-induced-distribution">
+<h2>Function Induced Distribution<a class="headerlink" href="#function-induced-distribution" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>you give me a (test) function, I have to tell you how a distribution
+(generalized function) operates on it (by integraion for Fourier
+transform).</p>
+</div></blockquote>
+<p><strong>Lemma</strong>: if <span class="math notranslate nohighlight">\(f : \mathbb{R}^n \to \mathbb{C}\)</span>:</p>
+<ul class="simple">
+<li><p>polynomially bounded</p></li>
+<li><p>Riemann integrable on <span class="math notranslate nohighlight">\([−M, M]\)</span> for each <span class="math notranslate nohighlight">\(M &gt; 0\)</span>.</p></li>
+</ul>
+<p>Then:</p>
+<div class="math notranslate nohighlight">
+\[
+f: \phi \in \mathcal{S} \mapsto
+  \langle f, \phi \rangle = \int_{-\infty}^{+\infty} f(x) \phi(x) dx
+\]</div>
+<p>is a tempered distribution (generalized function) induced by <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>As the rapidly decreasing functions are “good enough”, <strong>most weird
+functions</strong> can be considered generalized functions (aka distributions)
+by defining the pairing as:</p>
+<div class="math notranslate nohighlight">
+\[\langle f, \phi \rangle = \int_{-\infty}^{+\infty} f(x) \phi(x) dx\]</div>
+<p>For example, the integral of <span class="math notranslate nohighlight">\(sin(2 \pi x)\)</span> does not make any sense, but
+<span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty} sin(2 \pi x) \phi(x) dx\)</span> will converge as
+<span class="math notranslate nohighlight">\(\phi\)</span> is a rapidly decreasing function. Thus <span class="math notranslate nohighlight">\(sin(2 \pi x)\)</span> can be
+considered as a generalized function as I can tell you how it can
+operate on test functions (i.e. by integraion).</p>
+<div class="math notranslate nohighlight">
+\[
+\langle sin(2 \pi x), \phi \rangle =
+\int_{-\infty}^{+\infty} sin(2 \pi x) \cdot \phi (x) dx
+\]</div>
+<p>Similarly:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle 1, \phi \rangle =
+\int_{-\infty}^{+\infty} 1 \cdot \phi (x) dx
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\langle \Pi, \phi \rangle =
+\int_{-\infty}^{+\infty} \Pi(x) \cdot \phi (x) dx
+\]</div>
+</section>
+<section id="fourier-transform-of-distribution">
+<h2>Fourier Transform of Distribution<a class="headerlink" href="#fourier-transform-of-distribution" title="Link to this heading">¶</a></h2>
+<p>Properties:</p>
+<div class="math notranslate nohighlight">
+\[
+T \in \mathcal{S}' \implies
+  \mathcal{F} T \in \mathcal{S}'
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+T \in \mathcal{S}' \implies
+  \mathcal{F}^{-1} T \in \mathcal{S}'
+\]</div>
+<section id="theorem">
+<h3>Theorem<a class="headerlink" href="#theorem" title="Link to this heading">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\phi \in \mathcal{S}, T \in \mathcal{S}' \implies
+\langle \mathcal{F} T, \phi \rangle =
+  \langle T, \mathcal{F} \phi \rangle
+\]</div>
+<p>Proof:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle \mathcal{F} T, \phi \rangle &amp; =
+  \int_{-\infty}^{+\infty} \mathcal{F} T (x) \phi (x) dx
+  \\ &amp; =
+  \int_{-\infty}^{+\infty} \left(
+    \int_{-\infty}^{+\infty} e^{-2 \pi i x y} T(y) dy
+  \right) \phi (x) dx
+  \\ &amp; =
+  \int_{-\infty}^{+\infty}
+    \int_{-\infty}^{+\infty} e^{-2 \pi i x y} \phi(x) T(y) dy dx
+  \\ &amp; =
+  \int_{-\infty}^{+\infty} \left(
+    \int_{-\infty}^{+\infty} e^{-2 \pi i x y} \phi(x) T(y) dx
+  \right) dy
+  \\ &amp; =
+  \int_{-\infty}^{+\infty}
+    T(y) \cdot \mathcal{F} \phi (y) dy
+  \\ &amp; =
+  \langle T, \mathcal{F} \phi \rangle
+\end{split}\]</div>
+<p>Similarly:</p>
+<div class="math notranslate nohighlight">
+\[
+\phi \in \mathcal{S}, T \in \mathcal{S}' \implies
+\langle \mathcal{F}^{-1} T, \phi \rangle =
+  \langle T, \mathcal{F}^{-1} \phi \rangle
+\]</div>
+</section>
+<section id="applications">
+<h3>Applications<a class="headerlink" href="#applications" title="Link to this heading">¶</a></h3>
+<p>Fourier Transform of <strong>shifted delta function</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle \mathcal{F} \delta_a, \phi \rangle &amp; =
+  \langle \delta_a, \mathcal{F} \phi \rangle
+  \\ &amp; =
+  \mathcal{F} \phi (a)
+  \\ &amp; =
+  \int_{-\infty}^{+\infty} e^{-2 \pi i a x} \phi(x) dx
+  \\ &amp; =
+  \langle e^{-2 \pi i a x}, \phi \rangle
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\therefore
+\mathcal{F} \delta_a = e^{-2 \pi i a x}
+\]</div>
+<p>Specifically when <span class="math notranslate nohighlight">\(a = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F} \delta = \mathcal{F} \delta_0 = 1\]</div>
+<p><span class="math notranslate nohighlight">\(\delta\)</span> is infinitely concentrated, its Fourier transform <span class="math notranslate nohighlight">\(F \delta\)</span> is
+uniformly spread out</p>
+<p>Fourier Transform of <strong>complex exponential function</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle \mathcal{F} e^{2 \pi i a x}, \phi \rangle &amp; =
+  \langle e^{2 \pi i a x}, \mathcal{F} \phi \rangle
+  \\ &amp; =
+  \int_{-\infty}^{+\infty} e^{2 \pi i a x} \mathcal{F} \phi(x) dx
+  \\ &amp; =
+  \mathcal{F}^{-1} \mathcal{F} \phi(a)
+  \\ &amp; =
+  \phi(a)
+  \\ &amp; =
+  \langle \delta_a, \phi \rangle
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\therefore
+\mathcal{F} e^{2 \pi i a x} = \delta_a
+\]</div>
+<p>Fourier Transform of <strong>cosine function</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathcal{F} cos(2 \pi a x) &amp; =
+  \mathcal{F} (\frac{1}{2} (e^{2 \pi i a x} + e^{-2 \pi i a x}))
+  \\ &amp; =
+  \frac{1}{2} (\mathcal{F} e^{2 \pi i a x} + \mathcal{F} e^{-2 \pi i a x})
+  \\ &amp; =
+  \frac{1}{2} (\delta_a + \delta_{-a})
+\end{split}\]</div>
+<p>Fourier Transform of <strong>sine function</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathcal{F} sin(2 \pi a x) &amp; =
+  \mathcal{F} (\frac{1}{2i} (e^{2 \pi i a x} - e^{-2 \pi i a x}))
+  \\ &amp; =
+  \frac{1}{2i} (\mathcal{F} e^{2 \pi i a x} - \mathcal{F} e^{-2 \pi i a x})
+  \\ &amp; =
+  \frac{1}{2i} (\delta_a - \delta_{-a})
+\end{split}\]</div>
+</section>
+</section>
+<section id="derivitive-of-distribution">
+<h2>Derivitive of Distribution<a class="headerlink" href="#derivitive-of-distribution" title="Link to this heading">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(T'\)</span> be the derivitive of distribution <span class="math notranslate nohighlight">\(T\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle T', \phi \rangle &amp; =
+  \int_{-\infty}^{+\infty} T' (x) \phi (x) dx
+  \\ &amp; =
+  T(x) \phi (x) |_{-\infty}^{+\infty} -
+    \int_{-\infty}^{+\infty} T(x) \phi' (x) dx
+  \\ &amp; =
+  - \langle T, \phi' \rangle
+\end{split}\]</div>
+<p>Again, <strong>by turning the solution of a problem into a definiation</strong>, we
+define:</p>
+<div class="math notranslate nohighlight">
+\[\langle T', \phi \rangle = - \langle T, \phi' \rangle\]</div>
+<p>By defining how it operates on test function, the derivitive of a
+distribution can be derived, even for many weird function.</p>
+<section id="id1">
+<h3>Applications<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p><strong>Derivative of Heaviside Step Function</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H (x) =
+\begin{cases}
+  1 &amp; x \gt 0
+  \\
+  0 &amp; x \le 0
+\end{cases}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle H', \phi \rangle &amp; =
+  - \langle H, \phi' \rangle
+  \\ &amp; =
+  - \int_{-\infty}^{+\infty} H(x) \phi' (x) dx
+  \\ &amp; =
+  - \int_{0}^{+\infty} \phi' (x) dx
+  \\ &amp; =
+  \phi (0)
+  \\ &amp; =
+  \langle \delta, \phi \rangle
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\therefore
+H' = \delta
+\]</div>
+<p><strong>Derivative of Signum Function</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\sgn (x) =
+\begin{cases}
+  -1 &amp; x \lt 0
+  \\
+  0 &amp; x = 0
+  \\
+  1 &amp; x \gt 0
+\end{cases}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle \sgn', \phi \rangle &amp; =
+  -\langle \sgn, \phi' \rangle
+  \\ &amp; =
+  -\int_{0}^{+\infty} \phi' dx +
+    \int_{-\infty}^0 \phi' dx
+  \\ &amp; =
+  2 \phi (0)
+  \\ &amp; =
+  \langle 2 \delta, \phi \rangle
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\therefore
+\sgn' = 2 \delta
+\]</div>
+<p><strong>Fourier Transform of Signum Function</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+(\mathcal{F} \sgn) (s) &amp; =
+  \frac{1}{2 \pi i s} (\mathcal{F} \sgn') (s)
+  \\ &amp; =
+  \frac{1}{2 \pi i s} \left(\mathcal{F} (2 \delta) \right) (s)
+  \\ &amp; =
+  \frac{2}{2 \pi i s}
+  \\ &amp; =
+  \frac{1}{\pi i s}
+\end{split}\]</div>
+<p><strong>Fourier Transform of Heaviside Step Function</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H (x) &amp; =
+\begin{cases}
+  1 &amp; x \gt 0
+  \\
+  0 &amp; x \le 0
+\end{cases}
+\\ &amp; =
+\frac{1}{2}(1 + \sgn(x))
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\therefore
+\mathcal{F} H (s) &amp; =
+  \mathcal{F} (\frac{1}{2} + \frac{\sgn{x}}{2}) (s)
+  \\ &amp; =
+  \frac{1}{2} \mathcal{F} 1 (s) + \frac{1}{2} \mathcal{F} \sgn (s)
+  \\ &amp; =
+  \frac{1}{2} \delta + \frac{1}{2 \pi i s}
+\end{split}\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The following derivation is <strong>WRONG</strong>:</p>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathcal{F} H (s) &amp; =
+  \frac{1}{2 \pi i s} (\mathcal{F} H') (s)
+  \\ &amp; =
+  \frac{1}{2 \pi i s} \left(\mathcal{F} \delta \right) (s)
+  \\ &amp; =
+  \frac{1}{2 \pi i s}
+\end{split}\]</div>
+<p>As the highest score answer<a class="footnote-reference brackets" href="#id3" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> suggested:</p>
+<blockquote>
+<div><p>.… There’s a family of functions that differ by additive constants
+and all have the same derivative. Their Fourier transforms differ by
+<span class="math notranslate nohighlight">\(\delta\)</span> s at the origin (proportional to the additive constants), so
+it can’t be the case that you get the Fourier transform of all of
+them by dividing the transform of the derivative by <span class="math notranslate nohighlight">\(i \omega\)</span></p>
+</div></blockquote>
+</section>
+</section>
+<section id="multiplication-of-distribution">
+<h2>Multiplication of Distribution<a class="headerlink" href="#multiplication-of-distribution" title="Link to this heading">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\langle Tf, \phi \rangle =
+  \int_{-\infty}^{+\infty} T(x) f(x) \phi(x) dx
+  =
+  \langle T, f\phi \rangle
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Arbitrary distributions <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> can not multiply as <span class="math notranslate nohighlight">\(ST\)</span> is
+undefined.</p></li>
+<li><p>A distribution multiplied by a function <span class="math notranslate nohighlight">\(f\)</span> is valid if
+<span class="math notranslate nohighlight">\(f \phi \in \mathcal{S}\)</span></p></li>
+</ul>
+</div>
+</section>
+<section id="convolution-of-distribution">
+<h2>Convolution of Distribution<a class="headerlink" href="#convolution-of-distribution" title="Link to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>It is often <strong>invalid</strong> to convolute two arbitrary distributions, as
+well as to convolute with an arbitrary function.</p></li>
+<li><p>With the distribution interpretation, convolution <span class="math notranslate nohighlight">\(f * T\)</span> is defined
+in terms of <strong>pairing</strong> not integral. It mimics the classical integral
+operation of convolution.</p></li>
+</ul>
+</div>
+<div class="math notranslate nohighlight">
+\[
+f \in \mathcal{S}, \psi \in \mathcal{S}'
+\implies
+\forall \phi \in \mathcal{S}:
+\langle \psi * f, \phi \rangle =
+  \langle \psi, \phi * f^- \rangle
+\]</div>
+<p>Proof:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\langle \psi * f, \phi \rangle &amp; =
+  \int_{-\infty}^{+\infty} (\psi * f)(x) \phi (x) dx
+  \\ &amp; =
+  \int_{-\infty}^{+\infty}
+    \left( \int_{-\infty}^{+\infty} f(x - y) \psi (y) dy \right)
+    \phi (x) dx
+  \\ &amp; =
+  \int_{-\infty}^{+\infty} \psi (y)
+    \left( \int_{-\infty}^{+\infty} f(x - y) \phi (x) dx \right)
+    dy
+  \\ &amp; =
+  \int_{-\infty}^{+\infty} \psi (y)
+    \left( \int_{-\infty}^{+\infty} f^- (y - x) \phi (x) dx \right)
+    dy
+  \\ &amp; =
+  \int_{-\infty}^{+\infty} \psi (y) \left( \phi * f^- \right) (y) dy
+  \\ &amp; =
+    \langle \psi, \phi * f^- \rangle
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\tag*{$\blacksquare$}\]</div>
+<p>Extending to the general case:</p>
+<div class="math notranslate nohighlight">
+\[\langle S * T, \phi \rangle = \langle S, \phi * T^- \rangle\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This formula holds only if <span class="math notranslate nohighlight">\(\phi * T^- \in \mathcal{S}\)</span>.</p>
+</div>
+<p><strong>Convolution Theorem of Fourier Transform</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F} (S * T) = \mathcal{F} S \cdot \mathcal{F} T\]</div>
+<div class="math notranslate nohighlight">
+\[\mathcal{F} (S \cdot T) = \mathcal{F} S * \mathcal{F} T\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Again, these formulas hold only if
+<span class="math notranslate nohighlight">\(\forall \phi \in \mathcal{S}, \phi * T^- \in \mathcal{S}\)</span>.</p>
+</div>
+<p>Proof can be found at <a class="reference internal" href="operations.html#ref-ft-conv-proof"><span class="std std-ref">Convolution</span></a>
+of operations section.</p>
+<hr class="docutils" />
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">Fourier Transform</span></a>.</p>
+<div id="disqus_thread" data-identifier="math/ft/gft_2"></div></section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://math.stackexchange.com/questions/73922/fourier-transform-of-unit-step">https://math.stackexchange.com/questions/73922/fourier-transform-of-unit-step</a></p>
+</aside>
+</aside>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+    
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">Generalized Fourier Transform: Tempered Distribution</a><ul>
+<li><a class="reference internal" href="#delta-distribution">Delta Distribution</a><ul>
+<li><a class="reference internal" href="#classical-interpretation">Classical Interpretation</a></li>
+<li><a class="reference internal" href="#distribution-interpretation">Distribution Interpretation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-induced-distribution">Function Induced Distribution</a></li>
+<li><a class="reference internal" href="#fourier-transform-of-distribution">Fourier Transform of Distribution</a><ul>
+<li><a class="reference internal" href="#theorem">Theorem</a></li>
+<li><a class="reference internal" href="#applications">Applications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#derivitive-of-distribution">Derivitive of Distribution</a><ul>
+<li><a class="reference internal" href="#id1">Applications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multiplication-of-distribution">Multiplication of Distribution</a></li>
+<li><a class="reference internal" href="#convolution-of-distribution">Convolution of Distribution</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+    
+
+      <div class="clearer"></div>
+    </div>
+    <div class="button_nav_wrapper">
+        <div class="button_nav">
+            <div class="left">
+                
+                <a href="gft_1.html">
+                    <span class="icon">&lt;</span><span>Generalized Fourier Transform: Schwartz Space</span></a>
+                
+            </div>
+
+            <div class="right">
+                
+                    <a href="gft_3.html"><span>Generalized Fourier Transform: Delta Distribution</span><span class="icon">&gt;</span></a>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2022, Juan Cervantes.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+
+<p id="theme_credit">Styled using the <a href="https://github.com/piccolo-orm/piccolo_theme">Piccolo Theme</a></p>
+  </body>
+</html>

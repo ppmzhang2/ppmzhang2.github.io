@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>YOLO: Loss Function &#8212; Machine Learning Notes</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic_mod.css?v=9b2032db" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/disqus.js?v=568ff333"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <script src="../../_static/js/petite-vue.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Faster R-CNN: Model Design" href="rcnn_faster_model.html" />
+    <link rel="prev" title="Problem Definition" href="def.html" /> 
+  </head><body data-dark_mode_code_blocks="true">
+
+<div id="top_nav">
+    
+
+    <nav>
+        
+            
+        
+
+        <p id="toggle_sidebar">
+            <a href="#" title="Toggle sidebar">|||</a>
+        </p>
+        <h1><a href="../../index.html" title="Go to homepage">ML Notes</a></h1>
+            <a id="source_link" href="https://github.com/ppmzhang2/ppmzhang2.github.io">
+    
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+            <path fill="white" d="M 244.8,8 C 106.1,8 0,113.3 0,252 c 0,110.9 69.8,205.8 169.5,239.2 12.8,2.3 17.3,-5.6 17.3,-12.1 0,-6.2 -0.3,-40.4 -0.3,-61.4 0,0 -70,15 -84.7,-29.8 0,0 -11.4,-29.1 -27.8,-36.6 0,0 -22.9,-15.7 1.6,-15.4 0,0 24.9,2 38.6,25.8 21.9,38.6 58.6,27.5 72.9,20.9 2.3,-16 8.8,-27.1 16,-33.7 -55.9,-6.2 -112.3,-14.3 -112.3,-110.5 0,-27.5 7.6,-41.3 23.6,-58.9 -2.6,-6.5 -11.1,-33.3 2.6,-67.9 20.9,-6.5 69,27 69,27 20,-5.6 41.5,-8.5 62.8,-8.5 21.3,0 42.8,2.9 62.8,8.5 0,0 48.1,-33.6 69,-27 13.7,34.7 5.2,61.4 2.6,67.9 16,17.7 25.8,31.5 25.8,58.9 0,96.5 -58.9,104.2 -114.8,110.5 9.2,7.9 17,22.9 17,46.4 0,33.7 -0.3,75.4 -0.3,83.6 0,6.5 4.6,14.4 17.3,12.1 C 428.2,457.8 496,362.9 496,252 496,113.3 383.5,8 244.8,8 Z"/>
+        </svg>
+    
+</a>
+        
+
+        <a id="mode_toggle" href="#" @click.prevent="handleClick" :title="mode">
+    <template v-if="mode == 'light'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_light"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M67.48,18.073c1.913,-1.912 1.913,-5.018 0,-6.931c-1.912,-1.912 -5.018,-1.912 -6.931,0l-6.798,6.799c-1.912,1.912 -1.912,5.018 0,6.931c1.913,1.912 5.018,1.912 6.931,-0l6.798,-6.799Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.728,61.108c1.912,-1.913 1.912,-5.018 -0,-6.931c-1.913,-1.913 -5.019,-1.913 -6.931,-0l-6.799,6.798c-1.912,1.913 -1.912,5.019 0,6.931c1.913,1.913 5.019,1.913 6.931,0l6.799,-6.798Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.682,54.177c-1.913,-1.913 -5.018,-1.913 -6.931,-0c-1.912,1.913 -1.912,5.018 0,6.931l6.798,6.798c1.913,1.913 5.019,1.913 6.931,0c1.913,-1.912 1.913,-5.018 0,-6.931l-6.798,-6.798Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M4.901,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,-0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M18.929,11.142c-1.912,-1.912 -5.018,-1.912 -6.931,0c-1.912,1.913 -1.912,5.019 0,6.931l6.799,6.799c1.912,1.912 5.018,1.912 6.931,-0c1.912,-1.913 1.912,-5.019 -0,-6.931l-6.799,-6.799Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.108,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c-0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c-0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'dark'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_dark"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.901,2.196 -4.901,4.901c0,2.705 2.197,4.901 4.901,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.662,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.989,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.732,61.103c1.91,-1.91 1.91,-5.011 0,-6.921l-0.009,-0.01c-1.91,-1.91 -5.012,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.909,1.91 5.011,1.91 6.92,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.672,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.52,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l-0,-0.01c-0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.901,2.196 -4.901,4.901c0,2.704 2.197,4.9 4.901,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.73,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 -0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.098,34.623c-2.699,0 -4.891,2.192 -4.891,4.892l-0,0.019c-0,2.699 2.192,4.891 4.891,4.891c2.7,0 4.892,-2.192 4.892,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.892,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'darkest'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_darkest"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><path d="M39.315,23.791c8.684,-0 15.734,7.05 15.734,15.733c0,8.684 -7.05,15.734 -15.734,15.734c-8.683,0 -15.733,-7.05 -15.733,-15.734c-0,-8.683 7.05,-15.733 15.733,-15.733Zm0,4.737c6.069,0 10.997,4.927 10.997,10.996c-0,6.069 -4.928,10.996 -10.997,10.996c-6.068,0 -10.996,-4.927 -10.996,-10.996c0,-6.069 4.928,-10.996 10.996,-10.996Z" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.216,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.9,2.196 -4.9,4.901c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.666,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.99,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.737,61.103c1.909,-1.91 1.909,-5.011 -0,-6.921l-0.01,-0.01c-1.91,-1.91 -5.011,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.91,1.91 5.011,1.91 6.921,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.676,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.524,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l0,-0.01c0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.216,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901c-0,2.704 2.196,4.9 4.9,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.734,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.103,34.623c-2.7,0 -4.892,2.192 -4.892,4.892l-0,0.019c-0,2.699 2.192,4.891 4.892,4.891c2.699,0 4.891,-2.192 4.891,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.891,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+</a>
+
+<script>
+(function() {
+    const LOCAL_STORAGE_KEY = 'piccoloThemeMode'
+
+    var initialMode = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+    if (initialMode) {
+        // Make sure the value in local storage is valid
+        if (['light', 'dark', 'darkest'].indexOf(initialMode) == -1) {
+            initialMode = 'light'
+            localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+        }
+    } else {
+        // Check if the client prefers dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            initialMode = 'dark'
+        } else {
+            initialMode = 'light'
+        }
+        localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+    }
+
+    document.documentElement.dataset.mode = initialMode
+
+    PetiteVue.createApp({
+        'mode': initialMode,
+        handleClick() {
+            let currentMode = this.mode
+
+            if (currentMode == 'light') {
+                this.mode = 'dark'
+            } else if (currentMode == 'dark') {
+                this.mode = 'darkest'
+            } else if (currentMode == 'darkest') {
+                this.mode = 'light'
+            }
+
+            document.documentElement.dataset.mode = this.mode
+            localStorage.setItem(LOCAL_STORAGE_KEY, this.mode)
+
+            console.log(this.mode)
+        }
+    }).mount('#mode_toggle')
+})()
+</script>
+            <p class="mobile_search_link">
+                <a href="../../search.html" title="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 64" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+                        <path d="M14.873 40.009c-2.315-3.943-3.642-8.532-3.642-13.429C11.231 11.91 23.141 0 37.811 0s26.58 11.91 26.58 26.58-11.91 26.58-26.58 26.58a26.44 26.44 0 0 1-14.277-4.161L9.739 62.794a3.12 3.12 0 0 1-4.413 0L.913 58.382c-1.217-1.218-1.217-3.196 0-4.413l13.96-13.96zM37.811 8.054c10.225 0 18.526 8.301 18.526 18.526s-8.301 18.526-18.526 18.526-18.526-8.301-18.526-18.526S27.586 8.054 37.811 8.054z" fill="#fff" />
+                    </svg>
+                </a>
+            </p>
+        
+
+        <div class="searchbox_wrapper">
+            
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+    </nav>
+</div>
+
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../math/index.html">Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nlp/index.html">NLP</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Computer Vision</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../nerf/index.html">Neural Radiance Fields (NeRF)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Object Detection</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="def.html">Problem Definition</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">YOLO: Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcnn_faster_model.html">Faster R-CNN: Model Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcnn_faster_rpn.html">Faster R-CNN: Region Proposal Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcnn_faster_detector.html">Faster R-CNN: Fast R-CNN Detector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcnn_faster_train.html">Faster R-CNN: Training</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mnp/index.html">Micro-nanoplastics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ref.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="yolo-loss-function">
+<h1>YOLO: Loss Function<a class="headerlink" href="#yolo-loss-function" title="Link to this heading">¶</a></h1>
+<section id="notation">
+<h2>Notation<a class="headerlink" href="#notation" title="Link to this heading">¶</a></h2>
+<p>The YOLO algorithm assumes that the model divides an input image into an
+<span class="math notranslate nohighlight">\(S \times S\)</span> grid. Each grid cell is responsible to predict <span class="math notranslate nohighlight">\(B\)</span> bounding
+boxes, performing both localization and classification (totally <span class="math notranslate nohighlight">\(K\)</span>
+classes).</p>
+<p>Therefore the bounding box of index <span class="math notranslate nohighlight">\((i, j)\)</span> (<span class="math notranslate nohighlight">\(i \in S^2,\)</span> <span class="math notranslate nohighlight">\(j \in B\)</span>)
+is<a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf y_{ij} =
+\{ c_{ij}, x_{ij}, y_{ij}, w_{ij}, h_{ij},
+   p_{ij}^{(1)}, \ldots, p_{ij}^{(K)} \}
+\]</div>
+<p>where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(c\)</span>: object confidence</p>
+<ul class="simple">
+<li><p>prediction: logit value</p></li>
+<li><p>ground truth: <span class="math notranslate nohighlight">\(1\)</span> / <span class="math notranslate nohighlight">\(0\)</span> flag</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(h\)</span>: bouding box coordinates</p>
+<ul class="simple">
+<li><p>YOLO redicts bounding boxes using anchor boxes since YOLO9000
+<span id="id2">[<a class="reference internal" href="../../ref.html#id18" title="Joseph Redmon and Ali Farhadi. YOLO9000: better, faster, stronger. CoRR, 2016. URL: http://arxiv.org/abs/1612.08242, arXiv:1612.08242.">14</a>]</span>. The predictions correspond to:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  b_x &amp;= \sigma(x) + c_x
+  \\
+  b_y &amp;= \sigma(y) + c_y
+  \\
+  b_w &amp;= p_w e^w
+  \\
+  b_h &amp;= p_h e^h
+  \end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(p_{ij}^{(1)}, \ldots, p_{ij}^{(K)}\)</span>: confidence of <span class="math notranslate nohighlight">\(K\)</span> classes</p>
+<ul class="simple">
+<li><p>prediction: logit values</p></li>
+<li><p>ground truth: one-hot values</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="mask">
+<h2>Mask<a class="headerlink" href="#mask" title="Link to this heading">¶</a></h2>
+<section id="iou-mask">
+<h3>IoU Mask<a class="headerlink" href="#iou-mask" title="Link to this heading">¶</a></h3>
+<p>Given a prediction <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> and label <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>, the IoU
+mask is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbb{1}_{ij}^{\mathrm{IoU}} =
+\begin{cases}
+  1 &amp; \mathrm{IoU}_{ij}^{\mathrm{max}} &gt; \mathrm{IoU}_0
+  \\
+  0 &amp; \mathrm{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathrm{IoU}_{ij}^{\mathrm{max}}\)</span> is the maximum <span class="math notranslate nohighlight">\(\mathrm{IoU}\)</span> value
+of <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}_{ij}\)</span> compared with all the ground truth bounding
+boxes;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathrm{IoU}_0\)</span> is the minimum <span class="math notranslate nohighlight">\(\mathrm{IoU}\)</span> threshold.</p></li>
+</ul>
+</section>
+<section id="ground-truth-mask">
+<h3>Ground Truth Mask<a class="headerlink" href="#ground-truth-mask" title="Link to this heading">¶</a></h3>
+<p>Ground truth mask is determined by the <strong>ground truth confidence only</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbb{1}_{ij}^{\mathrm{gt}} =
+\begin{cases}
+  1 &amp; o_{ij} = 1
+  \\
+  0 &amp; \mathrm{otherwise}
+\end{cases}
+\end{split}\]</div>
+</section>
+<section id="confidence-mask">
+<h3>Confidence Mask<a class="headerlink" href="#confidence-mask" title="Link to this heading">¶</a></h3>
+<p>Confidence Mask is determined by the <strong>prediction only</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbb{1}_{ij}^{\mathrm{conf}} =
+\begin{cases}
+  1 &amp; \hat{o}_{ij} &gt; o_0
+  \\
+  0 &amp; \mathrm{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(o_0\)</span> is the minimum object confidence threshold.</p></li>
+</ul>
+</section>
+<section id="overall-object-background-mask">
+<h3>Overall Object / Background Mask<a class="headerlink" href="#overall-object-background-mask" title="Link to this heading">¶</a></h3>
+<p>The background mask is a combination of <span class="math notranslate nohighlight">\(\mathbb{1}_{ij}^{\mathrm{gt}}\)</span>
+and <span class="math notranslate nohighlight">\(\mathbb{1}_{ij}^{\mathrm{IoU}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{1}_{ij}^{\mathrm{bgd}} =
+(1 - \mathbb{1}_{ij}^{\mathrm{gt}})
+(1 - \mathbb{1}_{ij}^{\mathrm{IoU}})
+\]</div>
+<p>The object mask is <span class="math notranslate nohighlight">\(\mathbb{1}_{ij}^{\mathrm{gt}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{1}_{ij}^{\mathrm{obj}} = \mathbb{1}_{ij}^{\mathrm{gt}}\]</div>
+</section>
+</section>
+<section id="empirical-risk">
+<h2>Empirical Risk<a class="headerlink" href="#empirical-risk" title="Link to this heading">¶</a></h2>
+<p>The YOLO risk is nothing but the sum of the following Risks.</p>
+<section id="iou-risk">
+<h3>IoU Risk<a class="headerlink" href="#iou-risk" title="Link to this heading">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}^{\mathrm{IoU}} (\mathbf{y}, \mathbf{\hat{y}}) =
+\sum_{i=0}^{S^2} \sum_{j=0}^{B}
+  \gamma_{ij}^{\mathrm{IoU}} \cdot
+  \mathbb{1}_{ij}^{\mathrm{obj}} \cdot
+  (1 - \mathrm{IoU}_{ij}^{\mathrm{max}})
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some implementation<a class="footnote-reference brackets" href="#fn2" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> will give large weights to small bounding boxes:</p>
+<div class="math notranslate nohighlight">
+\[
+\gamma_{ij}^{\mathrm{IoU}} =
+2 - \frac{b_w \cdot b_h}{I_w \cdot I_h}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(I_w\)</span> and <span class="math notranslate nohighlight">\(I_h\)</span> are the image width and height respectively.</p>
+</div>
+</section>
+<section id="confidence-risk">
+<h3>Confidence Risk<a class="headerlink" href="#confidence-risk" title="Link to this heading">¶</a></h3>
+<p>The confidence risk is computed with binary cross entropy:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal L^{\mathrm conf} (\mathbf y, \mathbf {\hat{y}}) =
+\sum_{i=0}^{S^2} \sum_{j=0}^{B}
+  c_{ij} \log {\hat c_{ij}} +
+  (1 - c_{ij}) \log {\hat c_{ij}}
+\]</div>
+</section>
+<section id="class-risk">
+<h3>Class Risk<a class="headerlink" href="#class-risk" title="Link to this heading">¶</a></h3>
+<p>YOLOv3 class risk is computed with binary cross entropy as it allows the
+model to handle class imbalance more effectively <span id="id4">[<a class="reference internal" href="../../ref.html#id19" title="Joseph Redmon and Ali Farhadi. Yolov3: an incremental improvement. 2018. URL: https://arxiv.org/abs/1804.02767, doi:10.48550/ARXIV.1804.02767.">15</a>]</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}^{\mathrm{cls}} (\mathbf{y}, \mathbf{\hat{y}}) =
+\frac{1}{K} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \sum_{k=1}^{K}
+  p_{ij}^{(k)} \log \hat{p}_{ij}^{(k)} +
+  (1 - p_{ij}^{(k)}) \log \hat{p}_{ij}^{(k)}
+\]</div>
+</section>
+</section>
+<section id="review">
+<h2>Review<a class="headerlink" href="#review" title="Link to this heading">¶</a></h2>
+<section id="why-no-mse">
+<h3>Why no MSE<a class="headerlink" href="#why-no-mse" title="Link to this heading">¶</a></h3>
+<p>We adopted the IoU Risk instead of the mean squared error (MSE), as it
+does not directly depend on the coordinates or scale of the bounding
+boxes, and it could be more robust to data imbalance and various object
+scales.</p>
+<hr class="docutils" />
+<p>Back to <a class="reference internal" href="index.html"><span class="doc">Object Detection</span></a>.</p>
+<div id="disqus_thread" data-identifier="cv/od/yolo_loss"></div></section>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="fn1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>assume each bounding box of each grid cell has <strong>only one</strong> ground
+truth box.</p>
+</aside>
+<aside class="footnote brackets" id="fn2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://github.com/YunYang1994/TensorFlow2.0-Examples">https://github.com/YunYang1994/TensorFlow2.0-Examples</a></p>
+</aside>
+</aside>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+    
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">YOLO: Loss Function</a><ul>
+<li><a class="reference internal" href="#notation">Notation</a></li>
+<li><a class="reference internal" href="#mask">Mask</a><ul>
+<li><a class="reference internal" href="#iou-mask">IoU Mask</a></li>
+<li><a class="reference internal" href="#ground-truth-mask">Ground Truth Mask</a></li>
+<li><a class="reference internal" href="#confidence-mask">Confidence Mask</a></li>
+<li><a class="reference internal" href="#overall-object-background-mask">Overall Object / Background Mask</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#empirical-risk">Empirical Risk</a><ul>
+<li><a class="reference internal" href="#iou-risk">IoU Risk</a></li>
+<li><a class="reference internal" href="#confidence-risk">Confidence Risk</a></li>
+<li><a class="reference internal" href="#class-risk">Class Risk</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#review">Review</a><ul>
+<li><a class="reference internal" href="#why-no-mse">Why no MSE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+    
+
+      <div class="clearer"></div>
+    </div>
+    <div class="button_nav_wrapper">
+        <div class="button_nav">
+            <div class="left">
+                
+                <a href="def.html">
+                    <span class="icon">&lt;</span><span>Problem Definition</span></a>
+                
+            </div>
+
+            <div class="right">
+                
+                    <a href="rcnn_faster_model.html"><span>Faster R-CNN: Model Design</span><span class="icon">&gt;</span></a>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2022, Juan Cervantes.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+
+<p id="theme_credit">Styled using the <a href="https://github.com/piccolo-orm/piccolo_theme">Piccolo Theme</a></p>
+  </body>
+</html>
